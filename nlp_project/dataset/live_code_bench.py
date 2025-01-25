@@ -17,6 +17,10 @@ class LiveCodeBenchLite:
                 "You are given a positive integer array 'nums'. Return the total frequencies of elements in 'nums' such that those elements all have the maximum frequency.",
                 [
                     (([1, 3, 3, 4, 4],), 4),
+                    (([1, 2, 3, 4, 5],), 5),
+                    (([1, 1, 2, 2, 3, 3],), 6),
+                    (([8],), 1),
+                    (([],), 0),
                 ],
             )
         ]
@@ -65,7 +69,7 @@ class LiveCodeBenchLite:
                         continue
                     if retval.decode("utf-8").strip() != str(expected_output):
                         print(
-                            f"Test case '{test_case}' failed. Expected '{expected_output}', got '{output}'"
+                            f"Test case '{test_case}' failed. Expected '{expected_output}', got '{retval.decode('utf-8').strip()}'"
                         )
                         continue
                     total_score += 1
