@@ -1,4 +1,5 @@
 import openai
+import sympy as sp
 from pydantic import BaseModel
 
 
@@ -10,6 +11,10 @@ class SemanticContainment(BaseModel):
 class ScoreUtils:
     def __init__(self, openai_api_key: str):
         self.openai_client = openai.OpenAI(api_key=openai_api_key)
+
+    def simplify_math(self, expression):
+        simplified_expression = sp.simplify(expression)
+        return str(simplified_expression)
 
     def contains_semantically(self, target, text):
         response = self.openai_client.beta.chat.completions.parse(

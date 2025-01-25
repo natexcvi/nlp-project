@@ -49,3 +49,20 @@ def test_contains_semantically(
         assert expected(result)
     else:
         assert result == expected
+
+
+@pytest.mark.parametrize(
+    "expression, expected",
+    [
+        ("2 + 2", "4"),
+        ("2 * 2", "4"),
+        ("2 - 2", "0"),
+        ("2 / 2", "1"),
+        ("2 + 2 * 2", "6"),
+        ("(2 + 2) * 2", "8"),
+        ("(2 + 2) * (2 + 2)", "16"),
+    ],
+)
+def test_simplify_math(score_utils, expression, expected):
+    result = score_utils.simplify_math(expression)
+    assert result == expected

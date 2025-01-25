@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from openai import OpenAI
 
-from dataset.algo_problems import AlgoProblem
+from dataset import Problem
 
 
 class Solver(ABC):
@@ -10,5 +10,5 @@ class Solver(ABC):
         self.openai_client = OpenAI(api_key=openai_api_key)
 
     @abstractmethod
-    def solve(self, problem: AlgoProblem) -> str:
+    def solve(self, problem: Problem) -> str:
         pass

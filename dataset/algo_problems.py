@@ -1,20 +1,11 @@
-from typing import Callable
-
-from pydantic import BaseModel
-
+from dataset import Problem
 from dataset.score_utils import ScoreUtils
-
-
-class AlgoProblem(BaseModel):
-    name: str
-    statement: str
-    scorer_fn: Callable[[str], float]
 
 
 class AlgoProblems:
     def __init__(self, score_utils: ScoreUtils):
         self.__problems = [
-            AlgoProblem(
+            Problem(
                 name="dfs run with maximum tree edges",
                 statement="""Let (G = (V, E)) be a directed graph. As we have seen in class,
                              the DFS algorithm can have more than one possible output, due to the
