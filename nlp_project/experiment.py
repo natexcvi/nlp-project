@@ -6,6 +6,7 @@ from nlp_project.dataset.algo_problems import AlgoProblems
 from nlp_project.dataset.score_utils import ScoreUtils
 from nlp_project.solvers.base_solver import Solver
 from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
+from nlp_project.dataset.game_of_24 import GameOf24
 
 
 class EvaluationResult(BaseModel):
@@ -23,7 +24,7 @@ if __name__ == "__main__":
         "You are an algorithm expert."
     )
     score_utils = ScoreUtils()
-    algo_problems = AlgoProblems(score_utils)
+    algo_problems = GameOf24(score_utils)
 
     for problem in algo_problems.problems:
         result = EvaluationResult(scores=[])

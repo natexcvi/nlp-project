@@ -66,3 +66,20 @@ def test_contains_semantically(
 def test_simplify_math(score_utils, expression, expected):
     result = score_utils.simplify_math(expression)
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("3 + 5", ["3", "5"]),
+        ("71 * 4", ["71", "4"]),
+        ("9 - 1", ["9", "1"]),
+        ("8 / 22", ["8", "22"]),
+        ("6 + 3 * 2", ["6", "3", "2"]),
+        ("(4 + 4) * 2", ["4", "4", "2"]),
+        ("(5 + 3) * (2 + 6)", ["5", "3", "2", "6"]),
+    ],
+)
+def test_extract_literals(score_utils, text, expected):
+    result = score_utils.extract_literals(text)
+    assert result == expected
