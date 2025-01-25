@@ -1,9 +1,8 @@
-from typing_extensions import Self
-
 import sympy as sp
 from pydantic import BaseModel, model_validator
+from typing_extensions import Self
 
-from nlp_project.clients.openai_client import get_openai_client, LLMConfig
+from nlp_project.clients.openai_client import LLMConfig, get_openai_client
 
 
 class SemanticContainment(BaseModel):
@@ -51,7 +50,8 @@ class ScoreUtils:
             raise ValueError("Extracted text does not appear in the original")
 
         embedding_response = self.openai_client.embeddings.create(
-            model=self.llm_config.embeddings_model, input=[match.extracted_match, target]
+            model=self.llm_config.embeddings_model,
+            input=[match.extracted_match, target],
         )
 
         match_embedding = embedding_response.data[0].embedding
