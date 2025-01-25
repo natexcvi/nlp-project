@@ -5,6 +5,8 @@ from pydantic import BaseModel
 
 from dataset.algo_problems import AlgoProblems
 from dataset.score_utils import ScoreUtils
+from solvers import Solver
+from solvers.chain_of_thought import ChainOfThoughtSolver
 
 
 class EvaluationResult(BaseModel):
@@ -19,7 +21,9 @@ NUM_ITERATIONS = 5
 
 if __name__ == "__main__":
     openai_api_key = os.getenv("OPENAI_API_KEY")
-    openai_client = OpenAI(api_key=openai_api_key)
+    solver: Solver = ChainOfThoughtSolver(
+        openai_api_key, "You are an algorithm expert."
+    )
     score_utils = ScoreUtils(openai_api_key)
     algo_problems = AlgoProblems(score_utils)
 
@@ -27,14 +31,7 @@ if __name__ == "__main__":
         result = EvaluationResult(scores=[])
         for i in range(NUM_ITERATIONS):
             print(f"Evaluating problem '{problem.name}' ({i+1}/{NUM_ITERATIONS})...")
-            response = openai_client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {"role": "system", "content": "You are an algorithms expert."},
-                    {"role": "user", "content": problem.statement},
-                ],
-            )
-            output = response.choices[0].message.content
+            output = solver.solve(problem)
             # print(f"Output: {output}")
             score = problem.scorer_fn(output)
             print(f"Score: {score}")
