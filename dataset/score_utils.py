@@ -16,6 +16,16 @@ class ScoreUtils:
         simplified_expression = sp.simplify(expression)
         return str(simplified_expression)
 
+    def evaluate_math(self, expression):
+        return sp.sympify(expression).evalf()
+
+    def extract_literals(self, expression):
+        split_expression = sp.srepr(expression).split(" ")
+        split_expression = [
+            "".join([c for c in s if c.isnumeric()]) for s in split_expression
+        ]
+        return [s for s in split_expression if s]
+
     def contains_semantically(self, target, text):
         response = self.openai_client.beta.chat.completions.parse(
             model="gpt-4o-mini",

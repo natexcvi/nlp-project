@@ -4,6 +4,7 @@ from openai import OpenAI
 from pydantic import BaseModel
 
 from dataset.algo_problems import AlgoProblems
+from dataset.game_of_24 import GameOf24
 from dataset.score_utils import ScoreUtils
 from solvers import Solver
 from solvers.chain_of_thought import ChainOfThoughtSolver
@@ -25,7 +26,7 @@ if __name__ == "__main__":
         openai_api_key, "You are an algorithm expert."
     )
     score_utils = ScoreUtils(openai_api_key)
-    algo_problems = AlgoProblems(score_utils)
+    algo_problems = GameOf24(score_utils)
 
     for problem in algo_problems.problems:
         result = EvaluationResult(scores=[])
