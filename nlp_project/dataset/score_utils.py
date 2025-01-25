@@ -1,6 +1,9 @@
-import openai
+from typing_extensions import Self
+
 import sympy as sp
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
+
+from nlp_project.clients.openai_client import get_openai_client, LLMConfig
 
 
 class SemanticContainment(BaseModel):
@@ -9,8 +12,9 @@ class SemanticContainment(BaseModel):
 
 
 class ScoreUtils:
-    def __init__(self, openai_api_key: str):
-        self.openai_client = openai.OpenAI(api_key=openai_api_key)
+    def __init__(self):
+        self.openai_client = get_openai_client()
+        self.llm_config = LLMConfig()
 
     def simplify_math(self, expression):
         simplified_expression = sp.simplify(expression)
@@ -28,7 +32,7 @@ class ScoreUtils:
 
     def contains_semantically(self, target, text):
         response = self.openai_client.beta.chat.completions.parse(
-            model="gpt-4o-mini",
+            model=self.llm_config.model,
             messages=[
                 {"role": "system", "content": "You find matches in texts."},
                 {
@@ -43,9 +47,11 @@ class ScoreUtils:
         print(f"Match: {match}")
         if not match.found:
             return 0
+        elif match.extracted_match not in text:
+            raise ValueError("Extracted text does not appear in the original")
 
         embedding_response = self.openai_client.embeddings.create(
-            model="text-embedding-ada-002", input=[match.extracted_match, target]
+            model=self.llm_config.embeddings_model, input=[match.extracted_match, target]
         )
 
         match_embedding = embedding_response.data[0].embedding
@@ -55,7 +61,8 @@ class ScoreUtils:
         normalized_similarity = (similarity + 1) / 2
         return normalized_similarity
 
-    def __cosine_similarity(self, vec1, vec2):
+    @staticmethod
+    def __cosine_similarity(vec1, vec2):
         dot_product = sum(a * b for a, b in zip(vec1, vec2))
         norm_vec1 = sum(a * a for a in vec1) ** 0.5
         norm_vec2 = sum(b * b for b in vec2) ** 0.5
