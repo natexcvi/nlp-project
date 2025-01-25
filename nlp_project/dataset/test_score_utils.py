@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from dataset.score_utils import ScoreUtils, SemanticContainment
+from nlp_project.dataset.score_utils import ScoreUtils, SemanticContainment
 
 
 @pytest.fixture

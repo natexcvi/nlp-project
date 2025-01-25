@@ -1,5 +1,5 @@
-from dataset import Problem
-from dataset.score_utils import ScoreUtils
+from nlp_project.dataset import Problem
+from nlp_project.dataset.score_utils import ScoreUtils
 
 
 class AlgoProblems:

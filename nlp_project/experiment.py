@@ -1,12 +1,11 @@
 import os
 
-from openai import OpenAI
 from pydantic import BaseModel
 
-from dataset.algo_problems import AlgoProblems
-from dataset.score_utils import ScoreUtils
-from solvers import Solver
-from solvers.chain_of_thought import ChainOfThoughtSolver
+from nlp_project.dataset.algo_problems import AlgoProblems
+from nlp_project.dataset.score_utils import ScoreUtils
+from nlp_project.solvers.base_solver import Solver
+from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
 
 
 class EvaluationResult(BaseModel):
@@ -20,11 +19,10 @@ class EvaluationResult(BaseModel):
 NUM_ITERATIONS = 5
 
 if __name__ == "__main__":
-    openai_api_key = os.getenv("OPENAI_API_KEY")
     solver: Solver = ChainOfThoughtSolver(
-        openai_api_key, "You are an algorithm expert."
+        "You are an algorithm expert."
     )
-    score_utils = ScoreUtils(openai_api_key)
+    score_utils = ScoreUtils()
     algo_problems = AlgoProblems(score_utils)
 
     for problem in algo_problems.problems:

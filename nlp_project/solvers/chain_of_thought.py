@@ -1,16 +1,16 @@
 from typing import Any
 
-from solvers import Solver
+from nlp_project.solvers.base_solver import Solver
 
 
 class ChainOfThoughtSolver(Solver):
-    def __init__(self, openai_api_key: str, system_message: str):
-        super().__init__(openai_api_key)
+    def __init__(self, system_message: str):
+        super().__init__()
         self.system_message = system_message
 
     def solve(self, problem: Any) -> str:
         response = self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model=self.llm_config.model,
             messages=[
                 {"role": "system", "content": self.system_message},
                 {"role": "user", "content": problem.statement},
