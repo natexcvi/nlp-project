@@ -3,6 +3,7 @@ import os
 from pydantic import BaseModel
 
 from nlp_project.dataset.algo_problems import AlgoProblems
+from nlp_project.dataset.regex_problem import RegexProblems
 from nlp_project.dataset.game_of_24 import GameOf24
 from nlp_project.dataset.live_code_bench import LiveCodeBenchLite
 from nlp_project.dataset.score_utils import ScoreUtils
@@ -22,9 +23,10 @@ NUM_ITERATIONS = 5
 
 
 def run_experiment():
-    solver: Solver = ChainOfThoughtSolver("You are an algorithm expert.")
+    solver: Solver = ChainOfThoughtSolver("Your task is to create a regex according to the following instructions:")
     score_utils = ScoreUtils()
     algo_problems = LiveCodeBenchLite(score_utils)
+    algo_problems = RegexProblems(score_utils)
 
     for problem in algo_problems.problems:
         result = EvaluationResult(scores=[])

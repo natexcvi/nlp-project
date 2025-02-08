@@ -11,6 +11,8 @@ pandas = "^2.2.3"
 openai = "^1.60.1"
 sympy = "^1.13.3"
 google-generativeai = "^0.8.4"
+python-dotenv = "^1.0.1"
+testcontainers = "^4.9.1"
 
 
 [tool.poetry.dev-dependencies]

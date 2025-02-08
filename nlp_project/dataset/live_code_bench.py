@@ -5,7 +5,7 @@ from typing import Any
 
 from testcontainers.core.container import DockerContainer
 
-from nlp_project.dataset import Problem
+from nlp_project.dataset.base_problem import Problem
 
 
 class LiveCodeBenchLite:

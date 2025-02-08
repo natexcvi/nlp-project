@@ -1,10 +1,8 @@
 import os
 from abc import ABC, abstractmethod
 
-from openai import OpenAI
-
 from nlp_project.clients.openai_client import get_openai_client, LLMConfig
-from nlp_project.dataset import Problem
+from nlp_project.dataset.base_problem import Problem
 
 
 class Solver(ABC):

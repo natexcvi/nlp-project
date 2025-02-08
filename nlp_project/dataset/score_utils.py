@@ -67,3 +67,7 @@ class ScoreUtils:
         norm_vec1 = sum(a * a for a in vec1) ** 0.5
         norm_vec2 = sum(b * b for b in vec2) ** 0.5
         return dot_product / (norm_vec1 * norm_vec2)
+
+    @staticmethod
+    def compare_regexes(regex1: str, regex2: str):
+        return regex1 == regex2

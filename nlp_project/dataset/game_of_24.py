@@ -1,4 +1,4 @@
-from nlp_project.dataset import Problem
+from nlp_project.dataset.base_problem import Problem
 
 
 class GameOf24:
