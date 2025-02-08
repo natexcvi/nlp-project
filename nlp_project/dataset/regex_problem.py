@@ -1,5 +1,9 @@
+from pathlib import Path
+
 from nlp_project.dataset.base_problem import Problem
 from nlp_project.dataset.score_utils import ScoreUtils
+
+WORKING_DIR = Path(__file__).parent.parent
 
 
 class RegexProblems:
@@ -17,9 +21,10 @@ class RegexProblems:
 
     @staticmethod
     def _read_regex_files() -> (list[str], list[str]):
-        with open('data/KB13/regex_description.txt', 'r') as f:
+        data_dir = WORKING_DIR.parent / 'data' / 'KB13'
+        with open(data_dir / 'regex_descriptions.txt', 'r') as f:
             regex_description = f.readlines()
-        with open('data/KB13/regexes.txt', 'r') as f:
+        with open(data_dir / 'regexes.txt', 'r') as f:
             regexes = f.readlines()
 
         return regex_description, regexes
