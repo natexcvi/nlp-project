@@ -1,6 +1,7 @@
+import re
+
 import sympy as sp
-from pydantic import BaseModel, model_validator
-from typing_extensions import Self
+from pydantic import BaseModel
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
 
@@ -8,6 +9,12 @@ from nlp_project.clients.openai_client import LLMConfig, get_openai_client
 class SemanticContainment(BaseModel):
     found: bool
     extracted_match: str
+
+
+class RegexResponse(BaseModel):
+    cot_output: str
+    regex: str
+    original_instruction: str
 
 
 class ScoreUtils:
@@ -68,6 +75,9 @@ class ScoreUtils:
         norm_vec2 = sum(b * b for b in vec2) ** 0.5
         return dot_product / (norm_vec1 * norm_vec2)
 
-    @staticmethod
-    def compare_regexes(regex1: str, regex2: str):
+    def compare_regexes(self, regex_response: RegexResponse, regex2: str):
+        regex1 = regex_response.regex
         return regex1 == regex2
+
+    def is_regex_working_on_sample(self, regex_response: RegexResponse, matching_line: str):
+        return re.match(regex_response.regex,  matching_line) is not None

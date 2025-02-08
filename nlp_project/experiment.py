@@ -35,6 +35,6 @@ def run_experiment():
             output = solver.solve(problem)
             # print(f"Output: {output}")
             score = problem.scorer_fn(output)
-            print(f"Score: {score}")
+            print(f"Score: {score}, regex: {output.regex}")
             result.scores.append(score)
         print(f"Average score for problem '{problem.name}': {result.avg_score:.1f}")

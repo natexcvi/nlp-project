@@ -1,5 +1,9 @@
 from typing import Any
 
+from pydantic import BaseModel
+
+from nlp_project.dataset.base_problem import Problem
+from nlp_project.dataset.score_utils import RegexResponse
 from nlp_project.solvers.base_solver import Solver
 
 
@@ -8,8 +12,13 @@ class ChainOfThoughtSolver(Solver):
         super().__init__()
         self.system_message = system_message
 
-    def solve(self, problem: Any) -> str:
-        response = self.openai_client.chat.completions.create(
+    def solve(self, problem: Problem) -> BaseModel:
+        if problem.response_format:
+            completion_model = self.openai_client.beta.chat.completions.parse
+        else:
+            completion_model = self.openai_client.chat.completions.create
+
+        response = completion_model(
             model=self.llm_config.model,
             messages=[
                 {"role": "system", "content": self.system_message},
@@ -19,5 +28,9 @@ class ChainOfThoughtSolver(Solver):
                     "content": "Solve the problem step-by-step, reasoning about each step.",
                 },
             ],
+            response_format=problem.response_format
         )
+        if hasattr(response.choices[0].message, "parsed"):
+            return response.choices[0].message.parsed
+
         return response.choices[0].message.content
