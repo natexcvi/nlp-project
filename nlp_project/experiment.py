@@ -1,6 +1,7 @@
 import os
 
-from pydantic import BaseModel
+import yaml
+from pydantic import BaseModel, RootModel
 
 from nlp_project.dataset.algo_problems import AlgoProblems
 from nlp_project.dataset.game_of_24 import GameOf24
@@ -20,23 +21,58 @@ class EvaluationResult(BaseModel):
         return sum(self.scores) / len(self.scores)
 
 
+class ProblemReport(BaseModel):
+    scores: list[float]
+    avg_score: float
+
+
+class SolverReport(RootModel):
+    root: dict[str, ProblemReport]
+
+
+class ExperimentReport(RootModel):
+    root: dict[str, SolverReport]
+
+
 NUM_ITERATIONS = 5
+REPORT_FILE = "experiment_report.yaml"
 
 
 def run_experiment():
-    solver: Solver = DynamicFewShotSolver(
-        "Your task is to create a regex according to the user provided instructions."
-    )
+    solvers = {
+        "DynamicFewShotSolver": DynamicFewShotSolver(
+            "Your task is to create a regex according to the user provided instructions."
+        ),
+        "ChainOfThoughtSolver": ChainOfThoughtSolver(
+            "Your task is to create a regex according to the user provided instructions."
+        ),
+    }
     score_utils = ScoreUtils()
     algo_problems = RegexProblems(score_utils)
+    report = {}
 
-    for problem in algo_problems.problems:
-        result = EvaluationResult(scores=[])
-        for i in range(NUM_ITERATIONS):
-            print(f"Evaluating problem '{problem.name}' ({i+1}/{NUM_ITERATIONS})...")
-            output = solver.solve(problem)
-            # print(f"Output: {output}")
-            score = problem.scorer_fn(output)
-            print(f"Score: {score}, regex: {output.regex}")
-            result.scores.append(score)
-        print(f"Average score for problem '{problem.name}': {result.avg_score:.1f}")
+    for solver_name, solver in solvers.items():
+        report[solver_name] = {}
+        for problem in algo_problems.problems:
+            result = EvaluationResult(scores=[])
+            for i in range(NUM_ITERATIONS):
+                print(
+                    f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
+                )
+                output = solver.solve(problem)
+                # print(f"Output: {output}")
+                score = problem.scorer_fn(output)
+                print(f"Score: {score}, regex: {output.regex}")
+                result.scores.append(score)
+            avg_score = result.avg_score
+            print(
+                f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
+            )
+            report[solver_name][problem.name] = ProblemReport(
+                scores=result.scores, avg_score=avg_score
+            )
+
+    experiment_report = ExperimentReport(__root__=report)
+    with open(REPORT_FILE, "w") as f:
+        yaml.dump(experiment_report.model_dump(), f, default_flow_style=False)
+    print(f"Report saved to {REPORT_FILE}")
