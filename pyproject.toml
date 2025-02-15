@@ -2,7 +2,7 @@
 name = "nlp-final-project"
 version = "0.1.0"
 description = "NLP Final Project"
-authors = [""]
+authors = ["AA, RR && NL"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -13,6 +13,7 @@ sympy = "^1.13.3"
 google-generativeai = "^0.8.4"
 python-dotenv = "^1.0.1"
 testcontainers = "^4.9.1"
+toml = "^0.10.2"
 
 
 [tool.poetry.dev-dependencies]
