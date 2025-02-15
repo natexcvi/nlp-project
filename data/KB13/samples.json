@@ -263,5 +263,131 @@
             "Yet another string"
         ],
         "regex": ".*\\bTriple\\b.*\\bX[A-Za-z]*\\b.*"
+    },
+    "lines using 'su' after 'son' or 'soon'.": {
+        "string_matches": [
+            "son sues",
+            "soon sue",
+            "son su"
+        ],
+        "string_mismatches": [
+            "son's use",
+            "son use"
+        ],
+        "regex": ".*(son|soon).*su.*"
+    },
+    "lines using 'q' before 'r'": {
+        "string_matches": [
+            "acquire",
+            "quarantine"
+        ],
+        "string_mismatches": [
+            "grey",
+            "brown",
+            "car"
+        ],
+        "regex": ".*q.*r.*"
+    },
+    "lines containing a word using the letters 'tt'.": {
+        "string_matches": [
+            "The string contains the substring \"better\".",
+            "This is another string with \"letter\" in it.",
+            "Here is a string with \"potter\"."
+        ],
+        "string_mismatches": [
+            "This sentence lacks the required substring.",
+            "Another string without the substring.",
+            "Yet another string that does not match"
+        ],
+        "regex": ".*\\b[A-Za-z]*tt[A-Za-z]*\\b.*"
+    },
+    "lines using more than 1 character": {
+        "string_matches": [
+            "abc",
+            "def",
+            "ghi"
+        ],
+        "string_mismatches": [
+            "a",
+            "b",
+            "c"
+        ],
+        "regex": ".*.{2,}.*"
+    },
+    "lines that contain words with 'ru'.": {
+        "string_matches": [
+            "true",
+            "rural",
+            "rupture"
+        ],
+        "string_mismatches": [
+            "abc",
+            "def",
+            "ghi"
+        ],
+        "regex": ".*\\b[A-Za-z]*ru[A-Za-z]*\\b.*"
+    },
+    "lines containing a word using 'ause'": {
+        "string_matches": [
+            "because",
+            "cause"
+        ],
+        "string_mismatches": [
+            "string",
+            "this",
+            "another",
+            "example"
+        ],
+        "regex": ".*\\b[A-Za-z]*ause[A-Za-z]*\\b.*"
+    },
+    "lines containing instances of 'JFK' found after 'ABC'": {
+        "string_matches": [
+            "ABC JFK",
+            "ABC DEF JFK ABC JFK",
+            "ABC 123 JFK"
+        ],
+        "string_mismatches": [
+            "DEF JFK",
+            "GHI JFK"
+        ],
+        "regex": ".*ABC.*JFK.*"
+    },
+    "lines that contain numbers": {
+        "string_matches": [
+            "123",
+            "456",
+            "789"
+        ],
+        "string_mismatches": [
+            "abc",
+            "def",
+            "ghi"
+        ],
+        "regex": ".*[0-9].*"
+    },
+    "lines that contain words ending with vowels.": {
+        "string_matches": [
+            "apple",
+            "orange"
+        ],
+        "string_mismatches": [
+            "world",
+            "python"
+        ],
+        "regex": ".*\\b[A-Za-z]*[AEIOUaeiou]\\b.*"
+    },
+    "lines that use words starting with 's'.": {
+        "string_matches": [
+            "She sells seashells by the seashore.",
+            "Simple sentences simplify understanding.",
+            "Seven swans swam swiftly.",
+            "Sally saw a squirrel.",
+            "Stars shine brightly in the night sky"
+        ],
+        "string_mismatches": [
+            "The quick brown fox jumps over a lazy dog.",
+            "Winter is coming."
+        ],
+        "regex": ".*\\bs[A-Za-z]*\\b.*"
     }
 }
