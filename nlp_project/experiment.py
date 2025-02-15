@@ -1,5 +1,6 @@
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Any
 
 import yaml
 from pydantic import BaseModel, RootModel
@@ -16,15 +17,21 @@ from nlp_project.solvers.dyfs import DynamicFewShotSolver
 
 class EvaluationResult(BaseModel):
     scores: list[float]
+    outputs: list[Any]
 
     @property
     def avg_score(self):
         return sum(self.scores) / len(self.scores)
 
 
+class IndividualResult(BaseModel):
+    regex: str
+    score: float
+
+
 class ProblemReport(BaseModel):
-    scores: list[float]
     avg_score: float
+    results: list[IndividualResult]
 
 
 class SolverReport(RootModel):
@@ -40,7 +47,7 @@ REPORT_FILE = "experiment_report.yaml"
 
 
 def evaluate_problem(solver, problem, solver_name):
-    result = EvaluationResult(scores=[])
+    result = EvaluationResult(scores=[], outputs=[])
     for i in range(NUM_ITERATIONS):
         print(
             f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
@@ -50,6 +57,7 @@ def evaluate_problem(solver, problem, solver_name):
         score = problem.scorer_fn(output)
         print(f"Score: {score}, regex: {output.regex}")
         result.scores.append(score)
+        result.outputs.append(output)
     avg_score = result.avg_score
     print(
         f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
@@ -57,7 +65,13 @@ def evaluate_problem(solver, problem, solver_name):
     return (
         solver_name,
         problem.name,
-        ProblemReport(scores=result.scores, avg_score=avg_score),
+        ProblemReport(
+            results=[
+                IndividualResult(regex=output.regex, score=score)
+                for output, score in zip(result.outputs, result.scores)
+            ],
+            avg_score=avg_score,
+        ),
     )
 
 
