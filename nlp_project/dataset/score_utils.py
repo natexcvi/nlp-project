@@ -83,10 +83,14 @@ class ScoreUtils:
     def validate_against_test_cases(
         self, regex_response: RegexResponse, example: RegexExample
     ):
-        return all(
-            re.match(regex_response.regex, test_string) is not None
-            for test_string in example.string_matches
-        ) and all(
-            re.match(regex_response.regex, test_string) is None
-            for test_string in example.string_mismatches
-        )
+        try:
+            return all(
+                re.match(regex_response.regex, test_string) is not None
+                for test_string in example.string_matches
+            ) and all(
+                re.match(regex_response.regex, test_string) is None
+                for test_string in example.string_mismatches
+            )
+        except Exception as e:
+            print(f"Error scoring regex `{regex_response.regex}`: {e}. Returning a score of 0.")
+            return False
