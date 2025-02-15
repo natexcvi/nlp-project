@@ -54,7 +54,11 @@ def evaluate_problem(solver, problem, solver_name):
     print(
         f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
     )
-    return problem.name, ProblemReport(scores=result.scores, avg_score=avg_score)
+    return (
+        solver_name,
+        problem.name,
+        ProblemReport(scores=result.scores, avg_score=avg_score),
+    )
 
 
 def run_experiment():
@@ -74,14 +78,14 @@ def run_experiment():
         futures = []
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
-            for problem in algo_problems.problems:
+            for problem in algo_problems.problems[:5]:
                 futures.append(
                     executor.submit(evaluate_problem, solver, problem, solver_name)
                 )
 
         for future in as_completed(futures):
-            solver_name, problem_report = future.result()
-            report[solver_name][problem_report.name] = problem_report
+            solver_name, problem_name, problem_report = future.result()
+            report[solver_name][problem_name] = problem_report
 
     experiment_report = ExperimentReport(root=report)
     with open(REPORT_FILE, "w") as f:

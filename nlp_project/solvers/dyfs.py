@@ -67,6 +67,10 @@ class DynamicFewShotSolver(Solver):
                     "role": "user",
                     "content": f"Here are some edge cases to help guide the process of solving the problem in the general case:\n{edge_cases}",
                 },
+                {
+                    "role": "user",
+                    "content": "Solve the problem step-by-step, reasoning about each step.",
+                },
             ],
             response_format=problem.response_format,
         )
