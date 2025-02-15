@@ -3,8 +3,8 @@ import re
 from pathlib import Path
 
 from pydantic import BaseModel, Field
+from tenacity import retry, wait_random_exponential, stop_after_attempt, RetryError
 from tqdm import tqdm
-from tenacity import RetryError, retry, stop_after_attempt, wait_random_exponential
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
 
