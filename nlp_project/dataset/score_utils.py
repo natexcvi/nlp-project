@@ -19,8 +19,8 @@ class RegexResponse(BaseModel):
 
 class ScoreUtils:
     def __init__(self):
-        self.openai_client = get_openai_client()
-        self.llm_config = LLMConfig()
+        self.llm_config = LLMConfig.from_config_toml()
+        self.openai_client = get_openai_client(self.llm_config)
 
     def simplify_math(self, expression):
         simplified_expression = sp.simplify(expression)
