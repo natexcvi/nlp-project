@@ -6,12 +6,12 @@
         ],
         "string_mismatches": [
             "agxde",
-            "a",
+            "p",
             "ag d e"
         ],
         "regex": "agde"
     },
-    "lines using words  ending in 'er'.": {
+    "lines using words ending in 'er'.": {
         "string_matches": [
             "The larger the better",
             "Manager handled the case",
@@ -27,7 +27,8 @@
         "string_matches": [
             "dance is life",
             "I love to dance",
-            "Let's go dance"
+            "Let's go dance",
+            "If you dance, I will sing"
         ],
         "string_mismatches": [
             "sing a song",

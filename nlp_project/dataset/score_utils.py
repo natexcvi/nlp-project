@@ -4,6 +4,7 @@ import sympy as sp
 from pydantic import BaseModel
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
+from nlp_project.dataset.gt_generator import RegexExample
 
 
 class SemanticContainment(BaseModel):
@@ -79,5 +80,13 @@ class ScoreUtils:
         regex1 = regex_response.regex
         return regex1 == regex2
 
-    def is_regex_working_on_sample(self, regex_response: RegexResponse, matching_line: str):
-        return re.match(regex_response.regex,  matching_line) is not None
+    def validate_against_test_cases(
+        self, regex_response: RegexResponse, example: RegexExample
+    ):
+        return all(
+            re.match(regex_response.regex, test_string) is not None
+            for test_string in example.string_matches
+        ) and all(
+            re.match(regex_response.regex, test_string) is None
+            for test_string in example.string_mismatches
+        )

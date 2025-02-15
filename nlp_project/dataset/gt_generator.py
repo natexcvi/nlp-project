@@ -1,22 +1,34 @@
 import json
 import re
+from pathlib import Path
 
 from pydantic import BaseModel, Field
-from tenacity import retry, wait_random_exponential, stop_after_attempt, RetryError
+from tenacity import RetryError, retry, stop_after_attempt, wait_random_exponential
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
-from nlp_project.dataset.regex_problem import WORKING_DIR
+
+WORKING_DIR = Path(__file__).parent.parent
 
 
 class StringSampleResponse(BaseModel):
-    string_matches: list[str] = Field(description="The list of strings that match the regex pattern")
-    string_mismatches: list[str] = Field(description="The list of strings that do not match the regex pattern")
+    string_matches: list[str] = Field(
+        description="The list of strings that match the regex pattern"
+    )
+    string_mismatches: list[str] = Field(
+        description="The list of strings that do not match the regex pattern"
+    )
+
+
+class RegexExample(BaseModel):
+    regex: str
+    string_matches: list[str]
+    string_mismatches: list[str]
 
 
 class GTGenerator:
     def __init__(self):
-        self.openai_client = get_openai_client()
-        self.llm_config = LLMConfig()
+        self.llm_config = LLMConfig.from_config_toml()
+        self.openai_client = get_openai_client(self.llm_config)
 
     def validate_samples(self, samples: StringSampleResponse, regex: str):
         """
@@ -47,7 +59,9 @@ class GTGenerator:
         return samples
 
     @retry(wait=wait_random_exponential(min=1, max=10), stop=stop_after_attempt(5))
-    def generate_regex_string_samples(self, regex_instructions: str, regex: str) -> StringSampleResponse:
+    def generate_regex_string_samples(
+        self, regex_instructions: str, regex: str
+    ) -> StringSampleResponse:
         """
         Generate string samples that match a given regex pattern.
 
@@ -61,7 +75,10 @@ class GTGenerator:
         response = self.openai_client.beta.chat.completions.parse(
             model=self.llm_config.model,
             messages=[
-                {"role": "system", "content": "Generate string samples that match a given instruction."},
+                {
+                    "role": "system",
+                    "content": "Generate string samples that match a given instruction.",
+                },
                 {
                     "role": "user",
                     "content": f"Generate at least 3 string samples that match the following instructions and at least 3 that do not: {regex_instructions}",
@@ -74,7 +91,9 @@ class GTGenerator:
         try:
             samples = self.validate_samples(samples, regex)
         except ValueError as e:
-            print(f"Error: {e} on regex pattern: {regex_instructions} and samples: {samples}")
+            print(
+                f"Error: {e} on regex pattern: {regex_instructions} and samples: {samples}"
+            )
             raise e
 
         return samples
@@ -83,15 +102,16 @@ class GTGenerator:
 if __name__ == "__main__":
     gt_generator = GTGenerator()
 
-    data_file_path = WORKING_DIR.parent / 'data' / 'KB13'
-    with open(data_file_path / 'regexes.txt', "r") as f:
+    data_file_path = WORKING_DIR.parent / "data" / "KB13"
+    with open(data_file_path / "regexes.txt", "r") as f:
         regexes = f.readlines()
-    with open(data_file_path / 'regex_descriptions.txt', "r") as f:
+    with open(data_file_path / "regex_descriptions.txt", "r") as f:
         regexes_instructions = f.readlines()
 
     try:
-        with open(data_file_path / 'samples.json', 'r') as f:
+        with open(data_file_path / "samples.json", "r") as f:
             regex_examples = json.load(f)
+            regex_examples = {k: RegexExample(**v) for k, v in regex_examples.items()}
     except:
         regex_examples = {}
 
@@ -100,17 +120,19 @@ if __name__ == "__main__":
             continue
 
         if len(regex_examples) % 10 == 0:
-            with open(data_file_path / 'samples.json', 'w') as f:
-                json.dump(regex_examples, f, indent=4)
+            with open(data_file_path / "samples.json", "w") as f:
+                json.dump(
+                    {k: v.model_dump() for k, v in regex_examples.items()}, f, indent=4
+                )
 
         instructions = instructions.strip()
         regex = regex.strip()
         try:
             res = gt_generator.generate_regex_string_samples(instructions, regex)
-            regex_examples[instructions] = {**res.model_dump(), "regex": regex}
+            regex_examples[instructions] = RegexExample(regex=regex, **res.model_dump())
         except RetryError as e:
             print(f"Error: {e} on regex pattern: {instructions}")
             continue
 
-    with open(data_file_path / 'samples.json', 'w') as f:
-        json.dump(regex_examples, f, indent=4)
+    with open(data_file_path / "samples.json", "w") as f:
+        json.dump({k: v.model_dump() for k, v in regex_examples.items()}, f, indent=4)
