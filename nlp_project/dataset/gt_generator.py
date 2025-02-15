@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 
 from pydantic import BaseModel, Field
+from tqdm import tqdm
 from tenacity import RetryError, retry, stop_after_attempt, wait_random_exponential
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
@@ -115,7 +116,7 @@ if __name__ == "__main__":
     except:
         regex_examples = {}
 
-    for i, (regex, instructions) in enumerate(list(zip(regexes, regexes_instructions))):
+    for i, (regex, instructions) in enumerate(tqdm(list(zip(regexes, regexes_instructions)))):
         if instructions in regex_examples:
             continue
 
