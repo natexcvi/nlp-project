@@ -44,7 +44,9 @@ class GTGenerator:
         if len(samples.string_matches) < 2 or len(samples.string_mismatches) < 2:
             raise ValueError("No valid samples found")
 
-    @retry(wait=wait_random_exponential(min=1, max=10), stop=stop_after_attempt(3))
+        return samples
+
+    @retry(wait=wait_random_exponential(min=1, max=10), stop=stop_after_attempt(5))
     def generate_regex_string_samples(self, regex_instructions: str, regex: str) -> StringSampleResponse:
         """
         Generate string samples that match a given regex pattern.
@@ -70,7 +72,7 @@ class GTGenerator:
 
         samples = response.choices[0].message.parsed
         try:
-            self.validate_samples(samples, regex)
+            samples = self.validate_samples(samples, regex)
         except ValueError as e:
             print(f"Error: {e} on regex pattern: {regex_instructions} and samples: {samples}")
             raise e
@@ -87,16 +89,28 @@ if __name__ == "__main__":
     with open(data_file_path / 'regex_descriptions.txt', "r") as f:
         regexes_instructions = f.readlines()
 
-    samples = {}
-    for regex, instructions in list(zip(regexes, regexes_instructions))[:3]:
+    try:
+        with open(data_file_path / 'samples.json', 'r') as f:
+            regex_examples = json.load(f)
+    except:
+        regex_examples = {}
+
+    for i, (regex, instructions) in enumerate(list(zip(regexes, regexes_instructions))):
+        if instructions in regex_examples:
+            continue
+
+        if len(regex_examples) % 10 == 0:
+            with open(data_file_path / 'samples.json', 'w') as f:
+                json.dump(regex_examples, f, indent=4)
+
         instructions = instructions.strip()
         regex = regex.strip()
         try:
             res = gt_generator.generate_regex_string_samples(instructions, regex)
-            samples[instructions] = {**res.model_dump(), "regex": regex}
+            regex_examples[instructions] = {**res.model_dump(), "regex": regex}
         except RetryError as e:
             print(f"Error: {e} on regex pattern: {instructions}")
             continue
 
     with open(data_file_path / 'samples.json', 'w') as f:
-        json.dump(samples, f, indent=4)
+        json.dump(regex_examples, f, indent=4)
