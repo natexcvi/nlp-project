@@ -11,7 +11,10 @@ MAX_EDGE_CASES = 5
 
 class EdgeCase(BaseModel):
     input: str
-    output: str
+    is_match: bool = Field(
+        ...,
+        description="Whether the input matches the regex.",
+    )
     explanation: str = Field(
         ...,
         description="What aspects of the problem are highlighted by this case.",
@@ -51,6 +54,14 @@ class DynamicFewShotSolver(Solver):
         )
         return response.choices[0].message.parsed.edge_cases
 
+    def __stringify_edge_cases(self, edge_cases: list[EdgeCase]) -> str:
+        return "\n".join(
+            [
+                f'{edge_case.input} -> {"matches" if edge_case.is_match else "does not match"}'
+                for edge_case in edge_cases
+            ]
+        )
+
     def solve(self, problem: Problem) -> BaseModel:
         if problem.response_format:
             completion_model = self.openai_client.beta.chat.completions.parse
@@ -65,7 +76,7 @@ class DynamicFewShotSolver(Solver):
                 {"role": "user", "content": problem.statement},
                 {
                     "role": "user",
-                    "content": f"Here are some edge cases to help guide the process of solving the problem in the general case:\n{edge_cases}",
+                    "content": f"Here are some edge cases to help guide the process of solving the problem in the general case:\n{self.__stringify_edge_cases(edge_cases)}",
                 },
                 {
                     "role": "user",
