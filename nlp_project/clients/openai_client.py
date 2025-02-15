@@ -1,8 +1,11 @@
 import os
+from pathlib import Path
 
 import toml
 from openai import OpenAI
 from pydantic import BaseModel
+
+WORKING_DIR = Path(__file__).parent.parent
 
 
 def get_openai_client(config: "LLMConfig") -> OpenAI:
@@ -20,7 +23,7 @@ class LLMConfig(BaseModel):
 
     @classmethod
     def from_config_toml(cls) -> "LLMConfig":
-        config = toml.load("llm_config.toml")
+        config = toml.load(WORKING_DIR / "clients/llm_config.toml")
         return cls(
             model=config.get("model", "gpt-4o"),
             embeddings_model=config.get("embeddings_model", "text-embedding-ada-002"),

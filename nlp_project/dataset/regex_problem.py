@@ -1,13 +1,9 @@
 import json
-from pathlib import Path
 
-from pydantic import BaseModel
-
+from nlp_project.clients.openai_client import WORKING_DIR
 from nlp_project.dataset.base_problem import Problem
 from nlp_project.dataset.gt_generator import RegexExample
 from nlp_project.dataset.score_utils import RegexResponse, ScoreUtils
-
-WORKING_DIR = Path(__file__).parent.parent
 
 
 class RegexProblems:

@@ -109,12 +109,9 @@ if __name__ == "__main__":
     with open(data_file_path / "regex_descriptions.txt", "r") as f:
         regexes_instructions = f.readlines()
 
-    try:
-        with open(data_file_path / "samples.json", "r") as f:
-            regex_examples = json.load(f)
-            regex_examples = {k: RegexExample(**v) for k, v in regex_examples.items()}
-    except:
-        regex_examples = {}
+    with open(data_file_path / "samples.json", "r") as f:
+        regex_examples = json.load(f)
+        regex_examples = {k: RegexExample(**v) for k, v in regex_examples.items()}
 
     for i, (regex, instructions) in enumerate(tqdm(list(zip(regexes, regexes_instructions)))):
         if instructions in regex_examples:
