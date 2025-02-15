@@ -13,9 +13,8 @@ class SemanticContainment(BaseModel):
 
 
 class RegexResponse(BaseModel):
-    cot_output: str
     regex: str
-    original_instruction: str
+    reasoning: str
 
 
 class ScoreUtils:
@@ -92,5 +91,7 @@ class ScoreUtils:
                 for test_string in example.string_mismatches
             )
         except Exception as e:
-            print(f"Error scoring regex `{regex_response.regex}`: {e}. Returning a score of 0.")
+            print(
+                f"Error scoring regex `{regex_response.regex}`: {e}. Returning a score of 0."
+            )
             return False
