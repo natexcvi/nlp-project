@@ -1,4 +1,6 @@
+import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from typing import Any
 
 import yaml
@@ -106,7 +108,7 @@ def generate_summary(report):
     )
 
 
-def run_experiment():
+def run_experiment() -> None:
     solvers = {
         "DynamicFewShotSolver": DynamicFewShotSolver(
             "Your task is to create a regex according to the user provided instructions."
@@ -134,7 +136,14 @@ def run_experiment():
 
     experiment_report = ExperimentReport(root=report)
     summary = generate_summary(report)
-    with open(REPORT_FILE, "w") as f:
+
+    reports_dir = "reports"
+    os.makedirs(reports_dir, exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    report_file = os.path.join(reports_dir, f"experiment_report_{timestamp}.yaml")
+
+    with open(report_file, "w") as f:
         yaml.dump(
             {
                 "summary": summary.model_dump(),
@@ -143,4 +152,4 @@ def run_experiment():
             f,
             default_flow_style=False,
         )
-    print(f"Report saved to {REPORT_FILE}")
+    print(f"Report saved to {report_file}")
