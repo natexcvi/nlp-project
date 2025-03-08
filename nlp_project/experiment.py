@@ -47,6 +47,7 @@ class ExperimentSummary(BaseModel):
     total_solvers: int
     avg_score: float
     avg_score_per_model: dict[str, float]
+    num_iterations: int
 
 
 NUM_ITERATIONS = 5
@@ -60,7 +61,6 @@ def evaluate_problem(solver, problem, solver_name):
             f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
         )
         output = solver.solve(problem)
-        # print(f"Output: {output}")
         score = problem.scorer_fn(output)
         print(f"Score: {score}, regex: {output.regex}")
         result.scores.append(score)
@@ -105,6 +105,7 @@ def generate_summary(report):
         total_solvers=total_solvers,
         avg_score=avg_score,
         avg_score_per_model=avg_score_per_model,
+        num_iterations=NUM_ITERATIONS,
     )
 
 
