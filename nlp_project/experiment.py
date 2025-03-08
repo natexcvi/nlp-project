@@ -83,7 +83,12 @@ def evaluate_problem(solver, problem, solver_name):
 
 
 def generate_summary(report):
-    total_problems = sum(len(solver_report) for solver_report in report.values())
+    unique_problems = set(
+        problem_name
+        for solver_report in report.values()
+        for problem_name in solver_report
+    )
+    total_problems = len(unique_problems)
     total_solvers = len(report)
     avg_score = (
         sum(
