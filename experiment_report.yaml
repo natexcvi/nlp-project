@@ -1,140 +1,531 @@
 details:
   ChainOfThoughtSolver:
-    lines that contain only the letters 'agde'.:
+    lines containing the word 'art':
+      avg_score: 0.6
+      results:
+      - regex: (?i)^.*\bart\b.*$
+        score: 1.0
+      - regex: (?i)\bart\b
+        score: 0.0
+      - regex: \bart\b
+        score: 0.0
+      - regex: ^(.*\bart\b.*)$
+        score: 1.0
+      - regex: ^.*\bart\b.*$
+        score: 1.0
+    lines having words ending with 'ne'.:
       avg_score: 1.0
       results:
-      - regex: ^[agde]*$
+      - regex: \b\w+ne\b
         score: 1.0
-      - regex: ^[agde]*$
+      - regex: \b\w*ne\b
         score: 1.0
-      - regex: ^[agde]*$
+      - regex: \b\w*ne\b
         score: 1.0
+      - regex: \b\w+ne\b
+        score: 1.0
+      - regex: \b\w*ne\b
+        score: 1.0
+    lines that contain at least one numeric in it.:
+      avg_score: 0.0
+      results:
+      - regex: \d
+        score: 0.0
+      - regex: \d
+        score: 0.0
+      - regex: \d
+        score: 0.0
+      - regex: \d
+        score: 0.0
+      - regex: \d
+        score: 0.0
+    lines that contain only the letters 'agde'.:
+      avg_score: 0.0
+      results:
       - regex: ^[agde]+$
-        score: 1.0
-      - regex: ^[agde]*$
-        score: 1.0
-    lines that contain the word 'dance':
+        score: 0.0
+      - regex: ^[agde]+$
+        score: 0.0
+      - regex: ^[agde]+$
+        score: 0.0
+      - regex: ^[agde]+$
+        score: 0.0
+      - regex: ^[agde]+$
+        score: 0.0
+    lines that contain the number '254' at least twice.:
       avg_score: 0.8
+      results:
+      - regex: (?=.*?(254).*?\1)
+        score: 1.0
+      - regex: (?=.*254.*254)
+        score: 1.0
+      - regex: (?:.*254.*){2,}
+        score: 1.0
+      - regex: ^(?=.*254.*254).*$
+        score: 1.0
+      - regex: \b(\d*254\d*){2,}\b
+        score: 0.0
+    lines that contain the numbers '9', and '10':
+      avg_score: 0.0
+      results:
+      - regex: ^(?=.*\b9\b)(?=.*\b10\b).*$
+        score: 0.0
+      - regex: (?=.*\b9\b)(?=.*\b10\b)
+        score: 0.0
+      - regex: ^(?=.*\b9\b)(?=.*\b10\b).*$
+        score: 0.0
+      - regex: ^(?=.*\b9\b)(?=.*\b10\b).*$
+        score: 0.0
+      - regex: ^(?=.*\b9\b)(?=.*\b10\b).*$
+        score: 0.0
+    lines that contain the word 'dance':
+      avg_score: 1.0
       results:
       - regex: ^.*\bdance\b.*$
         score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
       - regex: ^.*\bdance\b.*$
         score: 1.0
-      - regex: \b(?i)dance\b
-        score: 0.0
-      - regex: ^.*\bdance\b.*$
+      - regex: (?i)^.*\bdance\b.*$
         score: 1.0
       - regex: (?i).*\bdance\b.*
         score: 1.0
-    lines that include three capital letters:
-      avg_score: 0.8
+    lines that end in an 'o':
+      avg_score: 0.0
       results:
-      - regex: ^(?=.*[A-Z].*[A-Z].*[A-Z]).*
+      - regex: ^.*o$
+        score: 0.0
+      - regex: o$
+        score: 0.0
+      - regex: ^.*o$
+        score: 0.0
+      - regex: ^.*o$
+        score: 0.0
+      - regex: ^.*o$
+        score: 0.0
+    lines that ends with letter 'f':
+      avg_score: 1.0
+      results:
+      - regex: ^.*f$
         score: 1.0
-      - regex: (?=.*[A-Z].*[A-Z].*[A-Z])^.*$
+      - regex: ^[\s\S]*f$
+        score: 1.0
+      - regex: ^.*f$
+        score: 1.0
+      - regex: ^.*f$
+        score: 1.0
+      - regex: ^.*f$
+        score: 1.0
+    lines that have 2 words using 4 letters:
+      avg_score: 0.0
+      results:
+      - regex: ^\b\w{4}\b \b\w{4}\b$
+        score: 0.0
+      - regex: ^\b\w{4}\b \b\w{4}\b$
+        score: 0.0
+      - regex: ^\b\w{4}\b\s\b\w{4}\b$
+        score: 0.0
+      - regex: ^\b\w{4}\b \b\w{4}\b$
+        score: 0.0
+      - regex: ^\b\w{4}\b \b\w{4}\b$
+        score: 0.0
+    lines that have at least 5 numbers.:
+      avg_score: 1.0
+      results:
+      - regex: ^(?:.*\d.*){5,}.*$
+        score: 1.0
+      - regex: ^(.*\d.*){5,}$
+        score: 1.0
+      - regex: ^(?=.*\d.*\d.*\d.*\d.*\d).*$
+        score: 1.0
+      - regex: ^(.*\d.*){5,}.*$
+        score: 1.0
+      - regex: ^(.*\d.*){5,}.*$
+        score: 1.0
+    lines that have words ending in 'ing':
+      avg_score: 0.2
+      results:
+      - regex: \b\w+ing\b
+        score: 0.0
+      - regex: \b\w*ing\b
+        score: 0.0
+      - regex: \b\w+ing\b
+        score: 0.0
+      - regex: \b\w+ing\b
+        score: 0.0
+      - regex: ^.*\b\w+ing\b.*$
+        score: 1.0
+    lines that include three capital letters:
+      avg_score: 1.0
+      results:
+      - regex: \b(?:\w*?[A-Z]\w*?){3,}\b
         score: 1.0
       - regex: (?=.*[A-Z].*[A-Z].*[A-Z]).*
         score: 1.0
-      - regex: ^.*[A-Z]{3}.*$
-        score: 0.0
+      - regex: \b(?=(?:.*[A-Z]){3,})[A-Za-z]*\b
+        score: 1.0
       - regex: (?=.*[A-Z].*[A-Z].*[A-Z])
         score: 1.0
-    lines using words ending in 'er'.:
+      - regex: ^(?=.*[A-Z].*[A-Z].*[A-Z]).*
+        score: 1.0
+    lines using a word that contains the letters 'der':
       avg_score: 0.0
       results:
-      - regex: \b\w*er\b
+      - regex: \b\w*der\w*\b
         score: 0.0
-      - regex: \b\w*er\b
+      - regex: \b\w*der\w*\b
         score: 0.0
-      - regex: \b\w*er\b
+      - regex: \b\w*der\w*\b
         score: 0.0
-      - regex: \b\w*er\b
+      - regex: \b\w*der\w*\b
         score: 0.0
-      - regex: \b\w*er\b
+      - regex: \b\w*der\w*\b
         score: 0.0
-    lines which have 'bar':
-      avg_score: 0.6
+    lines using only three words:
+      avg_score: 1.0
       results:
-      - regex: ^.*bar.*$
+      - regex: ^\b\w+\b \b\w+\b \b\w+\b$
         score: 1.0
-      - regex: (?=.*\bbar\b)
+      - regex: ^[\w\-']+(\s+[\w\-']+){2}$
+        score: 1.0
+      - regex: ^\b\w+\b(?:\s+\b\w+\b){2}$
+        score: 1.0
+      - regex: ^\b\w+\b \b\w+\b \b\w+\b$
+        score: 1.0
+      - regex: ^\b(\w+\b\s+){2}\w+\b$
+        score: 1.0
+    lines using words ending in 'er'.:
+      avg_score: 0.2
+      results:
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: ^.*\b\w*er\b.*$
+        score: 1.0
+      - regex: \b\w*er\b
+        score: 0.0
+    lines using words that begin with 'z'.:
+      avg_score: 0.4
+      results:
+      - regex: (?i)\b[zZ]\w*\b
+        score: 0.0
+      - regex: (?i)\b[zZ]\w*\b
+        score: 0.0
+      - regex: ^.*\b[zZ]\w*\b.*$
+        score: 1.0
+      - regex: \bz\w*\b
+        score: 0.0
+      - regex: ^.*\b[zZ][a-zA-Z]*\b.*$
+        score: 1.0
+    lines which contain only an uppercase letter:
+      avg_score: 1.0
+      results:
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+    lines which have 'bar':
+      avg_score: 0.0
+      results:
+      - regex: ^.*\bbar\b.*$
         score: 0.0
       - regex: (?i)^.*\bbar\b.*$
         score: 0.0
-      - regex: ^.*bar.*$
-        score: 1.0
-      - regex: ^.*bar.*$
-        score: 1.0
-  DynamicFewShotSolver:
-    lines that contain only the letters 'agde'.:
+      - regex: ^.*\bbar\b.*$
+        score: 0.0
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+    lines with the word 'Triple' followed by words that start with 'X':
       avg_score: 1.0
       results:
+      - regex: (?i)^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: ^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: ^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: ^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+  DynamicFewShotSolver:
+    lines containing the word 'art':
+      avg_score: 0.2
+      results:
+      - regex: (?i)\b(?<![-'])art(?![-'])\b
+        score: 0.0
+      - regex: ^.*\b[Aa]rt\b.*$
+        score: 1.0
+      - regex: \b[Aa]rt\b
+        score: 0.0
+      - regex: (?i)\b(?<![-])art\b
+        score: 0.0
+      - regex: \b[Aa]rt\b
+        score: 0.0
+    lines having words ending with 'ne'.:
+      avg_score: 1.0
+      results:
+      - regex: (?i)(?<![\w'-])\b\w*ne\b(?![\w'-])
+        score: 1.0
+      - regex: \b\w+ne\b
+        score: 1.0
+      - regex: ^.*\b\w*ne\b.*$
+        score: 1.0
+      - regex: \b\w*-?ne\b
+        score: 1.0
+      - regex: \b[A-Za-z]*ne\b
+        score: 1.0
+    lines that contain at least one numeric in it.:
+      avg_score: 0.2
+      results:
+      - regex: \d
+        score: 0.0
+      - regex: \d
+        score: 0.0
+      - regex: (?=.*\d).*
+        score: 1.0
+      - regex: \b\d+\b
+        score: 0.0
+      - regex: \d
+        score: 0.0
+    lines that contain only the letters 'agde'.:
+      avg_score: 0.0
+      results:
       - regex: ^[agde]+$
-        score: 1.0
-      - regex: ^(?=.*[agde])[agde]+$
-        score: 1.0
+        score: 0.0
+      - regex: ^(?!^$)[agde]+$
+        score: 0.0
       - regex: ^[agde]+$
-        score: 1.0
+        score: 0.0
+      - regex: ^(?!.*\W)[agde]*$
+        score: 0.0
       - regex: ^[agde]*$
+        score: 0.0
+    lines that contain the number '254' at least twice.:
+      avg_score: 1.0
+      results:
+      - regex: ^(?=.*254.*254)
         score: 1.0
-      - regex: ^[agde]+$
+      - regex: (?:.*\b254\b.*){2}
         score: 1.0
+      - regex: (?:.*\b254\b.*){2,}
+        score: 1.0
+      - regex: (?=.*254.*254)
+        score: 1.0
+      - regex: ^(?=.*254.*254).*
+        score: 1.0
+    lines that contain the numbers '9', and '10':
+      avg_score: 0.0
+      results:
+      - regex: \b(?:[^\d]*\b9\b[^\d]*\b10\b|[^\d]*\b10\b[^\d]*\b9\b)
+        score: 0.0
+      - regex: ^.*(?<!\d)(?:9|10)(?!\d).*$
+        score: 0.0
+      - regex: (?=.*(?:\b9\b|9\.10))(?=.*(?:\b10\b|9\.10))
+        score: 0.0
+      - regex: ^(?=.*\b9\b)(?=.*\b10\b).*$
+        score: 0.0
+      - regex: (?=.*\b9\b)(?=.*\b10\b)
+        score: 0.0
     lines that contain the word 'dance':
       avg_score: 1.0
       results:
-      - regex: (?i)^.*\bdance\b.*$
+      - regex: ^(.*\bdance\b.*)|(.*[-])dance(.*)$
         score: 1.0
-      - regex: (?i)^.*\bdance\b.*$
+      - regex: ^(?=.*\bdance\b).*$
         score: 1.0
       - regex: ^.*\bdance\b.*$
         score: 1.0
       - regex: (?i)^.*\bdance\b.*$
         score: 1.0
-      - regex: (?i)^.*\bdance\b.*$
+      - regex: (?i).*\bdance\b.*
+        score: 1.0
+    lines that end in an 'o':
+      avg_score: 0.0
+      results:
+      - regex: ^.*o\s*$
+        score: 0.0
+      - regex: ^.*o$
+        score: 0.0
+      - regex: \bo$
+        score: 0.0
+      - regex: ^[^o]*o$
+        score: 0.0
+      - regex: (?mi)^.*o$
+        score: 0.0
+    lines that ends with letter 'f':
+      avg_score: 0.6
+      results:
+      - regex: ^.*f$
+        score: 1.0
+      - regex: .*f$
+        score: 1.0
+      - regex: ^.*\bf\b$
+        score: 0.0
+      - regex: ^.*f$
+        score: 1.0
+      - regex: ^.*f\.$
+        score: 0.0
+    lines that have 2 words using 4 letters:
+      avg_score: 0.8
+      results:
+      - regex: ^\b[a-zA-Z]{4}\b \b[a-zA-Z]{4}\b$
+        score: 1.0
+      - regex: ^\b[a-zA-Z]{4}\b \b[a-zA-Z]{4}\b$
+        score: 1.0
+      - regex: ^\b[a-zA-Z]{4}\b\s+\b[a-zA-Z]{4}\b$
+        score: 1.0
+      - regex: ^\b\w{4}\b \b\w{4}\b$
+        score: 0.0
+      - regex: ^\b[a-zA-Z]{4}\b \b[a-zA-Z]{4}\b$
+        score: 1.0
+    lines that have at least 5 numbers.:
+      avg_score: 1.0
+      results:
+      - regex: ^(.*?\d.*?){5,}$
+        score: 1.0
+      - regex: ^(?:[^\d]*\d[^\d]*){5,}$
+        score: 1.0
+      - regex: ^(\D*\d\D*){5,}$
+        score: 1.0
+      - regex: ^(?:[^\d]*\d){5,}
+        score: 1.0
+      - regex: ^(?=(?:.*?\d){5}).*$
+        score: 1.0
+    lines that have words ending in 'ing':
+      avg_score: 0.8
+      results:
+      - regex: \b\w*ing\b
+        score: 0.0
+      - regex: (?m)^.*\b\w*ing\b.*$
+        score: 1.0
+      - regex: ^(?=.*\b[a-zA-Z]+ing\b).*$
+        score: 1.0
+      - regex: ^.*\b\w*ing\b.*$
+        score: 1.0
+      - regex: ^(.*\b\w*ing\b.*)$
         score: 1.0
     lines that include three capital letters:
       avg_score: 0.6
       results:
-      - regex: (?:^|\W)([A-Z]{3})(?:\W|$)
+      - regex: ^(?=.*[A-Z].*){3}.*$
         score: 0.0
-      - regex: ^(?=.*\b(?:[^A-Z]*[A-Z]){3}[^A-Z]*\b)
+      - regex: ^(?=.*[A-Z].*[A-Z].*[A-Z]).*$
+        score: 1.0
+      - regex: ^(.*?[A-Z]){3,}.*$
+        score: 1.0
+      - regex: ^(?=.*[A-Z].*[A-Z].*[A-Z]).*$
+        score: 1.0
+      - regex: (?<![A-Z])[A-Z]{3}(?![A-Z])
         score: 0.0
-      - regex: .*([A-Z].*?){3}.*
+    lines using a word that contains the letters 'der':
+      avg_score: 0.0
+      results:
+      - regex: \b\w*[dD][eE][rR]\w*\b
+        score: 0.0
+      - regex: \b[a-zA-Z]*der[a-zA-Z]*\b
+        score: 0.0
+      - regex: \b\S*der\S*\b
+        score: 0.0
+      - regex: (?i)\b\S*der\S*\b
+        score: 0.0
+      - regex: (?i)\b\w*der\w*\b
+        score: 0.0
+    lines using only three words:
+      avg_score: 1.0
+      results:
+      - regex: ^\b(\w+\b\s){2}\w+\b$
         score: 1.0
-      - regex: ^(?=(?:.*[A-Z].*){3}).*$
+      - regex: ^\s*\b\w+\b(\s+\b\w+\b){2}\s*$
         score: 1.0
-      - regex: (?=.*[A-Z].*[A-Z].*[A-Z]).*
+      - regex: ^\w+[.,!?;:]*\s+\w+[.,!?;:]*\s+\w+[.,!?;:]*$
+        score: 1.0
+      - regex: ^\b\w+\b[ ]\b\w+\b[ ]\b\w+\b$
+        score: 1.0
+      - regex: ^(\b\w+\b\s+){2}\b\w+\b$
         score: 1.0
     lines using words ending in 'er'.:
-      avg_score: 0.4
+      avg_score: 0.2
       results:
+      - regex: \b(?:[a-zA-Z]+er\b)
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b(?<!-)\w*er\b(?!-)
+        score: 0.0
       - regex: ^.*\b\w*er\b.*$
         score: 1.0
-      - regex: ^(?=.*\b\w*er\b).*$
-        score: 1.0
-      - regex: \b(?!over|under)\w+er\b
+      - regex: \b\w*er(?!ing)\b
         score: 0.0
-      - regex: \b([A-Za-z]+er)\b
-        score: 0.0
-      - regex: \b\w+er(?!\w)
-        score: 0.0
-    lines which have 'bar':
-      avg_score: 0.6
+    lines using words that begin with 'z'.:
+      avg_score: 0.4
       results:
-      - regex: ^.*bar.*$
-        score: 1.0
-      - regex: (?=.*bar)
-        score: 1.0
-      - regex: (?m)^.*\bbar\b.*$
+      - regex: \b[zZ][a-zA-Z]*\b
         score: 0.0
-      - regex: ^.*(?<![a-zA-Z])bar(?![a-zA-Z]).*$
+      - regex: \b[zZ]\w*\b
         score: 0.0
-      - regex: ^.*bar.*$
+      - regex: ^.*\b[zZ][a-zA-Z]*\b.*$
+        score: 1.0
+      - regex: (?<=^|\s|[^\w])z\w*
+        score: 0.0
+      - regex: ^.*\b[zZ]\w*\b.*$
+        score: 1.0
+    lines which contain only an uppercase letter:
+      avg_score: 1.0
+      results:
+      - regex: ^([A-Z])$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^[A-Z]$
+        score: 1.0
+      - regex: ^\n|^[A-Z]$
+        score: 1.0
+    lines which have 'bar':
+      avg_score: 0.0
+      results:
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+      - regex: .*\bbar\b.*
+        score: 0.0
+      - regex: ^(?i).*\bbar\b.*$
+        score: 0.0
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+    lines with the word 'Triple' followed by words that start with 'X':
+      avg_score: 1.0
+      results:
+      - regex: ^.*?\bTriple\b.*?\bX\w*\b.*?$
+        score: 1.0
+      - regex: ^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: ^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: ^.*\bTriple\b.*\bX\w*\b.*$
+        score: 1.0
+      - regex: ^.*\bTriple\b\s+\bX\w*\b.*$
         score: 1.0
 summary:
-  avg_score: 0.6799999999999999
+  avg_score: 1.05
   avg_score_per_model:
-    ChainOfThoughtSolver: 0.64
-    DynamicFewShotSolver: 0.72
-  total_problems: 10
+    ChainOfThoughtSolver: 0.51
+    DynamicFewShotSolver: 0.5399999999999999
+  num_iterations: 5
+  total_problems: 20
   total_solvers: 2

@@ -85,14 +85,11 @@ def generate_summary(report):
     )
     total_problems = len(unique_problems)
     total_solvers = len(report)
-    avg_score = (
-        sum(
-            problem_report.avg_score
-            for solver_report in report.values()
-            for problem_report in solver_report.values()
-        )
-        / total_problems
-    )
+    avg_score = sum(
+        problem_report.avg_score
+        for solver_report in report.values()
+        for problem_report in solver_report.values()
+    ) / (total_problems * total_solvers)
     avg_score_per_model = {
         solver_name: sum(
             problem_report.avg_score for problem_report in solver_report.values()
