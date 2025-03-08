@@ -63,7 +63,11 @@ class DynamicFewShotSolver(Solver):
         )
 
     def solve(self, problem: Problem) -> BaseModel:
-        if problem.response_format:
+        if not problem.solution_evaluator:
+            raise ValueError(
+                "Problem must have a solution evaluator to use this solver."
+            )
+        if issubclass(problem.response_format, BaseModel):
             completion_model = self.openai_client.beta.chat.completions.parse
         else:
             completion_model = self.openai_client.chat.completions.create
@@ -76,16 +80,56 @@ class DynamicFewShotSolver(Solver):
                 {"role": "user", "content": problem.statement},
                 {
                     "role": "user",
-                    "content": f"Here are some edge cases to help guide the process of solving the problem in the general case:\n{self.__stringify_edge_cases(edge_cases)}",
-                },
-                {
-                    "role": "user",
                     "content": "Solve the problem step-by-step, reasoning about each step.",
                 },
             ],
             response_format=problem.response_format,
         )
-        if hasattr(response.choices[0].message, "parsed"):
-            return response.choices[0].message.parsed
 
-        return response.choices[0].message.content
+        final_response = (
+            response.choices[0].message.parsed
+            if hasattr(response.choices[0].message, "parsed")
+            else response.choices[0].message.content
+        )
+
+        evaluator = problem.solution_evaluator(final_response)
+
+        failing_edge_cases = [
+            edge_case
+            for edge_case in edge_cases
+            if evaluator(edge_case.input) != edge_case.is_match
+        ]
+
+        if not failing_edge_cases:
+            return final_response
+
+        edge_case_str = self.__stringify_edge_cases(failing_edge_cases)
+
+        response = completion_model(
+            model=self.llm_config.model,
+            messages=[
+                {"role": "system", "content": self.system_message},
+                {"role": "user", "content": problem.statement},
+                {
+                    "role": "user",
+                    "content": "Solve the problem step-by-step, reasoning about each step.",
+                },
+                {
+                    "role": "assistant",
+                    "content": response.choices[0].message.content,
+                },
+                {
+                    "role": "user",
+                    "content": f"Here are some edge cases that your solution does not handle correctly:\n\n{edge_case_str}",
+                },
+            ],
+            response_format=problem.response_format,
+        )
+
+        final_response = (
+            response.choices[0].message.parsed
+            if hasattr(response.choices[0].message, "parsed")
+            else response.choices[0].message.content
+        )
+
+        return final_response

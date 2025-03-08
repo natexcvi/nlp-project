@@ -42,6 +42,13 @@ class ExperimentReport(RootModel):
     root: dict[str, SolverReport]
 
 
+class ExperimentSummary(BaseModel):
+    total_problems: int
+    total_solvers: int
+    avg_score: float
+    avg_score_per_model: dict[str, float]
+
+
 NUM_ITERATIONS = 5
 REPORT_FILE = "experiment_report.yaml"
 
@@ -75,6 +82,32 @@ def evaluate_problem(solver, problem, solver_name):
     )
 
 
+def generate_summary(report):
+    total_problems = sum(len(solver_report) for solver_report in report.values())
+    total_solvers = len(report)
+    avg_score = (
+        sum(
+            problem_report.avg_score
+            for solver_report in report.values()
+            for problem_report in solver_report.values()
+        )
+        / total_problems
+    )
+    avg_score_per_model = {
+        solver_name: sum(
+            problem_report.avg_score for problem_report in solver_report.values()
+        )
+        / len(solver_report)
+        for solver_name, solver_report in report.items()
+    }
+    return ExperimentSummary(
+        total_problems=total_problems,
+        total_solvers=total_solvers,
+        avg_score=avg_score,
+        avg_score_per_model=avg_score_per_model,
+    )
+
+
 def run_experiment():
     solvers = {
         "DynamicFewShotSolver": DynamicFewShotSolver(
@@ -102,6 +135,14 @@ def run_experiment():
             report[solver_name][problem_name] = problem_report
 
     experiment_report = ExperimentReport(root=report)
+    summary = generate_summary(report)
     with open(REPORT_FILE, "w") as f:
-        yaml.dump(experiment_report.model_dump(), f, default_flow_style=False)
+        yaml.dump(
+            {
+                "summary": summary.model_dump(),
+                "details": experiment_report.model_dump(),
+            },
+            f,
+            default_flow_style=False,
+        )
     print(f"Report saved to {REPORT_FILE}")

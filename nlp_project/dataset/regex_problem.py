@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -25,6 +26,10 @@ class RegexProblems:
                     output, example
                 ),
                 response_format=RegexResponse,
+                solution_evaluator=lambda solution: lambda txt: re.match(
+                    solution.regex, txt
+                )
+                is not None,
             )
             for regex_description, sample_string in zip(
                 regex_descriptions, regex_examlpes

@@ -13,7 +13,7 @@ class ChainOfThoughtSolver(Solver):
         self.system_message = system_message
 
     def solve(self, problem: Problem) -> BaseModel:
-        if problem.response_format:
+        if issubclass(problem.response_format, BaseModel):
             completion_model = self.openai_client.beta.chat.completions.parse
         else:
             completion_model = self.openai_client.chat.completions.create
@@ -28,7 +28,7 @@ class ChainOfThoughtSolver(Solver):
                     "content": "Solve the problem step-by-step, reasoning about each step.",
                 },
             ],
-            response_format=problem.response_format
+            response_format=problem.response_format,
         )
         if hasattr(response.choices[0].message, "parsed"):
             return response.choices[0].message.parsed

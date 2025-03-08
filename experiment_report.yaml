@@ -1,0 +1,140 @@
+details:
+  ChainOfThoughtSolver:
+    lines that contain only the letters 'agde'.:
+      avg_score: 1.0
+      results:
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]+$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+    lines that contain the word 'dance':
+      avg_score: 0.8
+      results:
+      - regex: ^.*\bdance\b.*$
+        score: 1.0
+      - regex: ^.*\bdance\b.*$
+        score: 1.0
+      - regex: \b(?i)dance\b
+        score: 0.0
+      - regex: ^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i).*\bdance\b.*
+        score: 1.0
+    lines that include three capital letters:
+      avg_score: 0.8
+      results:
+      - regex: ^(?=.*[A-Z].*[A-Z].*[A-Z]).*
+        score: 1.0
+      - regex: (?=.*[A-Z].*[A-Z].*[A-Z])^.*$
+        score: 1.0
+      - regex: (?=.*[A-Z].*[A-Z].*[A-Z]).*
+        score: 1.0
+      - regex: ^.*[A-Z]{3}.*$
+        score: 0.0
+      - regex: (?=.*[A-Z].*[A-Z].*[A-Z])
+        score: 1.0
+    lines using words ending in 'er'.:
+      avg_score: 0.0
+      results:
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+    lines which have 'bar':
+      avg_score: 0.6
+      results:
+      - regex: ^.*bar.*$
+        score: 1.0
+      - regex: (?=.*\bbar\b)
+        score: 0.0
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+      - regex: ^.*bar.*$
+        score: 1.0
+      - regex: ^.*bar.*$
+        score: 1.0
+  DynamicFewShotSolver:
+    lines that contain only the letters 'agde'.:
+      avg_score: 1.0
+      results:
+      - regex: ^[agde]+$
+        score: 1.0
+      - regex: ^(?=.*[agde])[agde]+$
+        score: 1.0
+      - regex: ^[agde]+$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]+$
+        score: 1.0
+    lines that contain the word 'dance':
+      avg_score: 1.0
+      results:
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: ^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+    lines that include three capital letters:
+      avg_score: 0.6
+      results:
+      - regex: (?:^|\W)([A-Z]{3})(?:\W|$)
+        score: 0.0
+      - regex: ^(?=.*\b(?:[^A-Z]*[A-Z]){3}[^A-Z]*\b)
+        score: 0.0
+      - regex: .*([A-Z].*?){3}.*
+        score: 1.0
+      - regex: ^(?=(?:.*[A-Z].*){3}).*$
+        score: 1.0
+      - regex: (?=.*[A-Z].*[A-Z].*[A-Z]).*
+        score: 1.0
+    lines using words ending in 'er'.:
+      avg_score: 0.4
+      results:
+      - regex: ^.*\b\w*er\b.*$
+        score: 1.0
+      - regex: ^(?=.*\b\w*er\b).*$
+        score: 1.0
+      - regex: \b(?!over|under)\w+er\b
+        score: 0.0
+      - regex: \b([A-Za-z]+er)\b
+        score: 0.0
+      - regex: \b\w+er(?!\w)
+        score: 0.0
+    lines which have 'bar':
+      avg_score: 0.6
+      results:
+      - regex: ^.*bar.*$
+        score: 1.0
+      - regex: (?=.*bar)
+        score: 1.0
+      - regex: (?m)^.*\bbar\b.*$
+        score: 0.0
+      - regex: ^.*(?<![a-zA-Z])bar(?![a-zA-Z]).*$
+        score: 0.0
+      - regex: ^.*bar.*$
+        score: 1.0
+summary:
+  avg_score: 0.6799999999999999
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.64
+    DynamicFewShotSolver: 0.72
+  total_problems: 10
+  total_solvers: 2
