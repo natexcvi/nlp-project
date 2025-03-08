@@ -33,18 +33,6 @@ class RegexProblems:
         ]
 
     @staticmethod
-    def _read_regex_files() -> dict[str, str]:
-        data_dir = WORKING_DIR.parent / "data" / "KB13"
-        # with open(data_dir / 'regex_descriptions.txt', 'r') as f:
-        #     regex_description = f.readlines()
-        # with open(data_dir / 'regexes.txt', 'r') as f:
-        #     regexes = f.readlines()
-        with open(data_dir / "single_sample.json", "r") as f:
-            regex_examples = json.load(f)
-
-        return regex_examples
-
-    @staticmethod
     def __read_regex_examples() -> dict[str, RegexExample]:
         data_dir = WORKING_DIR.parent / "data" / "KB13"
         with open(data_dir / "samples.json", "r") as f:
