@@ -1,9 +1,7 @@
-from typing import Any
 
 from pydantic import BaseModel, Field
 
 from nlp_project.dataset.base_problem import Problem
-from nlp_project.dataset.score_utils import RegexResponse
 from nlp_project.solvers.base_solver import Solver
 
 MAX_EDGE_CASES = 5

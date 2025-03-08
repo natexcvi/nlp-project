@@ -1,16 +1,11 @@
-import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import yaml
 from pydantic import BaseModel, RootModel
 
-from nlp_project.dataset.algo_problems import AlgoProblems
-from nlp_project.dataset.game_of_24 import GameOf24
-from nlp_project.dataset.live_code_bench import LiveCodeBenchLite
 from nlp_project.dataset.regex_problem import RegexProblems
 from nlp_project.dataset.score_utils import ScoreUtils
-from nlp_project.solvers.base_solver import Solver
 from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
 from nlp_project.solvers.dyfs import DynamicFewShotSolver
 
@@ -131,7 +126,7 @@ def run_experiment():
         futures = []
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
-            for problem in algo_problems.problems[:5]:
+            for problem in algo_problems.problems[:20]:
                 futures.append(
                     executor.submit(evaluate_problem, solver, problem, solver_name)
                 )
