@@ -1,8 +1,5 @@
 import json
 import re
-from pathlib import Path
-
-from pydantic import BaseModel
 
 from nlp_project.clients.openai_client import WORKING_DIR
 from nlp_project.dataset.base_problem import Problem
