@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel, Field
 
 from nlp_project.dataset.base_problem import Problem
@@ -31,7 +30,7 @@ class DynamicFewShotSolver(Solver):
         super().__init__()
         self.system_message = system_message
 
-    def __generate_edge_cases(self, problem: Problem) -> list[EdgeCase]:
+    def generate_edge_cases(self, problem: Problem) -> list[EdgeCase]:
         response = self.openai_client.beta.chat.completions.parse(
             model=self.llm_config.model,
             messages=[
@@ -52,7 +51,7 @@ class DynamicFewShotSolver(Solver):
         )
         return response.choices[0].message.parsed.edge_cases
 
-    def __stringify_edge_cases(self, edge_cases: list[EdgeCase]) -> str:
+    def stringify_edge_cases(self, edge_cases: list[EdgeCase]) -> str:
         return "\n".join(
             [
                 f'{edge_case.input} -> {"matches" if edge_case.is_match else "does not match"}'
@@ -70,7 +69,7 @@ class DynamicFewShotSolver(Solver):
         else:
             completion_model = self.openai_client.chat.completions.create
 
-        edge_cases = self.__generate_edge_cases(problem)
+        edge_cases = self.generate_edge_cases(problem)
         response = completion_model(
             model=self.llm_config.model,
             messages=[
@@ -101,7 +100,7 @@ class DynamicFewShotSolver(Solver):
         if not failing_edge_cases:
             return final_response
 
-        edge_case_str = self.__stringify_edge_cases(failing_edge_cases)
+        edge_case_str = self.stringify_edge_cases(failing_edge_cases)
 
         response = completion_model(
             model=self.llm_config.model,
@@ -131,3 +130,5 @@ class DynamicFewShotSolver(Solver):
         )
 
         return final_response
+
+
