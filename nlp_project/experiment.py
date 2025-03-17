@@ -10,6 +10,7 @@ from nlp_project.dataset.regex_problem import RegexProblems
 from nlp_project.dataset.score_utils import ScoreUtils
 from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
 from nlp_project.solvers.dyfs import DynamicFewShotSolver
+from nlp_project.solvers.regex_solver import RegexFewShotSolver, DynamicRegexSolver
 
 
 class EvaluationResult(BaseModel):
@@ -52,31 +53,35 @@ REPORT_FILE = "experiment_report.yaml"
 
 
 def evaluate_problem(solver, problem, solver_name):
-    result = EvaluationResult(scores=[], outputs=[])
-    for i in range(NUM_ITERATIONS):
+    try:
+        result = EvaluationResult(scores=[], outputs=[])
+        for i in range(NUM_ITERATIONS):
+            print(
+                f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
+            )
+            output = solver.solve(problem)
+            score = problem.scorer_fn(output)
+            print(f"Score: {score}, regex: {output.regex}")
+            result.scores.append(score)
+            result.outputs.append(output)
+        avg_score = result.avg_score
         print(
-            f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
+            f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
         )
-        output = solver.solve(problem)
-        score = problem.scorer_fn(output)
-        print(f"Score: {score}, regex: {output.regex}")
-        result.scores.append(score)
-        result.outputs.append(output)
-    avg_score = result.avg_score
-    print(
-        f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
-    )
-    return (
-        solver_name,
-        problem.name,
-        ProblemReport(
-            results=[
-                IndividualResult(regex=output.regex, score=score)
-                for output, score in zip(result.outputs, result.scores)
-            ],
-            avg_score=avg_score,
-        ),
-    )
+        return (
+            solver_name,
+            problem.name,
+            ProblemReport(
+                results=[
+                    IndividualResult(regex=output.regex, score=score)
+                    for output, score in zip(result.outputs, result.scores)
+                ],
+                avg_score=avg_score,
+            ),
+        )
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return solver_name, problem.name, ProblemReport(avg_score=0, results=[])
 
 
 def generate_summary(report):
@@ -110,7 +115,10 @@ def generate_summary(report):
 
 def run_experiment() -> None:
     solvers = {
-        "DynamicFewShotSolver": DynamicFewShotSolver(
+        # "DynamicFewShotSolver": DynamicFewShotSolver(
+        #     "Your task is to create a regex according to the user provided instructions."
+        # ),
+        "DynamicRegexSolver": DynamicRegexSolver(
             "Your task is to create a regex according to the user provided instructions."
         ),
         "ChainOfThoughtSolver": ChainOfThoughtSolver(
@@ -121,7 +129,7 @@ def run_experiment() -> None:
     algo_problems = RegexProblems(score_utils)
     report = {}
 
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    with ThreadPoolExecutor(max_workers=1) as executor:
         futures = []
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
