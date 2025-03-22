@@ -1403,17 +1403,16 @@
         ]
     },
     "lines which end with 'you'": {
-        "regex": ".*you",
+        "regex": ".*you$",
         "string_matches": [
-            "Think of me, will you?",
-            "Did you have a good day?",
-            "I'll see you soon!",
-            "Come back to me, will you?",
-            "Please help me, will you?"
+            "Think of me, will you",
+            "Come back to me, will you",
+            "Please help me, will you"
         ],
         "string_mismatches": [
             "It's a beautiful day, isn't it?",
-            "Hello there, friend!"
+            "Hello there, friend!",
+            "Please help me, will you?"
         ]
     },
     "lines that contain a digit.": {
@@ -2524,24 +2523,24 @@
             "The sofa is very comfortable."
         ]
     },
-    "lines that contain at least five words.": {
-        "regex": "(.*\\b[A-Za-z][A-Za-z]*\\b.*){5,}",
+    "lines that contain at least five words": {
+        "regex": "(\\b[A-Za-z]+\\b.*){5,}",
         "string_matches": [
             "This is a sample string with more than five words.",
             "Another example string that contains at least five words.",
             "Yet another string fulfilling the requirement of at least five words.",
             "This sentence has precisely five words in it.",
-            "This is a rather long sentence that certainly contains more than the required five words"
+            "This is a rather long sentence that certainly contains more than the required five words."
         ],
         "string_mismatches": [
             "Short.",
             "One word.",
             "Two words only.",
             "Three words here.",
-            "Four words total"
+            "Four words total."
         ]
     },
-    "lines which have a th after a 'ch'.": {
+    "lines that contain 'th' occurring anywhere after 'ch'": {
         "regex": ".*ch.*th.*",
         "string_matches": [
             "archth",
@@ -2554,8 +2553,8 @@
             "cde"
         ]
     },
-    "lines which contain the letter 'z' twice.": {
-        "regex": "(.*z.*){2,}",
+    "lines that contain the letter 'z' at least twice": {
+        "regex": ".*z.*z.*",
         "string_matches": [
             "pizzazz",
             "fuzzbuzz",
@@ -2567,8 +2566,8 @@
             "test"
         ]
     },
-    "lines containing either a 'w' or 's' character.": {
-        "regex": ".*(w|s).*",
+    "lines containing at least one 'w' or 's' character": {
+        "regex": ".*[ws].*",
         "string_matches": [
             "sword",
             "swing",
@@ -2580,8 +2579,8 @@
             "ghi"
         ]
     },
-    "lines which contain 2 or more 'q'.": {
-        "regex": "(.*q.*){2,}",
+    "lines that contain the letter 'q' at least twice": {
+        "regex": ".*q.*q.*",
         "string_matches": [
             "quizzical questions",
             "quality questions",
@@ -2596,7 +2595,7 @@
             "a"
         ]
     },
-    "lines that contain words starting with 'an'.": {
+    "lines that contain words starting with 'an'": {
         "regex": ".*\\ban[A-Za-z]*\\b.*",
         "string_matches": [
             "an apple a day keeps the doctor away",
@@ -2607,8 +2606,8 @@
             "Neither does this one"
         ]
     },
-    "lines ending with 'vem'": {
-        "regex": ".*vem",
+    "lines that end exactly with 'vem'": {
+        "regex": ".*vem$",
         "string_matches": [
             "This line ends with vem",
             "Another line that ends with vem",
@@ -2619,7 +2618,7 @@
             "And this one ends with something else"
         ]
     },
-    "lines containing words starting with the letter 'x'.": {
+    "lines that contain words starting with the letter 'x'": {
         "regex": ".*\\bx[A-Za-z]*\\b.*",
         "string_matches": [
             "xenon",
@@ -2632,8 +2631,8 @@
             "cherry"
         ]
     },
-    "lines with 7 or more words": {
-        "regex": "(.*\\b[A-Za-z]+\\b.*){7,}",
+    "lines that contain at least seven words": {
+        "regex": "(\\b[A-Za-z]+\\b.*){7,}",
         "string_matches": [
             "This string has more than seven words in it",
             "This is another example of a string with more than seven words",
@@ -2645,8 +2644,8 @@
             "One more short string"
         ]
     },
-    "lines that contain 5 or more letters": {
-        "regex": ".*(.*[A-Za-z].*){5,}.*",
+    "lines that contain at least five alphabetical letters": {
+        "regex": ".*([A-Za-z].*){5,}.*",
         "string_matches": [
             "string",
             "longer",
@@ -2659,13 +2658,13 @@
             "four"
         ]
     },
-    "lines containing the word 'inoperative'.": {
+    "lines that contain the word 'inoperative' as a standalone word": {
         "regex": ".*\\binoperative\\b.*",
         "string_matches": [
             "The machine is inoperative.",
             "The inoperative device was replaced.",
             "His inoperative leg required surgery.",
-            "We discovered the inoperative component causing issues"
+            "We discovered the inoperative component causing issues."
         ],
         "string_mismatches": [
             "The machine is operative.",
@@ -2675,8 +2674,8 @@
             "The system is online."
         ]
     },
-    "lines that end with 'you'.": {
-        "regex": ".*you",
+    "lines that end with the word 'you' exactly": {
+        "regex": ".*\\byou$",
         "string_matches": [
             "How are you",
             "It's all about you",
@@ -2688,172 +2687,7 @@
             "Programming is fun"
         ]
     },
-    "lines that contain 4 letter words ending in 's'": {
-        "regex": ".*\\b[A-Za-z]{3}s\\b.*",
-        "string_matches": [
-            "This has four",
-            "With some cats",
-            "Plus dogs"
-        ],
-        "string_mismatches": [
-            "No short words here",
-            "Just one word"
-        ]
-    },
-    "lines which contain the letter 'h' preceded by a letter.": {
-        "regex": ".*[A-Za-z].*h.*",
-        "string_matches": [
-            "ahoy",
-            "their",
-            "within",
-            "alpha",
-            "behold"
-        ],
-        "string_mismatches": [
-            "abc",
-            "def",
-            "jkl",
-            "mno"
-        ]
-    },
-    "lines which have the word 'egg'": {
-        "regex": ".*\\begg\\b.*",
-        "string_matches": [
-            "egg",
-            "fried egg",
-            "egg salad",
-            "scrambled egg"
-        ],
-        "string_mismatches": [
-            "apple",
-            "banana",
-            "orange",
-            "grape"
-        ]
-    },
-    "lines that have at least two words that start with 's'.": {
-        "regex": "(.*\\bs[A-Za-z]*\\b.*){2}",
-        "string_matches": [
-            "She sells seashells by the seashore",
-            "Seven swans swam swiftly",
-            "Sally saw sixteen snakes sleeping soundly"
-        ],
-        "string_mismatches": [
-            "sample",
-            "example",
-            "test"
-        ]
-    },
-    "lines that contain a number ending with '0'": {
-        "regex": ".*[0-9]*0.*",
-        "string_matches": [
-            "10",
-            "20",
-            "30"
-        ],
-        "string_mismatches": [
-            "apple",
-            "banana",
-            "cherry"
-        ]
-    },
-    "lines that end with the word 'free'.": {
-        "regex": ".*\\bfree",
-        "string_matches": [
-            "Stay free",
-            "Set yourself free",
-            "Feel free"
-        ],
-        "string_mismatches": [
-            "Make it easy",
-            "Just breathe",
-            "Do it now"
-        ]
-    },
-    "lines which contain 'ead' or 'pro'": {
-        "regex": ".*(ead|pro).*",
-        "string_matches": [
-            "head",
-            "bread",
-            "profile",
-            "pro"
-        ],
-        "string_mismatches": [
-            "example",
-            "test",
-            "hello"
-        ]
-    },
-    "lines that contain the word 'and'": {
-        "regex": ".*\\band\\b.*",
-        "string_matches": [
-            "This string contains the word and.",
-            "Another string with the word and in it.",
-            "This one also has and"
-        ],
-        "string_mismatches": [
-            "This is a sample string.",
-            "Another example string.",
-            "One more string"
-        ]
-    },
-    "lines that end in 'e'": {
-        "regex": ".*e",
-        "string_matches": [
-            "apple",
-            "orange",
-            "grape",
-            "pineapple",
-            "blue"
-        ],
-        "string_mismatches": [
-            "banana",
-            "kiwi",
-            "mango"
-        ]
-    },
-    "lines end in an 'a'": {
-        "regex": ".*a",
-        "string_matches": [
-            "unia",
-            "area",
-            "folia",
-            "academia",
-            "spania"
-        ],
-        "string_mismatches": [
-            "unite",
-            "fol"
-        ]
-    },
-    "lines that have at least three words beginning with a vowel.": {
-        "regex": "(.*\\b[AEIOUaeiou][A-Za-z]*\\b.*){3}",
-        "string_matches": [
-            "apple orange elephant",
-            "eagle owl igloo",
-            "umbrella apricot eggplant"
-        ],
-        "string_mismatches": [
-            "one two three",
-            "four five six",
-            "seven eight nine"
-        ]
-    },
-    "lines which contain a 3 letter string": {
-        "regex": ".*([A-Za-z]{3}).*",
-        "string_matches": [
-            "abc",
-            "def",
-            "ghi",
-            "xyz"
-        ],
-        "string_mismatches": [
-            "a",
-            "ab",
-            "1234"
-        ]
-    },
-    "lines with 'car' between 'try' and 'say'.": {
+    "lines that contain the word 'car' appearing anywhere between the words 'try' and 'say' (order can be reversed).": {
         "regex": ".*try.*car.*say.*|.*say.*car.*try.*",
         "string_matches": [
             "try car say",
@@ -2865,7 +2699,7 @@
             "try say"
         ]
     },
-    "lines that contain 6 letter words beginning with the letter 'y'.": {
+    "lines that contain at least one six-letter word that begins with the letter 'y'.": {
         "regex": ".*\\by[A-Za-z]{5}\\b.*",
         "string_matches": [
             "yarrow",
@@ -2882,7 +2716,7 @@
             "yearning"
         ]
     },
-    "lines that contain a word starting with a vowel.": {
+    "lines that contain at least one word that starts with a vowel (A, E, I, O, U).": {
         "regex": ".*\\b[AEIOUaeiou][A-Za-z]*\\b.*",
         "string_matches": [
             "apple",
@@ -2897,8 +2731,8 @@
             "fgh"
         ]
     },
-    "lines containing an instance of the name 'Beaker'.": {
-        "regex": ".*Beaker.*",
+    "lines that contain the exact word 'Beaker' anywhere in the text.": {
+        "regex": ".*\\bBeaker\\b.*",
         "string_matches": [
             "Beaker Street",
             "Breaking Beaker"
@@ -2909,8 +2743,8 @@
             "Breaking Flask"
         ]
     },
-    "lines which contain 'qu' at the start": {
-        "regex": "qu.*",
+    "lines that start with the letters 'qu'.": {
+        "regex": "^qu.*",
         "string_matches": [
             "quack",
             "queen",
@@ -2922,7 +2756,7 @@
             "sun"
         ]
     },
-    "lines which contain a word ending in 'ing'.": {
+    "lines that contain at least one word ending in 'ing'.": {
         "regex": ".*\\b[A-Za-z]*ing\\b.*",
         "string_matches": [
             "This sentence is interesting.",
@@ -2931,22 +2765,10 @@
         ],
         "string_mismatches": [
             "This is a sample sentence.",
-            "A third sentence for good measure.."
+            "A third sentence for good measure."
         ]
     },
-    "lines that start with 'apartheid'.": {
-        "regex": "apartheid.*",
-        "string_matches": [
-            "apartheid is a crime against humanity",
-            "apartheid was the official policy of racial segregation"
-        ],
-        "string_mismatches": [
-            "This is about human rights",
-            "This is about equality",
-            "This is about justice"
-        ]
-    },
-    "lines containing words that start with 'h' and end with 'e'.": {
+    "lines that contain at least one word that starts with 'h' and ends with 'e'.": {
         "regex": ".*\\bh[A-Za-z]*e\\b.*",
         "string_matches": [
             "house",
@@ -2963,7 +2785,7 @@
             "star"
         ]
     },
-    "lines using words beginning with the letter 'x'.": {
+    "lines that contain at least one word that begins with the letter 'x'.": {
         "regex": ".*\\bx[A-Za-z]*\\b.*",
         "string_matches": [
             "Xenial Xerxes' xylophone experienced extreme wear and tear.",
@@ -2975,7 +2797,7 @@
             "This is a sample sentence."
         ]
     },
-    "lines that contain words beginning in 'p'": {
+    "lines that contain at least one word that begins with the letter 'p'.": {
         "regex": ".*\\bp[A-Za-z]*\\b.*",
         "string_matches": [
             "Please pass the potatoes.",
@@ -2988,7 +2810,7 @@
             "Is this the last sentence?"
         ]
     },
-    "lines that contain a word containing 5 or more letters.": {
+    "lines that contain at least one word with five or more letters.": {
         "regex": ".*\\b[A-Za-z]{5,}\\b.*",
         "string_matches": [
             "string contains more than five letters",
@@ -3001,7 +2823,7 @@
             "123"
         ]
     },
-    "lines that contain at least three five letter words": {
+    "lines that contain at least three words, each having exactly five letters.": {
         "regex": "(.*\\b[A-Za-z]{5}\\b.*){3}",
         "string_matches": [
             "among these words there are many five letter words",
@@ -3015,7 +2837,7 @@
             "words"
         ]
     },
-    "lines that contain 'ugly' before 'betty' or 'thomas'.": {
+    "lines that contain the word 'ugly' appearing before either 'betty' or 'thomas'.": {
         "regex": ".*ugly.*(betty|thomas).*",
         "string_matches": [
             "ugly betty",
@@ -3032,7 +2854,7 @@
             "ugly"
         ]
     },
-    "lines that contain words starting with 'fa'.": {
+    "lines that contain at least one word starting with 'fa'.": {
         "regex": ".*\\bfa[A-Za-z]*\\b.*",
         "string_matches": [
             "fantastic",
@@ -3049,297 +2871,23 @@
             "elderberry"
         ]
     },
-    "lines that contain 'fu' before 'ba' or 'bar'.": {
-        "regex": ".*fu.*(ba|bar).*",
-        "string_matches": [
-            "fu bar",
-            "This string has fu before bar"
-        ],
-        "string_mismatches": [
-            "bar foo",
-            "This has bar before fu"
-        ]
-    },
-    "lines using more than 4 characters": {
-        "regex": ".*.{5,}.*",
-        "string_matches": [
-            "12345",
-            "abcdefg",
-            "longer string",
-            "more characters"
-        ],
-        "string_mismatches": [
-            "abc",
-            "123",
-            "a",
-            "1"
-        ]
-    },
-    "lines that contain any three vowels": {
-        "regex": "(.*[AEIOUaeiou].*){3}",
-        "string_matches": [
-            "aeiou",
-            "queue",
-            "euphemism",
-            "abstemious"
-        ],
-        "string_mismatches": [
-            "dog",
-            "cat",
-            "sun",
-            "moon",
-            "tree"
-        ]
-    },
-    "lines that use words that are only four letters long.": {
-        "regex": ".*\\b[A-Za-z]{4}\\b.*",
-        "string_matches": [
-            "Four word line.",
-            "Cool word.",
-            "Test case.",
-            "This is good"
-        ],
-        "string_mismatches": [
-            "Short.",
-            "Another."
-        ]
-    },
-    "lines containing words that start with 'i'.": {
-        "regex": ".*\\bi[A-Za-z]*\\b.*",
-        "string_matches": [
-            "I am a line that contains words starting with 'i'",
-            "it's impossible to ignore its importance",
-            "In this line, there are multiple words starting with 'i'"
-        ],
-        "string_mismatches": [
-            "Neither does this one",
-            "Nor this"
-        ]
-    },
-    "lines containing 'mean' or 'nic' before 'est' or 'test'": {
-        "regex": ".*(mean|nic).*(est|test).*",
-        "string_matches": [
-            "The meanest person",
-            "I've never seen a nicer test"
-        ],
-        "string_mismatches": [
-            "This is a test",
-            "Another test string",
-            "No mean or nice here"
-        ]
-    },
-    "lines containing 'tain' after 're' or 'per'.": {
-        "regex": ".*(re|per).*tain.*",
-        "string_matches": [
-            "pertain",
-            "pertaining",
-            "retained",
-            "retaining"
-        ],
-        "string_mismatches": [
-            "contain",
-            "maintained",
-            "obtained",
-            "sustain"
-        ]
-    },
-    "lines that end in 'o'": {
-        "regex": ".*o",
-        "string_matches": [
-            "avocado",
-            "tomato",
-            "potato"
-        ],
-        "string_mismatches": [
-            "apple",
-            "banana",
-            "kiwi"
-        ]
-    },
-    "lines that begin with 'The' or 'For'.": {
-        "regex": "(The|For).*",
-        "string_matches": [
-            "The quick brown fox jumps over the lazy dog.",
-            "For the sake of argument, let's assume this.",
-            "The following is an important note."
-        ],
-        "string_mismatches": [
-            "This is a sample line.",
-            "Another line here.",
-            "Yet another line"
-        ]
-    },
-    "lines that end with the letter 'o'": {
-        "regex": ".*o",
-        "string_matches": [
-            "avocado",
-            "tomato",
-            "potato"
-        ],
-        "string_mismatches": [
-            "abc",
-            "defg",
-            "hijklmn"
-        ]
-    },
-    "lines using any instance of 'd' or 'e' followed by 's' or 'r'": {
-        "regex": ".*(d|e).*(s|r).*",
-        "string_matches": [
-            "desk",
-            "doors",
-            "dress",
-            "ears",
-            "error"
-        ],
-        "string_mismatches": [
-            "abc",
-            "ghi",
-            "jkl"
-        ]
-    },
-    "lines that contin words ending in 'e'.": {
-        "regex": ".*\\b[A-Za-z]*e\\b.*",
-        "string_matches": [
-            "apple",
-            "bike",
-            "orange"
-        ],
-        "string_mismatches": [
-            "example1",
-            "example2"
-        ]
-    },
-    "lines containing the word 'blog'": {
-        "regex": ".*\\bblog\\b.*",
-        "string_matches": [
-            "My cool new blog",
-            "Check out my latest blog post!",
-            "This is a blog about cats"
-        ],
-        "string_mismatches": [
-            "No blogs here",
-            "Just some random text",
-            "This is a different topic"
-        ]
-    },
-    "lines having words ending with 'en'.": {
-        "regex": ".*\\b[A-Za-z]*en\\b.*",
-        "string_matches": [
-            "This is a golden opportunity.",
-            "Open the door and come in"
-        ],
-        "string_mismatches": [
-            "This is a sample sentence.",
-            "Another sentence with no matching words.",
-            "This one is also different."
-        ]
-    },
-    "lines using a 3 letter sequence": {
-        "regex": ".*[A-Za-z]{3}.*",
-        "string_matches": [
-            "abc",
-            "def",
-            "ghi"
-        ],
-        "string_mismatches": [
-            "12345",
-            "123"
-        ]
-    },
-    "lines which contain 'upper' or 'lower'": {
-        "regex": ".*(upper|lower).*",
-        "string_matches": [
-            "This line is in lower case",
-            "Upper and lower cases are here"
-        ],
-        "string_mismatches": [
-            "sample1",
-            "sample2",
-            "sample3"
-        ]
-    },
-    "lines that have the word 'sandwich'": {
-        "regex": ".*sandwich.*",
-        "string_matches": [
-            "I ate a delicious sandwich.",
-            "My favorite sandwich is a turkey and swiss.",
-            "Is that a veggie sandwich?"
-        ],
-        "string_mismatches": [
-            "I love hamburgers.",
-            "He prefers salads.",
-            "She is eating a hotdog."
-        ]
-    },
-    "lines ending in 'ia'": {
-        "regex": ".*ia",
-        "string_matches": [
-            "Romania",
-            "Bulgaria",
-            "Albania"
-        ],
-        "string_mismatches": [
-            "alpha",
-            "beta",
-            "gamma"
-        ]
-    },
-    "lines that begin with the phrase 'once upon a time'": {
-        "regex": "once upon a time.*",
-        "string_matches": [
-            "once upon a time, in a land far away",
-            "once upon a time, there was a princess",
-            "once upon a time, a brave knight set out on a quest"
-        ],
-        "string_mismatches": [
-            "a brave knight",
-            "in a land far away",
-            "there was a princess"
-        ]
-    },
-    "lines that utilize the letters 'as'.": {
-        "regex": ".*as.*",
-        "string_matches": [
-            "aspiration",
-            "class",
-            "fast"
-        ],
-        "string_mismatches": [
-            "sample1",
-            "example",
-            "test"
-        ]
-    },
-    "lines that contain digits.": {
-        "regex": ".*[0-9].*",
-        "string_matches": [
-            "a1b",
-            "123",
-            "xyz456"
-        ],
-        "string_mismatches": [
-            "abc",
-            "def",
-            "ghi"
-        ]
-    },
-    "lines that contain three 'she'.": {
-        "regex": "(.*she.*){3}",
+    "lines that contain at least three occurrences of 'she' anywhere in the line": {
+        "regex": "(.*\\bshe\\b.*){3}",
         "string_matches": [
             "She sells seashells; she likes she-scorpions. She is a she-devil!",
             "She, she, she; three repetitions of she.",
-            "She went to see she-wolves; she saw three she-wolves in the woods. "
+            "She went to see she-wolves; she saw three she-wolves in the woods."
         ],
         "string_mismatches": [
             "She sells seashells by the seashore.",
             "She went to the store and bought some sheeting.",
-            "The girl's name is Shelley; she is a she-wolf in disguise. ",
+            "The girl's name is Shelley; she is a she-wolf in disguise.",
             "There is a she-cat in the garden. She is very friendly.",
-            "She had a little lamb; its fleece was white as snow. She loved it dearly; she never let it go.  "
+            "She had a little lamb; its fleece was white as snow. She loved it dearly; she never let it go."
         ]
     },
-    "lines beginning with words that have a vowel as the first letter.": {
-        "regex": "\\b[AEIOUaeiou][A-Za-z]*\\b.*",
+    "lines that begin with a word whose first letter is a vowel (A, E, I, O, U)": {
+        "regex": "^\\b[AEIOUaeiou][A-Za-z]*\\b.*",
         "string_matches": [
             "Apple",
             "Orange",
@@ -3355,8 +2903,8 @@
             "Rust"
         ]
     },
-    "lines that begin with a numeral": {
-        "regex": "[0-9].*",
+    "lines that begin with a numeral (0-9)": {
+        "regex": "^[0-9].*",
         "string_matches": [
             "123 abc",
             "456 def",
@@ -3368,7 +2916,7 @@
             "ghi 789"
         ]
     },
-    "lines containing words that begin with 'G' and end with 'y'": {
+    "lines that contain at least one word starting with 'G' and ending with 'y'": {
         "regex": ".*\\bG[A-Za-z]*y\\b.*",
         "string_matches": [
             "Galaxy",
@@ -3381,7 +2929,7 @@
             "cherry"
         ]
     },
-    "lines containing at least 3 words": {
+    "lines that contain at least three distinct words": {
         "regex": "(.*\\b[A-Za-z]+\\b.*){3,}",
         "string_matches": [
             "this is a sentence",
@@ -3394,7 +2942,7 @@
             "a"
         ]
     },
-    "lines that contain words that have the letter 'e' occuring after the letter 'c'.": {
+    "lines that contain at least one word where the letter 'e' appears after the letter 'c'": {
         "regex": ".*\\b[A-Za-z]*c[A-Za-z]*e[A-Za-z]*\\b.*",
         "string_matches": [
             "ocean",
@@ -3407,8 +2955,8 @@
             "sun"
         ]
     },
-    "lines which begin with 'omega'": {
-        "regex": "omega.*",
+    "lines that begin with the exact word 'omega'": {
+        "regex": "^omega\\b.*",
         "string_matches": [
             "omega rocks",
             "omega is great",
@@ -3420,7 +2968,7 @@
             "gamma"
         ]
     },
-    "lines with words that contain 3 letters": {
+    "lines that contain at least one word consisting of exactly three letters": {
         "regex": ".*\\b[A-Za-z]{3}\\b.*",
         "string_matches": [
             "cat sat",
@@ -3433,7 +2981,7 @@
             "no short words here"
         ]
     },
-    "lines that use words ending with 'ot'.": {
+    "lines that contain at least one word ending with 'ot'": {
         "regex": ".*\\b[A-Za-z]*ot\\b.*",
         "string_matches": [
             "parrot",
@@ -3446,35 +2994,8 @@
             "test"
         ]
     },
-    "lines using more than 3 characters": {
-        "regex": ".*.{4,}.*",
-        "string_matches": [
-            "abcd",
-            "efgh",
-            "ijkl"
-        ],
-        "string_mismatches": [
-            "a",
-            "b",
-            "c"
-        ]
-    },
-    "lines using a word which contains at least 5 letters.": {
-        "regex": ".*\\b[A-Za-z]{5,}\\b.*",
-        "string_matches": [
-            "abcedf",
-            "abcdefg",
-            "amazing"
-        ],
-        "string_mismatches": [
-            "a",
-            "ab",
-            "abc",
-            "abcd"
-        ]
-    },
-    "lines that use words of at least 9 letters.": {
-        "regex": ".*\\b[A-Za-z]{9,}\\b.*",
+    "lines that contain at least one word consisting of at least seven letters": {
+        "regex": ".*\\b[A-Za-z]{7,}\\b.*",
         "string_matches": [
             "qualification",
             "understanding",
@@ -3490,7 +3011,7 @@
             "car"
         ]
     },
-    "lines that match the words 'and in this life'.": {
+    "lines that contain the exact phrase 'and in this life' as a whole unit": {
         "regex": ".*\\band in this life\\b.*",
         "string_matches": [
             "and in this life is good",
@@ -3503,115 +3024,7 @@
             "there is always hope"
         ]
     },
-    "lines that contain at least 4 words.": {
-        "regex": "(.*\\b[A-Za-z]+\\b.*){4,}",
-        "string_matches": [
-            "Four words are present",
-            "This is a sentence with more than four words",
-            "Another sentence with at least four words"
-        ],
-        "string_mismatches": [
-            "one",
-            "two words",
-            "three word",
-            "short"
-        ]
-    },
-    "lines using at least 3 'b'": {
-        "regex": "(.*b.*){3,}",
-        "string_matches": [
-            "bobb",
-            "bbbbbbbbbbbbbbbbb",
-            "The big bad bear"
-        ],
-        "string_mismatches": [
-            "aa",
-            "a",
-            "cat",
-            "dog",
-            "123"
-        ]
-    },
-    "lines that contain an 'x'": {
-        "regex": ".*x.*",
-        "string_matches": [
-            "xyz",
-            "x",
-            "axbc"
-        ],
-        "string_mismatches": [
-            "abc",
-            "def",
-            "ghi"
-        ]
-    },
-    "lines that contain the symbol '-'.": {
-        "regex": ".*-.*",
-        "string_matches": [
-            "a-bc",
-            "a-bc-def",
-            "123-456"
-        ],
-        "string_mismatches": [
-            "abc",
-            "def",
-            "ghi"
-        ]
-    },
-    "3 letter lines starting with 'x'": {
-        "regex": "x[A-Za-z]{2}",
-        "string_matches": [
-            "xyz",
-            "xya",
-            "xaz"
-        ],
-        "string_mismatches": [
-            "abcd",
-            "xy",
-            "x"
-        ]
-    },
-    "lines that contain '-' between words 'a' and 'lot'.": {
-        "regex": ".*(\\ba\\b.*\\-.*\\blot\\b|\\blot\\b.*\\-.*\\ba\\b).*",
-        "string_matches": [
-            "a-lot",
-            "a- lot",
-            "a -lot",
-            "a  -  lot"
-        ],
-        "string_mismatches": [
-            "a lot",
-            "a lot of",
-            "alot",
-            "a   lot"
-        ]
-    },
-    "lines with words that end in 'n'.": {
-        "regex": ".*\\b[A-Za-z]*n\\b.*",
-        "string_matches": [
-            "Open the door",
-            "Clean your room"
-        ],
-        "string_mismatches": [
-            "This is a sample string",
-            "Another string here"
-        ]
-    },
-    "lines using 'lay' or 'lie'": {
-        "regex": ".*l(ay|ie).*",
-        "string_matches": [
-            "I lay down on the couch.",
-            "The book lies on the table.",
-            "They lay the groundwork for the project.",
-            "He lay there for hours.",
-            "The city lies nestled in the valley."
-        ],
-        "string_mismatches": [
-            "The quick brown rabbit jumps over the lazy frogs.",
-            "Water flows downhill."
-        ]
-    },
-    "lines which contain 5 words starting with 'f'": {
+    "lines that contain at least five words that start with the letter 'f'": {
         "regex": "(.*\\bf[A-Za-z]*\\b.*){5,}",
         "string_matches": [
             "five fat frogs fly fast",
@@ -3624,8 +3037,8 @@
             "Only three foxes"
         ]
     },
-    "lines which mention 'puppy'.": {
-        "regex": ".*puppy.*",
+    "lines that contain the exact word 'puppy' at least once": {
+        "regex": ".*\\bpuppy\\b.*",
         "string_matches": [
             "My new puppy is so cute!",
             "The puppy learned a new trick.",
@@ -3641,71 +3054,13 @@
             "She is reading a book."
         ]
     },
-    "lines that contain DEF' with a period immediately after it.'": {
-        "regex": ".*DEF\\..*",
-        "string_matches": [
-            "DEF.",
-            "This line contains DEF.",
-            "DEF. This is a test."
-        ],
-        "string_mismatches": [
-            "DEF",
-            "DEF ",
-            "DEF1",
-            "DEFS",
-            "Definition"
-        ]
-    },
-    "lines using words ending with 'on'.": {
-        "regex": ".*\\b[A-Za-z]*on\\b.*",
-        "string_matches": [
-            "The sun shone brightly on the horizon.",
-            "He put his coat on.",
-            "Based on the information given, we can conclude that..."
-        ],
-        "string_mismatches": [
-            "This is a simple sentence.",
-            "No relevant words here."
-        ]
-    },
-    "lines that use words starting with 'fu'.": {
-        "regex": ".*\\bfu[A-Za-z]*\\b.*",
-        "string_matches": [
-            "fuchsia",
-            "fulcrum",
-            "function",
-            "fundamental",
-            "furthermore"
-        ],
-        "string_mismatches": [
-            "apple",
-            "banana",
-            "cherry",
-            "date",
-            "elderberry"
-        ]
-    },
-    "lines beginning with 'begin'": {
-        "regex": "begin.*",
-        "string_matches": [
-            "beginner",
-            "beginner's",
-            "beginning"
-        ],
-        "string_mismatches": [
-            "abc",
-            "Begin",
-            " end"
-        ]
-    },
-    "lines that start with a vowel and ends in an 'e'.": {
-        "regex": "[AEIOUaeiou].*e",
+    "lines that begin with a vowel (A, E, I, O, U) and end with the letter 'e'": {
+        "regex": "^[AEIOUaeiou].*e$",
         "string_matches": [
             "apple",
             "orange",
             "eagle",
-            "alice",
-            "amethyst"
+            "alice"
         ],
         "string_mismatches": [
             "hello",
@@ -3714,8 +3069,8 @@
             "foo"
         ]
     },
-    "lines starting with the word 'the'.": {
-        "regex": "\\bthe\\b.*",
+    "lines that start with the exact word 'the', followed by any content": {
+        "regex": "^the\\b.*",
         "string_matches": [
             "the quick brown rabbit",
             "the rain in Spain",
@@ -3727,8 +3082,8 @@
             "sun shines bright"
         ]
     },
-    "lines that end with 'and'": {
-        "regex": ".*and",
+    "lines that end with the exact word 'and'": {
+        "regex": ".*\\band$",
         "string_matches": [
             "This line ends with and",
             "Another line that ends with and",
@@ -3740,11 +3095,11 @@
             "A third example string"
         ]
     },
-    "lines that utilize 'pan' following words starting with 'pe'.": {
-        "regex": ".*\\bpe[A-Za-z]*\\b.*pan.*",
+    "lines containing a word that starts with 'pe' followed somewhere later by the word 'pan'": {
+        "regex": ".*\\bpe[A-Za-z]*\\b.*\\bpan\\b.*",
         "string_matches": [
             "pepperoni pan pizza",
-            "penguin pants",
+            "penguin pan ts",
             "people pan handler"
         ],
         "string_mismatches": [
@@ -3753,7 +3108,7 @@
             "people mover"
         ]
     },
-    "lines that have the word 'Facebook'": {
+    "lines that contain the exact word 'Facebook' anywhere": {
         "regex": ".*\\bFacebook\\b.*",
         "string_matches": [
             "Facebook post",
@@ -3766,7 +3121,7 @@
             "This is an Apple product"
         ]
     },
-    "lines that have words with 're'.": {
+    "lines containing at least one word that includes 're' as part of it": {
         "regex": ".*\\b[A-Za-z]*re[A-Za-z]*\\b.*",
         "string_matches": [
             "there",
@@ -3779,8 +3134,8 @@
             "abc"
         ]
     },
-    "lines using the word 'of' or the word 'in'": {
-        "regex": "(.*\\bof\\b.*)|(.*\\bin\\b.*)",
+    "lines containing either the exact word 'of' or the exact word 'in'": {
+        "regex": ".*\\b(of|in)\\b.*",
         "string_matches": [
             "The book is made of paper",
             "The cat sat in the sun",
@@ -3792,8 +3147,8 @@
             "cherry"
         ]
     },
-    "lines containing two or more words containing 'y'.": {
-        "regex": "(.*\\b[A-Za-z]*y[A-Za-z]*\\b.*){2,}",
+    "lines containing at least two separate words that contain the letter 'y'": {
+        "regex": ".*(\\b[A-Za-z]*y[A-Za-z]*\\b.*){2,}.*",
         "string_matches": [
             "yellow yarrow",
             "yesterday's yummy discovery",
@@ -3804,7 +3159,7 @@
             "yesterday"
         ]
     },
-    "lines that contain at least one 'z'": {
+    "lines that contain at least one occurrence of the letter 'z' anywhere": {
         "regex": ".*z.*",
         "string_matches": [
             "pizza",
@@ -3819,7 +3174,7 @@
             "grape"
         ]
     },
-    "lines that have 'ser' after 'lin' or 'ku'.": {
+    "lines containing 'ser' that appears after either 'lin' or 'ku'": {
         "regex": ".*(lin|ku).*ser.*",
         "string_matches": [
             "linen server",
@@ -3831,8 +3186,8 @@
             "lin"
         ]
     },
-    "lines that have three words comprised of 4 characters each.": {
-        "regex": ".*(.*\\b[A-Za-z]{4}\\b.*){3}.*",
+    "lines containing exactly three words, each consisting of exactly four letters": {
+        "regex": "^(\\b[A-Za-z]{4}\\b\\s*){3}$",
         "string_matches": [
             "play work code",
             "test this task"
@@ -3845,8 +3200,8 @@
             "this is a sentence"
         ]
     },
-    "lines ending in 'az'": {
-        "regex": ".*az",
+    "lines that end with 'az'": {
+        "regex": ".*az$",
         "string_matches": [
             "pizzaz",
             "daz"
@@ -3857,8 +3212,8 @@
             "fuzzball"
         ]
     },
-    "lines which begin with the letter 'z'.": {
-        "regex": "z.*",
+    "lines that start with the letter 'z'": {
+        "regex": "^z.*",
         "string_matches": [
             "zebra",
             "zip",
@@ -3870,61 +3225,7 @@
             "cherry"
         ]
     },
-    "lines containing 'ku' after 'mar' or 'is'.": {
-        "regex": ".*(mar|is).*ku.*",
-        "string_matches": [
-            "This is a sample string with 'ku' after 'is'.",
-            "This marvelous string contains 'ku' after 'mar'.",
-            "This is a string with 'ku' after 'is' and 'mar'"
-        ],
-        "string_mismatches": [
-            "This is a sample string.",
-            "Another string without 'ku' after 'mar' or 'is'.",
-            "This is another example string"
-        ]
-    },
-    "lines that include one word using at least 2 letters": {
-        "regex": ".*\\b[A-Za-z]{2,}\\b.*",
-        "string_matches": [
-            "cat",
-            "dog",
-            "bird"
-        ],
-        "string_mismatches": [
-            "",
-            "a",
-            " ",
-            "1"
-        ]
-    },
-    "lines that start with the letter 'e' followed by the word 'jr'.": {
-        "regex": "e.*\\bjr\\b.*",
-        "string_matches": [
-            "e jr is here",
-            "e jr was there",
-            "e jr went home"
-        ],
-        "string_mismatches": [
-            "e j r is here",
-            "e jr1 was there",
-            "a jr is here",
-            "e j r"
-        ]
-    },
-    "lines containing 'b', or 'c'": {
-        "regex": ".*(b|c).*",
-        "string_matches": [
-            "abc",
-            "bcd",
-            "cdb"
-        ],
-        "string_mismatches": [
-            "a",
-            "d",
-            "efg"
-        ]
-    },
-    "lines where '4' is between '3' and '5'": {
+    "lines that contain the digit '4' appearing between the digits '3' and '5'": {
         "regex": ".*3.*4.*5.*|.*5.*4.*3.*",
         "string_matches": [
             "345",
@@ -3940,7 +3241,7 @@
             "abc"
         ]
     },
-    "lines using words  ending in 'er'.": {
+    "lines containing at least one word that ends in 'er'": {
         "regex": ".*\\b[A-Za-z]*er\\b.*",
         "string_matches": [
             "The faster runner won the race.",
@@ -3954,7 +3255,7 @@
             "A third string sample"
         ]
     },
-    "lines using the word 'going' followed by 'd'.": {
+    "lines using the word 'going' followed immediately by a word starting with 'd'.": {
         "regex": ".*\\bgoing\\b.*d.*",
         "string_matches": [
             "I'm going down the street.",
@@ -3970,7 +3271,7 @@
             "We are going now"
         ]
     },
-    "lines that mention 'Dylan' in the same line as 'Lynda'.": {
+    "lines that mention 'Dylan' and 'Lynda'.": {
         "regex": "(.*Dylan.*Lynda.*)|(.*Lynda.*Dylan.*)",
         "string_matches": [
             "Dylan and Lynda went to the park.",
@@ -4011,7 +3312,7 @@
             "Interesting stories."
         ]
     },
-    "lines that have words ending with 'ti'.": {
+    "lines that have at least one word ending with 'ti'.": {
         "regex": ".*\\b[A-Za-z]*ti\\b.*",
         "string_matches": [
             "quantiti",
@@ -4023,14 +3324,14 @@
             "example"
         ]
     },
-    "lines using words with 'ca'.": {
+    "lines with at least one word starting with 'ca'.": {
         "regex": ".*\\b[A-Za-z]*ca[A-Za-z]*\\b.*",
         "string_matches": [
             "cabbage",
             "decapitate",
             "capacity",
             "cacao",
-            "casualty"
+            "casually funny"
         ],
         "string_mismatches": [
             "apple",
@@ -4040,10 +3341,10 @@
             "watermelon"
         ]
     },
-    "lines that have only 3 words": {
+    "lines that have exactly 3 words": {
         "regex": "(([^A-Za-z])*\\b[A-Za-z]+\\b([^A-Za-z])*){3}",
         "string_matches": [
-            "The sky is blue",
+            "The sky blue",
             "I love pizza",
             "Cats are cute"
         ],
@@ -4052,7 +3353,7 @@
             "Another string"
         ]
     },
-    "lines that have a 2 letter sequence": {
+    "lines that have at least a single 2 letter sequence": {
         "regex": ".*[A-Za-z]{2}.*",
         "string_matches": [
             "ab",
@@ -4069,7 +3370,7 @@
             "e"
         ]
     },
-    "lines containing 5 letter words.": {
+    "lines containing at least one 5 letter word.": {
         "regex": ".*\\b[A-Za-z]{5}\\b.*",
         "string_matches": [
             "abcde",
