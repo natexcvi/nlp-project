@@ -3463,6 +3463,114 @@
             "there is always hope"
         ]
     },
+   "lines that contain at least 4 words.": {
+        "regex": "(.*\\b[A-Za-z]+\\b.*){4,}",
+        "string_matches": [
+            "Four words are present",
+            "This is a sentence with more than four words",
+            "Another sentence with at least four words"
+        ],
+        "string_mismatches": [
+            "one",
+            "two words",
+            "three word",
+            "short"
+        ]
+    },
+    "lines using at least 3 'b' anywhere": {
+        "regex": "(.*b.*){3,}",
+        "string_matches": [
+            "bobb",
+            "bbbbbbbbbbbbbbbbb",
+            "The big bad bear"
+        ],
+        "string_mismatches": [
+            "aa",
+            "a",
+            "cat",
+            "dog",
+            "123"
+        ]
+    },
+    "lines that contain an 'x'": {
+        "regex": ".*x.*",
+        "string_matches": [
+            "xyz",
+            "x",
+            "axbc"
+        ],
+        "string_mismatches": [
+            "abc",
+            "def",
+            "ghi"
+        ]
+    },
+    "lines that contain the symbol '-'.": {
+        "regex": ".*-.*",
+        "string_matches": [
+            "a-bc",
+            "a-bc-def",
+            "123-456"
+        ],
+        "string_mismatches": [
+            "abc",
+            "def",
+            "ghi"
+        ]
+    },
+    "lines with exactly 3 letters, starting with 'x'": {
+        "regex": "x[A-Za-z]{2}",
+        "string_matches": [
+            "xyz",
+            "xya",
+            "xaz"
+        ],
+        "string_mismatches": [
+            "abcd",
+            "xy",
+            "x"
+        ]
+    },
+    "lines that contain '-' between words 'a' and 'lot' with any number of spaces between.": {
+        "regex": ".*(\\ba\\b.*\\-.*\\blot\\b|\\blot\\b.*\\-.*\\ba\\b).*",
+        "string_matches": [
+            "a-lot",
+            "a- lot",
+            "a -lot",
+            "a  -  lot"
+        ],
+        "string_mismatches": [
+            "a lot",
+            "a lot of",
+            "alot",
+            "a   lot"
+        ]
+    },
+    "lines with at least one word that end in 'n'.": {
+        "regex": ".*\\b[A-Za-z]*n\\b.*",
+        "string_matches": [
+            "Open the door",
+            "Clean your room"
+        ],
+        "string_mismatches": [
+            "This is a sample string",
+            "Another string here"
+        ]
+    },
+    "lines using 'lay' or 'lie'": {
+        "regex": ".*l(ay|ie).*",
+        "string_matches": [
+            "I lay down on the couch.",
+            "The book lies on the table.",
+            "They lay the groundwork for the project.",
+            "He lay there for hours.",
+            "The city lies nestled in the valley."
+        ],
+        "string_mismatches": [
+            "The quick brown rabbit jumps over the lazy frogs.",
+            "Water flows downhill."
+        ]
+    },
     "lines that contain at least five words that start with the letter 'f'": {
         "regex": "(.*\\bf[A-Za-z]*\\b.*){5,}",
         "string_matches": [
