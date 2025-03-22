@@ -1,3 +1,4 @@
+
 from pydantic import BaseModel, Field
 
 from nlp_project.dataset.base_problem import Problem
@@ -109,11 +110,15 @@ class DynamicFewShotSolver(Solver):
                 {"role": "user", "content": problem.statement},
                 {
                     "role": "user",
-                    "content": f"Here are some edge cases you should make sure your solution handles correctly:\n\n{edge_case_str}",
+                    "content": "Solve the problem step-by-step, reasoning about each step.",
+                },
+                {
+                    "role": "assistant",
+                    "content": response.choices[0].message.content,
                 },
                 {
                     "role": "user",
-                    "content": "Solve the problem step-by-step, reasoning about each step.",
+                    "content": f"Here are some edge cases that your solution does not handle correctly:\n\n{edge_case_str}",
                 },
             ],
             response_format=problem.response_format,
