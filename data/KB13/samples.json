@@ -3829,6 +3829,19 @@
             "cherry"
         ]
     },
+      "lines containing either 'b' or 'c' anywhere": {
+        "regex": ".*(b|c).*",
+        "string_matches": [
+            "abc",
+            "bcd",
+            "cdb"
+        ],
+        "string_mismatches": [
+            "a",
+            "d",
+            "efg"
+        ]
+    },
     "lines that contain the digit '4' appearing between the digits '3' and '5'": {
         "regex": ".*3.*4.*5.*|.*5.*4.*3.*",
         "string_matches": [
