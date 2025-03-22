@@ -3601,6 +3601,63 @@
             "She is reading a book."
         ]
     },
+      "lines that contain exactly 'DEF.' anywhere in the string'": {
+        "regex": ".*DEF\\..*",
+        "string_matches": [
+            "DEF.",
+            "This line contains DEF.",
+            "DEF. This is a test."
+        ],
+        "string_mismatches": [
+            "DEF",
+            "DEF ",
+            "DEF1",
+            "DEFS",
+            "Definition"
+        ]
+    },
+    "lines using at least one word ending with 'on'.": {
+        "regex": ".*\\b[A-Za-z]*on\\b.*",
+        "string_matches": [
+            "The sun shone brightly on the horizon.",
+            "He put his coat on.",
+            "Based on the information given, we can conclude that..."
+        ],
+        "string_mismatches": [
+            "This is a simple sentence.",
+            "No relevant words here."
+        ]
+    },
+    "lines that use at least one word starting with 'fu'.": {
+        "regex": ".*\\bfu[A-Za-z]*\\b.*",
+        "string_matches": [
+            "fuchsia",
+            "fulcrum",
+            "function",
+            "fundamental",
+            "furthermore"
+        ],
+        "string_mismatches": [
+            "apple",
+            "banana",
+            "cherry",
+            "date",
+            "elderberry"
+        ]
+    },
+    "lines beginning with 'begin'": {
+        "regex": "begin.*",
+        "string_matches": [
+            "beginner",
+            "beginner's",
+            "beginning"
+        ],
+        "string_mismatches": [
+            "abc",
+            "Begin",
+            " end"
+        ]
+    },
     "lines that begin with a vowel (A, E, I, O, U) and end with the letter 'e'": {
         "regex": "^[AEIOUaeiou].*e$",
         "string_matches": [
