@@ -1987,227 +1987,264 @@
             "cat"
         ]
     },
-    "lines containing words using a vowel.": {
+    "lines containing at least one word that contains at least one vowel (a,e,i,o,u) in any case.": {
         "regex": ".*\\b[A-Za-z]*[aeiouAEIOU][A-Za-z]*\\b.*",
         "string_matches": [
-            "apple",
-            "banana",
-            "orange",
-            "watermelon",
-            "grapefruit"
+            "The cat sat",
+            "eating an apple",
+            "UPPER case VOWELS",
+            "mixed vOwEls here",
+            "single vowel word"
         ],
         "string_mismatches": [
             "rhythm",
             "crypt",
-            "txt",
-            "ply"
+            "myth",
+            "gym",
+            "sync",
+            "psych"
         ]
     },
-    "lines with words ending in 'y'.": {
+    "lines containing at least one word that ends with the letter 'y' (preceded by any letters)": {
         "regex": ".*\\b[A-Za-z]*y\\b.*",
         "string_matches": [
-            "happy",
-            "funny",
-            "puppy",
-            "story"
+            "The happy dog",
+            "She told a funny story",
+            "My puppy is sleepy",
+            "The sky is cloudy today",
+            "They study biology"
         ],
         "string_mismatches": [
-            "cat",
-            "dog",
-            "sun",
-            "moon"
+            "yellow paint",
+            "beyond the horizon",
+            "your cat",
+            "yester morning",
+            "The sun is bright"
         ]
     },
-    "lines that contain 2 numbers that contain '19'.": {
+    "lines that contain at least two occurrences of the sequence '19'": {
         "regex": "(.*19.*){2}",
         "string_matches": [
             "19abc19",
             "1919",
-            "abc19def19ghi"
+            "abc19def19ghi",
+            "The number 19 appears twice in 19",
+            "19 is here and here is 19 again"
         ],
         "string_mismatches": [
-            "19",
-            "abc19",
-            "12345",
-            "a19b20c",
-            "1abc19"
+            "19 only appears once",
+            "No 19 here at all",
+            "Just some numbers 12345",
+            "Almost but not quite 18 and 20"
         ]
     },
-    "lines that contain at least 2 capital letters.": {
+    "lines that contain 2 or more uppercase letters anywhere in the line": {
         "regex": "(.*[A-Z].*){2,}",
         "string_matches": [
             "MultipleCapitals",
             "MoreThanTwo",
-            "ACoupleMore"
+            "ACoupleMore",
+            "The Quick Brown Fox",
+            "TWO capitals HERE"
         ],
         "string_mismatches": [
-            "lowercase",
-            "Anotherlowercase"
+            "lowercase only",
+            "Only one capital",
+            "another lowercase example"
         ]
     },
-    "lines containing a 6 letter sequence": {
+    "lines containing a consecutive sequence of exactly 6 letters": {
         "regex": ".*[A-Za-z]{6}.*",
         "string_matches": [
-            "abcdefgh",
-            "uvwxyzabcdef"
+            "abcdef",
+            "uvwxyzabcdef",
+            "The string LETTER has 6 letters",
+            "monkey123banana456"
         ],
         "string_mismatches": [
             "abcde",
-            "12345"
+            "12345",
+            "short",
+            "A B C D E F"
         ]
     },
-    "lines where the letter c appears more than one time": {
+    "lines that contain the lowercase letter 'c' at least twice": {
         "regex": "(.*c.*){2,}",
         "string_matches": [
             "access",
             "succeed",
             "concept",
-            "oceanic",
-            "accommodate"
+            "circle",
+            "circus",
+            "chocolate cake",
+            "circus clown"
         ],
         "string_mismatches": [
+            "cat",
+            "car",
+            "computer",
             "abc",
             "def",
-            "ghi",
-            "jkl",
-            "mno"
+            "ghi"
         ]
     },
-    "lines that contain words ending in 'i'.": {
+    "lines that contain at least one word that ends with the lowercase letter 'i' as its last character": {
         "regex": ".*\\b[A-Za-z]*i\\b.*",
         "string_matches": [
-            "veni",
-            "vidi",
-            "vici",
-            "taxi",
-            "taxi"
+            "veni vidi vici",
+            "I took a taxi home",
+            "The sushi was delicious",
+            "Macaroni and cheese",
+            "The kiwi is sweet"
         ],
         "string_mismatches": [
-            "apple",
-            "banana",
-            "orange",
-            "grape",
-            "watermelon"
+            "This word ends in pie",
+            "The word inside has",
+            "Words like skiing don't count",
+            "Neither do words like iris",
+            "Or words like india"
         ]
     },
-    "lines using 'the'": {
-        "regex": ".*the.*",
+    "lines containing the exact word 'the' (case-insensitive), not as part of other words": {
+        "regex": ".*\\b[Tt][Hh][Ee]\\b.*",
         "string_matches": [
-            "The quick brown rabbit jumps over the lazy frogs.",
-            "The rain in Spain falls mainly on the plain.",
-            "The cat sat on the mat.",
-            "There is the book I was looking for."
+            "The cat sat on the mat",
+            "I saw THE movie yesterday",
+            "Look at the stars"
         ],
         "string_mismatches": [
-            "This is a sample sentence.",
-            "Quick brown fox jumps over a lazy dog.",
-            "A beautiful day today."
+            "Words like 'there' don't match",
+            "Neither does 'other' or 'these'",
+            "Thermal is not a match"
         ]
     },
-    "lines that mention 'trolls'.": {
-        "regex": ".*trolls.*",
+    "lines that contain the word 'trolls' (all lowercase, with spaces before and after)": {
+        "regex": ".*\\strolls\\s.*",
         "string_matches": [
             "Beware of trolls under the bridge",
-            "Three trolls guarded the cave"
+            "Three trolls guarded the cave",
+            "The trolls were hiding",
+            "I saw trolls yesterday",
+            "Many trolls live here"
         ],
         "string_mismatches": [
-            "A quiet night",
-            "Peaceful waters",
-            "Gentle breeze"
+            "The TROLLS were scary",
+            "He was trolling online",
+            "The word Trolls with capital T",
+            "trollsbridge isn't valid",
+            "This_trolls_fails",
+            "No matches without spaces"
         ]
     },
-    "lines that begin with the word 'the'": {
+    "lines that begin with the word 'the' (all lowercase, must be first word)": {
         "regex": "\\bthe\\b.*",
         "string_matches": [
             "the quick brown rabbit",
-            "the earth is round"
+            "the earth is round",
+            "the sun shines bright today"
         ],
         "string_mismatches": [
-            "This is a string",
-            "Another string here",
-            "No match here"
+            "The quick brown fox",
+            "see the dog run",
+            "there is no match",
+            "another the word here"
         ]
     },
-    "lines that contain words with 'ri'.": {
+    "lines containing one or more words that have 'ri' anywhere within the word": {
         "regex": ".*\\b[A-Za-z]*ri[A-Za-z]*\\b.*",
         "string_matches": [
-            "price",
-            "trip",
-            "write",
-            "bright"
+            "The price is right",
+            "She went on a trip yesterday",
+            "I will write a letter",
+            "The bright sun shines",
+            "My friend is married"
         ],
         "string_mismatches": [
-            "cat",
-            "dog",
-            "sun",
-            "moon",
-            "star"
+            "The cat and dog played",
+            "Looking at the stars",
+            "Running in circles",
+            "The rain falls down",
+            "Singing a melody"
         ]
     },
-    "lines which contain 3 or more vowels.": {
+    "lines containing at least 3 vowels (a,e,i,o,u) in any order": {
         "regex": "(.*[AEIOUaeiou].*){3,}",
         "string_matches": [
-            "education",
-            "inconvenience",
-            "audiovisual"
+            "The education system",
+            "What an inconvenience",
+            "The audiovisual presentation",
+            "Beautiful morning",
+            "Outrageous behavior"
         ],
         "string_mismatches": [
-            "dog",
-            "cat",
-            "sun"
+            "The dry sky",
+            "My cat naps",
+            "Cry now",
+            "Myth"
         ]
     },
-    "lines using 3 instances of 'sw'": {
+    "lines containing at least 3 occurrences of the sequence 'sw'": {
         "regex": ".*(.*sw.*){3}.*",
         "string_matches": [
-            "nswnswsw",
-            "kswkswsw",
-            "pswpswsw"
+            "swswsw is valid",
+            "The sw appears sw here sw too",
+            "sw test sw case sw",
+            "swswswsw has four",
+            "kswkswsw matches"
         ],
         "string_mismatches": [
-            "abc",
-            "123",
-            "xyz"
+            "Only sw once",
+            "sw appears sw twice",
+            "No sw here at all",
+            "sssswww doesn't count"
         ]
     },
-    "lines that use words starting with 'no'.": {
+    "lines containing one or more words that begin with 'no' followed by letters": {
         "regex": ".*\\bno[A-Za-z]*\\b.*",
         "string_matches": [
-            "no way",
-            "nobody home",
-            "non-stop"
+            "There is no way out",
+            "I see nobody home today",
+            "It's a non-stop flight",
+            "The noise was loud",
+            "She noticed something"
         ],
         "string_mismatches": [
-            "go home",
-            "yes way",
-            "stop"
+            "Say yes way instead",
+            "Just stop here",
+            "Know the answer",
+            "The word snow doesn't count"
         ]
     },
-    "lines that contain the text 'this is it'.": {
+    "lines that contain the exact phrase 'this is it' (case sensitive)": {
         "regex": ".*this is it.*",
         "string_matches": [
             "this is it",
-            "this is it, I tell you!"
+            "this is it, I tell you!",
+            "hey this is it now",
+            "well this is it folks"
         ],
         "string_mismatches": [
             "this is not it",
-            "that is it"
+            "that is it",
+            "This Is It",
+            "THIS IS IT"
         ]
     },
-    "lines that start with 'the'.": {
+    "lines that begin with the lowercase word 'the' followed by any text": {
         "regex": "(the.*).*",
         "string_matches": [
             "the quick brown rabbit",
             "the rain in spain",
-            "the sun is shining"
+            "the sun is shining",
+            "the end of time"
         ],
         "string_mismatches": [
             "a quick brown fox",
-            "rain in spain",
-            "sun is shining"
+            "The sun rises",
+            "that is not correct"
         ]
     },
-    "lines using 'din' after 'e' or 'ky'.": {
+    "lines containing the sequence 'din' that appears after either the letter 'e' or the sequence 'ky'": {
         "regex": ".*(e|ky).*din.*",
         "string_matches": [
             "e din",
@@ -2220,24 +2257,26 @@
             "din e",
             "din ky",
             "a din",
-            "b din",
-            "c din"
+            "my dinner",
+            "garden inside"
         ]
     },
-    "lines that have a '7' in them": {
+    "lines containing at least one digit '7' anywhere in the text": {
         "regex": ".*7.*",
         "string_matches": [
             "7up",
             "This line has a 7 in it",
-            "Another line with 7"
+            "Another line with 7",
+            "777 lucky numbers"
         ],
         "string_mismatches": [
             "abc",
-            "def",
-            "ghi"
+            "eight nine ten",
+            "no numbers here",
+            "only text"
         ]
     },
-    "lines using at least 6 characters": {
+    "lines containing at least 6 characters (including spaces and punctuation)": {
         "regex": ".*.{6}.*",
         "string_matches": [
             "longer",
@@ -2254,7 +2293,7 @@
             "d"
         ]
     },
-    "lines that contain the word 'zoo'.": {
+    "lines containing the standalone word 'zoo' (not part of another word)": {
         "regex": ".*\\bzoo\\b.*",
         "string_matches": [
             "The zoo is a fun place to visit.",
@@ -2263,250 +2302,294 @@
             "Let's go to the zoo!"
         ],
         "string_mismatches": [
-            "I love to visit farms.",
-            "The park is a great place to relax.",
-            "She went shopping at the mall.",
-            "The museum has many interesting artifacts."
+            "zoology is interesting",
+            "The zoologist works hard",
+            "zooming past quickly",
+            "The word zoomed doesn't count"
         ]
     },
-    "lines using the vowel combination 'ei'.": {
+    "lines containing the letter sequence 'ei' anywhere in the text": {
         "regex": ".*ei.*",
         "string_matches": [
             "weight",
             "neighbor",
             "height",
-            "rein"
+            "their",
+            "receive"
         ],
         "string_mismatches": [
             "hello",
             "world",
             "example",
-            "test"
+            "test",
+            "ie sequence"
         ]
     },
-    "lines containing at least 2 words": {
+    "lines containing two or more space-separated words": {
         "regex": "(.*\\b[A-Za-z]+\\b.*){2,}",
         "string_matches": [
             "a sentence",
             "multiple words here",
-            "this is a line"
+            "this is a line",
+            "two words",
+            "many different words here"
         ],
         "string_mismatches": [
             "word",
             "anotherword",
-            "123"
+            "123",
+            "single",
+            "nospaceshere"
         ]
     },
-    "lines containing the word 'run' or the word 'hat'": {
+    "lines containing either the standalone word 'run' or 'hat' (not as part of other words)": {
         "regex": ".*\\b(run|hat)\\b.*",
         "string_matches": [
             "I want to run.",
             "He wore a hat.",
-            "Let's run for the hat!"
+            "Let's run for the hat!",
+            "The hat is red",
+            "They run fast"
         ],
         "string_mismatches": [
-            "This is a line.",
-            "Another line here.",
-            "No hats or running here"
+            "running is fun",
+            "hats are nice",
+            "hatred",
+            "runner",
+            "hatbox"
         ]
     },
-    "lines using 2 or more words comprised of 5 letters": {
+    "lines containing at least two different words that are exactly 5 letters long": {
         "regex": "(.*\\b[A-Za-z]{5}\\b.*){2,}",
         "string_matches": [
             "hello world",
-            "money talks"
+            "money talks",
+            "happy smile today",
+            "green brown black",
+            "sweet taste fresh"
         ],
         "string_mismatches": [
             "short",
             "small",
             "large",
-            "money",
-            "dream"
+            "money and talk",
+            "exactly five letters"
         ]
     },
-    "lines starting with 're'": {
+    "lines that begin with the characters 're' (must be first two characters)": {
         "regex": "re.*",
         "string_matches": [
             "recalled",
             "replace",
-            "ready"
+            "ready",
+            "real estate"
         ],
         "string_mismatches": [
-            "matches",
-            "not",
-            "here"
+            "the recall",
+            "we replace",
+            "already",
+            "store"
         ]
     },
-    "lines that contain 'in'": {
+    "lines containing the exact sequence of characters 'in' anywhere in the line": {
         "regex": ".*in.*",
         "string_matches": [
             "within",
             "in a string",
-            "this contains in"
+            "this contains in",
+            "paint"
         ],
         "string_mismatches": [
             "this",
-            "another"
+            "another",
+            "none here",
+            "example"
         ]
     },
-    "lines using 'ick'": {
+    "lines containing the exact sequence of characters 'ick' anywhere in the line": {
         "regex": ".*ick.*",
         "string_matches": [
             "quick",
-            "wicked"
+            "wicked",
+            "stick",
+            "picking"
         ],
         "string_mismatches": [
             "apple",
             "banana",
-            "cherry"
+            "cherry",
+            "ic"
         ]
     },
-    "lines that contain words starting with 'ki'.": {
+    "lines containing any word that begins with 'ki' followed by zero or more letters": {
         "regex": ".*\\bki[A-Za-z]*\\b.*",
         "string_matches": [
             "king",
             "kingdom",
-            "kick"
+            "kick",
+            "kind words"
         ],
         "string_mismatches": [
-            "queen",
-            "apple",
-            "banana"
+            "skiing",
+            "taking",
+            "queen"
         ]
     },
-    "lines that end in a digit": {
+    "lines where the last character is a numeric digit (0-9)": {
         "regex": ".*[0-9]",
         "string_matches": [
             "line12",
             "anotherline345",
-            "yetanother6789"
+            "yetanother6789",
+            "test9"
         ],
         "string_mismatches": [
             "line",
             "anotherline",
-            "yetanother"
+            "yetanother",
+            "12 test"
         ]
     },
-    "lines that have two vowels": {
+    "lines that contain exactly two vowels (a,e,i,o,u) in any position": {
         "regex": "(.*[AEIOUaeiou].*){2}",
         "string_matches": [
-            "aea",
-            "iou",
-            "eau"
+            "hello",
+            "train",
+            "mouse",
+            "bread"
         ],
         "string_mismatches": [
-            "world",
-            "test"
+            "sky",
+            "myth",
+            "cry",
+            "rhythm"
         ]
     },
-    "lines that contain five vowels": {
+    "lines that contain exactly five vowels (a,e,i,o,u) in any position": {
         "regex": "(.*[AEIOUaeiou].*){5}",
         "string_matches": [
             "education",
-            "unavailable",
-            "abstemious"
+            "evaluation",
+            "regulation",
+            "orientation"
         ],
         "string_mismatches": [
             "apple",
             "banana",
-            "cat",
-            "dog"
+            "elephant",
+            "octopus"
         ]
     },
-    "lines that contain the word 'hello' within 5 characters of the word 'world'.": {
-        "regex": ".*(\\bhello\\b.{1,5}\\bworld\\b|\\bworld\\b.{1,5}\\bhello\\b).*",
+    "lines containing the word 'hello' followed by the word 'world' with 1 to 5 characters between them": {
+        "regex": ".*(\\bhello\\b.{1,5}\\bworld\\b).*",
         "string_matches": [
             "hello world",
-            "hello  world"
+            "hello to world",
+            "hello my world"
         ],
         "string_mismatches": [
-            "This is a test string",
-            "hello way over there world",
-            "Another test"
+            "hello beautiful world",
+            "hello to the new world",
+            "hello there in the world",
+            "world dear hello"
         ]
     },
-    "lines that end with the number '100'.": {
+    "lines that end with the exact sequence '100'": {
         "regex": ".*100",
         "string_matches": [
-            "This line ends with 100",
-            "Another line ends with 100",
-            "Yet another line ends with 100"
+            "count to 100",
+            "score is 100",
+            "number 100",
+            "100"
         ],
         "string_mismatches": [
-            "line1",
-            "line2",
-            "line3"
+            "100 points",
+            "1000",
+            "10",
+            "1001"
         ]
     },
-    "lines using at least three numerical characters": {
+    "lines containing three or more digits (0-9) in any position": {
         "regex": "(.*[0-9].*){3,}",
         "string_matches": [
-            "123 abc",
-            "xyz 1234",
-            "123456789"
+            "abc123def",
+            "1a2b3c",
+            "123456",
+            "1st 2nd 3rd"
         ],
         "string_mismatches": [
-            "abc",
             "12",
-            "xyz1"
+            "1a2",
+            "number5",
+            "test 12"
         ]
     },
-    "lines that contain words ending in 'ch'": {
+    "lines containing at least one word that ends with the exact sequence 'ch'": {
         "regex": ".*\\b[A-Za-z]*ch\\b.*",
         "string_matches": [
-            "beach",
-            "catch",
-            "rich",
-            "approach",
-            "search"
+            "I will teach",
+            "reach for it",
+            "that's such a beach",
+            "watch the match"
         ],
         "string_mismatches": [
-            "line",
-            "plane",
-            "sun",
-            "tree",
-            "car"
+            "chair",
+            "achieve",
+            "chocolate",
+            "chess piece"
         ]
     },
-    "lines that contain the word 'trust'.": {
+    "lines that contain exactly the word 'trust' (not as part of another word), case sensitive": {
         "regex": ".*\\btrust\\b.*",
         "string_matches": [
             "You have my trust",
             "I trust you completely",
-            "This is a matter of trust"
+            "This is a matter of trust",
+            "In trust we believe"
         ],
         "string_mismatches": [
+            "trustworthy",
+            "entrusting",
+            "distrustful",
             "This is a test",
-            "Another line",
-            "Completely different"
+            "Trust is important"
         ]
     },
-    "lines that have a word of 3 letters": {
+    "lines that contain exactly one word that is exactly 3 letters long": {
         "regex": ".*\\b[A-Za-z]{3}\\b.*",
         "string_matches": [
-            "cat sat",
-            "dog ran",
-            "the sun"
+            "The cat sat",
+            "A dog ran fast",
+            "I see the sun shine",
+            "The box is heavy",
+            "She can dance"
         ],
         "string_mismatches": [
+            "cats dogs",
+            "running fast",
+            "a b c d",
             "sample1",
-            "example2",
             "test3"
         ]
     },
-    "lines that end with 'boby'": {
+    "lines that end with the exact sequence of letters 'boby'": {
         "regex": ".*boby",
         "string_matches": [
             "My favorite hobby is boby",
             "Coding is my boby",
-            "The best boby"
+            "The best boby",
+            "boby",
+            "I like boby"
         ],
         "string_mismatches": [
             "I love Bobby",
-            "This is Boby's hat"
+            "This is Boby's hat",
+            "bobycat",
+            "boby.",
+            "boby!"
         ]
     },
-    "lines that have the word 'couch' included": {
+    "lines that contain exactly the word 'couch' (not as part of another word)": {
         "regex": ".*\\bcouch\\b.*",
         "string_matches": [
             "I sat on the couch.",
@@ -2516,14 +2599,14 @@
             "We bought a new couch yesterday"
         ],
         "string_mismatches": [
+            "couchette",
+            "couchsurfing",
             "The chair is broken.",
             "I like to sit on the floor.",
-            "There's a table in the room.",
-            "He slept on the bed.",
             "The sofa is very comfortable."
         ]
     },
-    "lines that contain at least five words": {
+    "lines that contain five or more complete words (letters only)": {
         "regex": "(\\b[A-Za-z]+\\b.*){5,}",
         "string_matches": [
             "This is a sample string with more than five words.",
@@ -2537,7 +2620,7 @@
             "One word.",
             "Two words only.",
             "Three words here.",
-            "Four words total."
+            "Four words total here"
         ]
     },
     "lines that contain 'th' occurring anywhere after 'ch'": {

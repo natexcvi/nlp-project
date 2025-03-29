@@ -4,7 +4,10 @@ import re
 
 def validate_regex(data):
     print("Size of data: {}".format(len(data)))
-    for description, details in data.items():
+    for i, (description, details) in enumerate(data.items()):
+        if len(data) // 2 == i:
+            print("half way: ", description)
+
         pattern = details["regex"]
         for match in details["string_matches"]:
             if not re.fullmatch(pattern, match):
