@@ -2770,7 +2770,7 @@
             "Programming is fun"
         ]
     },
-   "lines that contain at least one 4 letter word ending in 's'": {
+    "lines that contain at least one 4 letter word ending in 's'": {
         "regex": ".*\\b[A-Za-z]{3}s\\b.*",
         "string_matches": [
             "This has four",
@@ -3119,7 +3119,7 @@
             "elderberry"
         ]
     },
-      "lines that contain 'fu' anywhere before 'bar'.": {
+    "lines that contain 'fu' anywhere before 'bar'.": {
         "regex": ".*fu.*(ba|bar).*",
         "string_matches": [
             "fu bar",
@@ -3516,6 +3516,40 @@
             "test"
         ]
     },
+    "lines containing a sequence of 4 or more characters in total": {
+        "regex": ".*.{4,}.*",
+        "string_matches": [
+            "abcd",
+            "This is a test",
+            "1234",
+            "Hello World!",
+            "a b c d"
+        ],
+        "string_mismatches": [
+            "a",
+            "ab",
+            "abc",
+            "1 2",
+            "x y"
+        ]
+    },
+    "lines containing at least one word with 5 or more letters": {
+        "regex": ".*\\b[A-Za-z]{5,}\\b.*",
+        "string_matches": [
+            "The horse gallops",
+            "Programming is fun",
+            "Beautiful day",
+            "Elephant in the room",
+            "Simple things"
+        ],
+        "string_mismatches": [
+            "cat",
+            "The dog",
+            "A red car",
+            "Up in sky",
+            "I am sad"
+        ]
+    },
     "lines that contain at least one word consisting of at least seven letters": {
         "regex": ".*\\b[A-Za-z]{7,}\\b.*",
         "string_matches": [
@@ -3546,7 +3580,7 @@
             "there is always hope"
         ]
     },
-   "lines that contain at least 4 words.": {
+    "lines that contain at least 4 words.": {
         "regex": "(.*\\b[A-Za-z]+\\b.*){4,}",
         "string_matches": [
             "Four words are present",
@@ -3684,7 +3718,7 @@
             "She is reading a book."
         ]
     },
-      "lines that contain exactly 'DEF.' anywhere in the string'": {
+    "lines that contain exactly 'DEF.' anywhere in the string'": {
         "regex": ".*DEF\\..*",
         "string_matches": [
             "DEF.",
@@ -3912,7 +3946,41 @@
             "cherry"
         ]
     },
-      "lines containing either 'b' or 'c' anywhere": {
+    "lines containing at least one word made up of 2 or more letters": {
+        "regex": ".*\\b[A-Za-z]{2,}\\b.*",
+        "string_matches": [
+            "cat",
+            "dog runs",
+            "the bird flies",
+            "to",
+            "an apple"
+        ],
+        "string_mismatches": [
+            "a",
+            "1",
+            "!",
+            "",
+            " "
+        ]
+    },
+    "lines that begin with the letter 'e' and contain the standalone word 'jr' somewhere after": {
+        "regex": "e.*\\bjr\\b.*",
+        "string_matches": [
+            "e hello jr world",
+            "e jr",
+            "e test jr test",
+            "e something jr something",
+            "e jr is here"
+        ],
+        "string_mismatches": [
+            "hello e jr",
+            "jr e hello",
+            "e j r",
+            "e jrr",
+            "e junior"
+        ]
+    },
+    "lines containing either 'b' or 'c' anywhere": {
         "regex": ".*(b|c).*",
         "string_matches": [
             "abc",
