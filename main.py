@@ -4,4 +4,4 @@ from nlp_project.experiment import run_experiment
 
 load_dotenv()
 
-run_experiment()
+run_experiment(20)

@@ -1,7 +1,8 @@
 import os
+import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import yaml
 from pydantic import BaseModel, RootModel
@@ -166,7 +167,7 @@ def generate_summary(report):
     )
 
 
-def run_experiment() -> None:
+def run_experiment(sample_size: Optional[int] = None) -> None:
     solvers = {
         "DynamicFewShotSolver": DynamicFewShotSolver(
             "Your task is to create a regex according to the user provided instructions."
@@ -180,11 +181,17 @@ def run_experiment() -> None:
     report = {}
     all_conversations = []
 
+    sampled_problems = (
+        random.sample(algo_problems.problems, sample_size)
+        if sample_size
+        else algo_problems.problems
+    )
+
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = []
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
-            for problem in algo_problems.problems[:5]:
+            for problem in sampled_problems:
                 futures.append(
                     executor.submit(evaluate_problem, solver, problem, solver_name)
                 )
