@@ -1,0 +1,658 @@
+details:
+  ChainOfThoughtSolver:
+    lines containing 'foo' or 'nu' before 'dist' or 'dust':
+      avg_score: 0.2
+      results:
+      - regex: (foo|nu).*?(dist|dust)
+        score: 1.0
+      - regex: ^(?=.*(?:foo|nu))(?=.*(?:dist|dust)).*$
+        score: 0.0
+      - regex: ^(?=.*(foo|nu))(?=.*\b(dist|dust)\b).*
+        score: 0.0
+      - regex: ^(?=.*(?:foo|nu)).*(?:dist|dust.*)$
+        score: 0.0
+      - regex: ^(?=.*\b(foo|nu)\b)(?=.*\b(dist|dust)\b).*$
+        score: 0.0
+      token_usage:
+        input_tokens: 530
+        output_tokens: 2091
+    lines containing the exact sequence of characters 'in' anywhere in the line:
+      avg_score: 0.6
+      results:
+      - regex: ^.*\bin\b.*$
+        score: 0.0
+      - regex: ^.*in.*$
+        score: 1.0
+      - regex: (?=.*in)
+        score: 1.0
+      - regex: ^.*\bin\b.*$
+        score: 0.0
+      - regex: ^.*in.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 515
+        output_tokens: 1778
+    lines containing the word 'blog':
+      avg_score: 0.8
+      results:
+      - regex: ^.*\bblog\b.*$
+        score: 1.0
+      - regex: ^.*\bblog\b.*$
+        score: 1.0
+      - regex: ^.*\bblog\b.*$
+        score: 1.0
+      - regex: ^(.*\bblog\b.*)$
+        score: 1.0
+      - regex: \bblog\b
+        score: 0.0
+      token_usage:
+        input_tokens: 480
+        output_tokens: 1466
+    lines that begin with the lowercase word 'the' followed by any text:
+      avg_score: 1.0
+      results:
+      - regex: ^the.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      token_usage:
+        input_tokens: 515
+        output_tokens: 1258
+    lines that contain 'th' occurring anywhere after 'ch':
+      avg_score: 0.2
+      results:
+      - regex: ch.*th
+        score: 0.0
+      - regex: (?=.*ch.*th)
+        score: 1.0
+      - regex: ch[^\n]*th
+        score: 0.0
+      - regex: ch.*th
+        score: 0.0
+      - regex: ch.*th
+        score: 0.0
+      token_usage:
+        input_tokens: 505
+        output_tokens: 1301
+    lines that contain a word of 5 letters or less.:
+      avg_score: 0.4
+      results:
+      - regex: ^(?=.*\b\w{1,5}\b).*$
+        score: 0.0
+      - regex: \b\w{1,5}\b
+        score: 1.0
+      - regex: (?i)\b\w{1,5}\b
+        score: 1.0
+      - regex: ^.*\b\w{1,5}\b.*$
+        score: 0.0
+      - regex: ^.*\b\w{1,5}\b.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 505
+        output_tokens: 1520
+    lines that contain at least one occurrence of the letter 'z' anywhere:
+      avg_score: 1.0
+      results:
+      - regex: (?i).*z.*
+        score: 1.0
+      - regex: ^.*z.*$
+        score: 1.0
+      - regex: ^(.*z.*)$
+        score: 1.0
+      - regex: ^.*z.*$
+        score: 1.0
+      - regex: (?i).*z.*
+        score: 1.0
+      token_usage:
+        input_tokens: 515
+        output_tokens: 1500
+    lines that contain at least one word that starts with 'h' and ends with 'e'.:
+      avg_score: 1.0
+      results:
+      - regex: \b[hH]\w*e\b
+        score: 1.0
+      - regex: \b[hH]\w*e\b
+        score: 1.0
+      - regex: \b[hH]\w*e\b
+        score: 1.0
+      - regex: \b[hH]\w*e\b
+        score: 1.0
+      - regex: \b[hH]\w*e\b
+        score: 1.0
+      token_usage:
+        input_tokens: 540
+        output_tokens: 1933
+    lines that contain exactly 'DEF.' anywhere in the string':
+      avg_score: 0.0
+      results:
+      - regex: ^.*\bDEF\.\b.*$
+        score: 0.0
+      - regex: ^.*\bDEF\.\b.*$
+        score: 0.0
+      - regex: ^.*\bDEF\.\b.*$
+        score: 0.0
+      - regex: ^.*\bDEF\.\b.*$
+        score: 0.0
+      - regex: ^.*\bDEF\.\b.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 505
+        output_tokens: 1686
+    lines that contain exactly one word that is exactly 3 letters long:
+      avg_score: 0.0
+      results:
+      - regex: ^\b\w{3}\b$
+        score: 0.0
+      - regex: ^\b\w{3}\b(|\s\b\w{3}\b)+$
+        score: 0.0
+      - regex: ^([a-zA-Z]+ )?[a-zA-Z]{3}( [a-zA-Z]+)?$
+        score: 0.0
+      - regex: ^\b\w{3}\b$
+        score: 0.0
+      - regex: ^\b\w{3}\b$
+        score: 0.0
+      token_usage:
+        input_tokens: 510
+        output_tokens: 1402
+    lines that contain five letter words.:
+      avg_score: 0.0
+      results:
+      - regex: \b\w{5}\b
+        score: 0.0
+      - regex: \b\w{5}\b
+        score: 0.0
+      - regex: (?<!\w)\w{5}(?!\w)
+        score: 0.0
+      - regex: \b\w{5}\b
+        score: 0.0
+      - regex: \b\w{5}\b
+        score: 0.0
+      token_usage:
+        input_tokens: 480
+        output_tokens: 1151
+    lines that contain the word 'and':
+      avg_score: 0.4
+      results:
+      - regex: ^(?=.*\band\b).*$
+        score: 1.0
+      - regex: \b(and)\b
+        score: 0.0
+      - regex: \band\b
+        score: 0.0
+      - regex: \band\b
+        score: 0.0
+      - regex: ^.*\band\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 485
+        output_tokens: 1161
+    lines that contain the word 'inoperative' as a standalone word:
+      avg_score: 0.0
+      results:
+      - regex: \b(?:inoperative)\b
+        score: 0.0
+      - regex: \b(inoperative)\b
+        score: 0.0
+      - regex: \b(?:inoperative)\b
+        score: 0.0
+      - regex: \binoperative\b
+        score: 0.0
+      - regex: \b(?i)inoperative\b
+        score: 0.0
+      token_usage:
+        input_tokens: 510
+        output_tokens: 1292
+    lines that contain three vowels or more:
+      avg_score: 0.8
+      results:
+      - regex: ^(.*[aeiouAEIOU].*){3,}$
+        score: 1.0
+      - regex: ^.*[aeiou].*[aeiou].*[aeiou].*$
+        score: 1.0
+      - regex: ^(?=.*[AEIOUaeiou].*){3,}.*$
+        score: 0.0
+      - regex: ^(.*[AEIOUaeiou].*){3,}.*$
+        score: 1.0
+      - regex: ^(?=.*[aeiou].*[aeiou].*[aeiou]).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 480
+        output_tokens: 1749
+    lines that end containing the letter 'z'.:
+      avg_score: 0.0
+      results:
+      - regex: z$
+        score: 0.0
+      - regex: z$
+        score: 0.0
+      - regex: z$
+        score: 0.0
+      - regex: z$
+        score: 0.0
+      - regex: z$
+        score: 0.0
+      token_usage:
+        input_tokens: 490
+        output_tokens: 908
+    lines that end exactly with 'vem':
+      avg_score: 0.4
+      results:
+      - regex: vem$
+        score: 0.0
+      - regex: ^.*vem$
+        score: 1.0
+      - regex: ^.*vem$
+        score: 1.0
+      - regex: vem$
+        score: 0.0
+      - regex: vem$
+        score: 0.0
+      token_usage:
+        input_tokens: 485
+        output_tokens: 1239
+    lines that end in 'o':
+      avg_score: 1.0
+      results:
+      - regex: ^.*o$
+        score: 1.0
+      - regex: ^.*o$
+        score: 1.0
+      - regex: ^.*o$
+        score: 1.0
+      - regex: ^.*o$
+        score: 1.0
+      - regex: ^.*o$
+        score: 1.0
+      token_usage:
+        input_tokens: 480
+        output_tokens: 1411
+    lines that have at least 3, but not more that 6 words.:
+      avg_score: 0.0
+      results:
+      - regex: ^(\b\w+\b\s*){3,6}$
+        score: 0.0
+      - regex: ^(\b\w+\b\s+){2,5}\b\w+\b$
+        score: 0.0
+      - regex: ^\s*(\S+\s+){2,5}\S+\s*$
+        score: 0.0
+      - regex: ^\s*(\w+\s+){2,5}\w+\s*$
+        score: 0.0
+      - regex: ^\b(\w+\b\s+){2,5}\w+\b$
+        score: 0.0
+      token_usage:
+        input_tokens: 525
+        output_tokens: 1853
+    lines that have within them words ending in 'ch'.:
+      avg_score: 0.2
+      results:
+      - regex: \b\w*ch\b
+        score: 0.0
+      - regex: \b\w*ch\b
+        score: 0.0
+      - regex: \b\w*ch\b
+        score: 0.0
+      - regex: \b\w+ch\b
+        score: 0.0
+      - regex: (?i).*\b\w*ch\b.*
+        score: 1.0
+      token_usage:
+        input_tokens: 500
+        output_tokens: 1511
+    lines using any instance of 'd' or 'e' followed anywhere by 's' or 'r':
+      avg_score: 1.0
+      results:
+      - regex: '[de].*[sr]'
+        score: 1.0
+      - regex: '[de].*[sr]'
+        score: 1.0
+      - regex: '[de].*[sr].*|.*[sr].*[de]'
+        score: 1.0
+      - regex: '[de].*[sr]'
+        score: 1.0
+      - regex: '[de].*[sr]'
+        score: 1.0
+      token_usage:
+        input_tokens: 555
+        output_tokens: 1525
+  DynamicFewShotSolver:
+    lines containing 'foo' or 'nu' before 'dist' or 'dust':
+      avg_score: 0.6
+      results:
+      - regex: \b(foo|nu)\b(?=.*\b(dist|dust)\b)
+        score: 1.0
+      - regex: ^(?=.*\b(foo|nu)\b.*\b(dist|dust)\b)
+        score: 1.0
+      - regex: (?:foo.*(?:dist|dust)|nu.*(?:dist|dust))
+        score: 1.0
+      - regex: ^(?=.*(foo|nu))(?=.*(dist|dust)).*$
+        score: 0.0
+      - regex: ^(?=.*\b(?:foo|nu)\b)(?=.*\b(?:dist|dust)\b).*$
+        score: 0.0
+      token_usage:
+        input_tokens: 4264
+        output_tokens: 4111
+    lines containing the exact sequence of characters 'in' anywhere in the line:
+      avg_score: 0.8
+      results:
+      - regex: .*\bin\b.*
+        score: 0.0
+      - regex: .*in.*
+        score: 1.0
+      - regex: ^.*in.*$
+        score: 1.0
+      - regex: ^.*in.*$
+        score: 1.0
+      - regex: (?i)^.*in.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 2110
+        output_tokens: 2626
+    lines containing the word 'blog':
+      avg_score: 0.6
+      results:
+      - regex: (?i)^.*\bblog\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bblog\b.*$
+        score: 1.0
+      - regex: (?i)^.*blog.*$
+        score: 0.0
+      - regex: (?<=[^a-zA-Z0-9])blog(?=[^a-zA-Z0-9])|^blog(?=[^a-zA-Z0-9])|(?<=[^a-zA-Z0-9])blog$
+        score: 0.0
+      - regex: (?i)^.*\bblog\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 2987
+        output_tokens: 3037
+    lines that begin with the lowercase word 'the' followed by any text:
+      avg_score: 1.0
+      results:
+      - regex: ^the.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      - regex: ^\s*the.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      - regex: ^the\b.*
+        score: 1.0
+      token_usage:
+        input_tokens: 1794
+        output_tokens: 2132
+    lines that contain 'th' occurring anywhere after 'ch':
+      avg_score: 0.0
+      results:
+      - regex: ch.*th
+        score: 0.0
+      - regex: (?s)ch.*\bth\b
+        score: 0.0
+      - regex: (?i)\bch\b([^\b]*)\bth\b
+        score: 0.0
+      - regex: ch.*th
+        score: 0.0
+      - regex: ch.*[^c]th
+        score: 0.0
+      token_usage:
+        input_tokens: 2005
+        output_tokens: 2445
+    lines that contain a word of 5 letters or less.:
+      avg_score: 0.0
+      results:
+      - regex: ^.*\b\w{1,5}\b.*$
+        score: 0.0
+      - regex: (?=.*\b\w{1,5}\b)
+        score: 0.0
+      - regex: (?i).*\b\w{1,5}\b.*
+        score: 0.0
+      - regex: (?i)^(?:.*\b\w{1,5}\b.*)$
+        score: 0.0
+      - regex: ^.*\b\w{1,5}\b.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 1930
+        output_tokens: 2316
+    lines that contain at least one occurrence of the letter 'z' anywhere:
+      avg_score: 1.0
+      results:
+      - regex: ^.*z.*$
+        score: 1.0
+      - regex: (?i).*z.*
+        score: 1.0
+      - regex: .*z.*
+        score: 1.0
+      - regex: (?i)^.*z.*$
+        score: 1.0
+      - regex: (?i)^.*z.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 1950
+        output_tokens: 2537
+    lines that contain at least one word that starts with 'h' and ends with 'e'.:
+      avg_score: 1.0
+      results:
+      - regex: \b[hH][a-zA-Z]*e\b
+        score: 1.0
+      - regex: (?i)\b[h]\w*e\b
+        score: 1.0
+      - regex: \b[hH][a-zA-Z]*e\b
+        score: 1.0
+      - regex: \b[hH][a-zA-Z]*e\b
+        score: 1.0
+      - regex: \b[hH][a-zA-Z]*e\b
+        score: 1.0
+      token_usage:
+        input_tokens: 6795
+        output_tokens: 5048
+    lines that contain exactly 'DEF.' anywhere in the string':
+      avg_score: 0.4
+      results:
+      - regex: (?<!\w)DEF\.(?!\w)
+        score: 0.0
+      - regex: ^.*\bDEF\..*$
+        score: 1.0
+      - regex: ^.*DEF\..*$
+        score: 1.0
+      - regex: ^(?=.*\bDEF\.\b).*$
+        score: 0.0
+      - regex: ^.*\bDEF\.\b.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 3874
+        output_tokens: 3750
+    lines that contain exactly one word that is exactly 3 letters long:
+      avg_score: 0.2
+      results:
+      - regex: ^(?:(?=\b\w{3}\b)[^\s]*\b\w{3}\b[^\s]*\s+)*(?!.*\b\w{3}\b.*\b\w{3}\b)\b\w+\b.*$
+        score: 0.0
+      - regex: ^(?!.*\b\w{3}\b.*\b\w{3}\b).*\b\w{3}\b.*$
+        score: 0.0
+      - regex: ^(?!(?:.*\b\w{3}\b.*){2,}).*\b\w{3}\b.*$
+        score: 0.0
+      - regex: ^([^\s]*\s*)*\b\w{3}\b([^\s]*\s*)*$
+        score: 1.0
+      - regex: ^(?=.*\b\w{3}\b)(?!.*\b\w{3}\b.*\b\w{3}\b).*
+        score: 0.0
+      token_usage:
+        input_tokens: 6587
+        output_tokens: 5025
+    lines that contain five letter words.:
+      avg_score: 0.6
+      results:
+      - regex: (?m)^.*\b\w{5}\b.*$
+        score: 1.0
+      - regex: \b[a-zA-Z]{5}\b
+        score: 0.0
+      - regex: \b[a-zA-Z]{5}\b
+        score: 0.0
+      - regex: (?=.*\b\w{5}\b)
+        score: 1.0
+      - regex: ^.*\b\w{5}\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 4345
+        output_tokens: 4115
+    lines that contain the word 'and':
+      avg_score: 1.0
+      results:
+      - regex: (?i).*and.*
+        score: 1.0
+      - regex: (?i)^.*\band\b.*$
+        score: 1.0
+      - regex: (?i)^.*\band\b.*$
+        score: 1.0
+      - regex: ^.*\band\b.*$
+        score: 1.0
+      - regex: (?i)^.*\band\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 4605
+        output_tokens: 4122
+    lines that contain the word 'inoperative' as a standalone word:
+      avg_score: 0.0
+      results:
+      - regex: \binoperative\b
+        score: 0.0
+      - regex: (?<!\w)(?:inoperative)(?!\w)
+        score: 0.0
+      - regex: \b(?i)inoperative(?=\W|$)
+        score: 0.0
+      - regex: \b(inoperative)\b
+        score: 0.0
+      - regex: \binoperative\b
+        score: 0.0
+      token_usage:
+        input_tokens: 3534
+        output_tokens: 3273
+    lines that contain three vowels or more:
+      avg_score: 1.0
+      results:
+      - regex: (?i)(?:[^aeiou]*[aeiou]){3,}
+        score: 1.0
+      - regex: (?i)^(?=(?:[^aeiou]*[aeiou]){3})
+        score: 1.0
+      - regex: ^(?=(?:[^aeiouAEIOU]*[aeiouAEIOU]){3,}[^aeiouAEIOU]*$).*$
+        score: 1.0
+      - regex: ^(.*[aeiouAEIOU].*){3,}$
+        score: 1.0
+      - regex: ^(?=.*[aeiou].*[aeiou].*[aeiou]).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 1554
+        output_tokens: 2240
+    lines that end containing the letter 'z'.:
+      avg_score: 0.0
+      results:
+      - regex: (?m)z$
+        score: 0.0
+      - regex: z\s*$
+        score: 0.0
+      - regex: (?i)\bz$
+        score: 0.0
+      - regex: z\s*$
+        score: 0.0
+      - regex: (?i)z$
+        score: 0.0
+      token_usage:
+        input_tokens: 3372
+        output_tokens: 3048
+    lines that end exactly with 'vem':
+      avg_score: 0.6
+      results:
+      - regex: \bvem$
+        score: 0.0
+      - regex: ^.*vem$
+        score: 1.0
+      - regex: (?m)^.*vem$
+        score: 1.0
+      - regex: ^.*\bvem$
+        score: 1.0
+      - regex: ^vem$
+        score: 0.0
+      token_usage:
+        input_tokens: 2270
+        output_tokens: 2948
+    lines that end in 'o':
+      avg_score: 1.0
+      results:
+      - regex: (?m)^.*o$
+        score: 1.0
+      - regex: ^.*o\s*$
+        score: 1.0
+      - regex: ^.*o$
+        score: 1.0
+      - regex: (?m)^.*o$
+        score: 1.0
+      - regex: (?m)^.*o$
+        score: 1.0
+      token_usage:
+        input_tokens: 3860
+        output_tokens: 3619
+    lines that have at least 3, but not more that 6 words.:
+      avg_score: 0.0
+      results:
+      - regex: ^(\S+\s+){2,5}\S+$
+        score: 0.0
+      - regex: ^(\S+\b\s*){3,6}$
+        score: 0.0
+      - regex: ^(\b\w+\b\s?){3,6}$
+        score: 0.0
+      - regex: ^(\b\w+\b\s*){3,6}$
+        score: 0.0
+      - regex: ^\s*\S+(\s+\S+){2,5}\s*$
+        score: 0.0
+      token_usage:
+        input_tokens: 2145
+        output_tokens: 2454
+    lines that have within them words ending in 'ch'.:
+      avg_score: 0.4
+      results:
+      - regex: ^(.*\b\w*ch\b.*)?$
+        score: 1.0
+      - regex: \b\w+ch\b
+        score: 0.0
+      - regex: (?=.*\b\w*ch\b)
+        score: 1.0
+      - regex: \b(\w+(ch)\b)
+        score: 0.0
+      - regex: \b\w*ch(?=\b|\W)
+        score: 0.0
+      token_usage:
+        input_tokens: 4698
+        output_tokens: 4037
+    lines using any instance of 'd' or 'e' followed anywhere by 's' or 'r':
+      avg_score: 1.0
+      results:
+      - regex: (?=.*[de].*[sr])
+        score: 1.0
+      - regex: (?=.*[de])(?=.*[sr])
+        score: 1.0
+      - regex: '[de].*[sr]|[sr].*[de]'
+        score: 1.0
+      - regex: '[de].*[sr]'
+        score: 1.0
+      - regex: '[de][^\n]*[sr]|[sr][^\n]*[de]'
+        score: 1.0
+      token_usage:
+        input_tokens: 4042
+        output_tokens: 3395
+summary:
+  avg_score: 0.505
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.45
+    DynamicFewShotSolver: 0.5599999999999999
+  avg_tokens_per_model:
+    ChainOfThoughtSolver:
+      input_tokens: 10110
+      output_tokens: 29735
+    DynamicFewShotSolver:
+      input_tokens: 68721
+      output_tokens: 66278
+  num_iterations: 5
+  total_problems: 20
+  total_solvers: 2
