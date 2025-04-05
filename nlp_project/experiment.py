@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Optional
 
 import yaml
 from pydantic import BaseModel, RootModel
+from tqdm import tqdm
 
 from nlp_project.dataset.regex_problem import RegexProblems
 from nlp_project.dataset.score_utils import ScoreUtils
@@ -77,13 +78,11 @@ def evaluate_problem(solver, problem, solver_name):
     total_input_tokens = 0
     total_output_tokens = 0
 
-    for i in range(NUM_ITERATIONS):
-        print(
-            f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
-        )
+    for i in tqdm(
+        range(NUM_ITERATIONS), desc=f"{solver_name} - {problem.name}", leave=False
+    ):
         output, conversation = solver.solve(problem)
         score = problem.scorer_fn(output)
-        print(f"Score: {score}, regex: {output.regex}")
         result.scores.append(score)
         result.outputs.append(output)
         result.conversations.append(conversation)
@@ -92,7 +91,7 @@ def evaluate_problem(solver, problem, solver_name):
         total_output_tokens += solver.token_usage["output_tokens"]
 
     avg_score = result.avg_score
-    print(
+    tqdm.write(
         f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
     )
 
@@ -189,6 +188,12 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
 
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = []
+        total_tasks = len(solvers) * len(sampled_problems)
+
+        print(
+            f"Running experiment with {len(solvers)} solvers on {len(sampled_problems)} problems"
+        )
+
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
             for problem in sampled_problems:
@@ -196,7 +201,9 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
                     executor.submit(evaluate_problem, solver, problem, solver_name)
                 )
 
-        for future in as_completed(futures):
+        for future in tqdm(
+            as_completed(futures), total=total_tasks, desc="Overall progress"
+        ):
             solver_name, problem_name, problem_report, conversation_reports = (
                 future.result()
             )
