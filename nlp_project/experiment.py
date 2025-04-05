@@ -64,7 +64,7 @@ class ExperimentSummary(BaseModel):
     total_solvers: int
     avg_score: float
     avg_score_per_model: dict[str, float]
-    avg_tokens_per_model: dict[str, TokenUsageStats]
+    total_tokens_per_model: dict[str, TokenUsageStats]
     num_iterations: int
 
 
@@ -143,7 +143,7 @@ def generate_summary(report):
         / len(solver_report)
         for solver_name, solver_report in report.items()
     }
-    avg_tokens_per_model = {
+    total_tokens_per_model = {
         solver_name: TokenUsageStats(
             input_tokens=sum(
                 problem_report.token_usage.input_tokens
@@ -161,7 +161,7 @@ def generate_summary(report):
         total_solvers=total_solvers,
         avg_score=avg_score,
         avg_score_per_model=avg_score_per_model,
-        avg_tokens_per_model=avg_tokens_per_model,
+        total_tokens_per_model=total_tokens_per_model,
         num_iterations=NUM_ITERATIONS,
     )
 
