@@ -36,15 +36,29 @@ class DynamicFewShotSolver(Solver):
         edge_case_messages = [
             {
                 "role": "system",
-                "content": "You are responsible for finding edge cases to help guide the process of solving a problem in the general case.",
+                "content": (
+                    "You are responsible for finding edge cases to help guide the "
+                    "process of solving a problem in the general case."
+                ),
             },
             {
                 "role": "user",
-                "content": f"Here is the problem statement:\n\n{problem.statement}",
+                "content": (f"Here is the problem statement:\n\n{problem.statement}"),
             },
             {
                 "role": "user",
-                "content": "Generate edge cases for this problem. Each case should highlight a different aspect of the problem. Remember: the goal is to help guide the process of solving the problem in the general case.",
+                "content": (
+                    "Generate edge cases for this problem. Each case should highlight "
+                    "a different aspect of the problem. Remember: the goal is to help "
+                    "guide the process of solving the problem in the general case. "
+                    "Do not overthink it, and when in doubt as for what the user "
+                    "intended in their problem statement, opt for the most common and "
+                    "reasonable interpretation. "
+                    "You MUST check and validate your edge cases. It's "
+                    "Particularly important that you do not generate edge cases that are "
+                    "misleading or incorrect, because it will confuse the user and "
+                    "do more harm than not having edge cases at all."
+                ),
             },
         ]
 
