@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel
 
 from nlp_project.dataset.base_problem import Problem
@@ -28,6 +27,12 @@ class ChainOfThoughtSolver(Solver):
             ],
             response_format=problem.response_format,
         )
+
+        self.token_usage = {
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
+        }
+
         if hasattr(response.choices[0].message, "parsed"):
             return response.choices[0].message.parsed
 

@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel, Field
 
 from nlp_project.dataset.base_problem import Problem
@@ -84,6 +83,11 @@ class DynamicFewShotSolver(Solver):
             response_format=problem.response_format,
         )
 
+        self.token_usage = {
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
+        }
+
         final_response = (
             response.choices[0].message.parsed
             if hasattr(response.choices[0].message, "parsed")
@@ -123,6 +127,9 @@ class DynamicFewShotSolver(Solver):
             ],
             response_format=problem.response_format,
         )
+
+        self.token_usage["input_tokens"] += response.usage.prompt_tokens
+        self.token_usage["output_tokens"] += response.usage.completion_tokens
 
         final_response = (
             response.choices[0].message.parsed
