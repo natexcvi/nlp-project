@@ -31,7 +31,6 @@ class DynamicFewShotSolver(Solver):
     def __init__(self, system_message: str):
         super().__init__()
         self.system_message = system_message
-        self.edge_case_conversation = []
 
     def __generate_edge_cases(self, problem: Problem) -> list[EdgeCase]:
         edge_case_messages = [
@@ -55,17 +54,16 @@ class DynamicFewShotSolver(Solver):
             response_format=EdgeCases,
         )
 
-        self.edge_case_conversation = edge_case_messages.copy()
-        self.edge_case_conversation.append(
+        edge_case_messages.append(
             {"role": "assistant", "content": response.choices[0].message.content}
         )
 
-        return response.choices[0].message.parsed.edge_cases
+        return response.choices[0].message.parsed.edge_cases, edge_case_messages
 
     def __stringify_edge_cases(self, edge_cases: list[EdgeCase]) -> str:
         return "\n".join(
             [
-                f'{edge_case.input} -> {"matches" if edge_case.is_match else "does not match"}'
+                f'{edge_case.input} -> {"should match" if edge_case.is_match else "should not match"} [{edge_case.explanation}]'
                 for edge_case in edge_cases
             ]
         )
@@ -80,7 +78,7 @@ class DynamicFewShotSolver(Solver):
         else:
             completion_model = self.openai_client.chat.completions.create
 
-        edge_cases = self.__generate_edge_cases(problem)
+        edge_cases, edge_case_conversation = self.__generate_edge_cases(problem)
 
         messages = [
             {"role": "system", "content": self.system_message},
@@ -102,7 +100,7 @@ class DynamicFewShotSolver(Solver):
             "output_tokens": response.usage.completion_tokens,
         }
 
-        self.conversation_history = self.edge_case_conversation.copy()
+        conversation_history = edge_case_conversation
         conversation = messages.copy()
         conversation.append(
             {"role": "assistant", "content": response.choices[0].message.content}
@@ -123,8 +121,8 @@ class DynamicFewShotSolver(Solver):
         ]
 
         if not failing_edge_cases:
-            self.conversation_history.extend(conversation)
-            return final_response, self.conversation_history
+            conversation_history.extend(conversation)
+            return final_response, conversation_history
 
         edge_case_str = self.__stringify_edge_cases(failing_edge_cases)
 
@@ -147,7 +145,7 @@ class DynamicFewShotSolver(Solver):
         conversation.append(
             {"role": "assistant", "content": response.choices[0].message.content}
         )
-        self.conversation_history.extend(conversation)
+        conversation_history.extend(conversation)
 
         final_response = (
             response.choices[0].message.parsed
@@ -155,4 +153,4 @@ class DynamicFewShotSolver(Solver):
             else response.choices[0].message.content
         )
 
-        return final_response, self.conversation_history
+        return final_response, conversation_history

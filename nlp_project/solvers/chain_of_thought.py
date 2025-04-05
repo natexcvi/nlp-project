@@ -41,9 +41,8 @@ class ChainOfThoughtSolver(Solver):
         conversation.append(
             {"role": "assistant", "content": response.choices[0].message.content}
         )
-        self.conversation_history = conversation
 
         if hasattr(response.choices[0].message, "parsed"):
-            return response.choices[0].message.parsed, self.conversation_history
+            return response.choices[0].message.parsed, conversation
 
-        return response.choices[0].message.content, self.conversation_history
+        return response.choices[0].message.content, conversation

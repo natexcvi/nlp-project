@@ -1,4 +1,5 @@
 import json
+import logging
 import re
 
 from nlp_project.clients.openai_client import WORKING_DIR
@@ -11,6 +12,16 @@ class RegexProblems:
     def __init__(self, score_utils: ScoreUtils):
         regex_descriptions: list[str] = []
         regex_examlpes: list[RegexExample] = []
+
+        def safe_regex_match(regex_str, text):
+            try:
+                return re.match(regex_str, text) is not None
+            except Exception as e:
+                logging.error(
+                    f"Error evaluating regex `{regex_str}` on text `{text}`: {e}"
+                )
+                return False
+
         for regex_description, regex_example in self.__read_regex_examples().items():
             regex_descriptions.append(regex_description)
             regex_examlpes.append(regex_example)
@@ -22,10 +33,9 @@ class RegexProblems:
                     output, example
                 ),
                 response_format=RegexResponse,
-                solution_evaluator=lambda solution: lambda txt: re.match(
+                solution_evaluator=lambda solution: lambda txt: safe_regex_match(
                     solution.regex, txt
-                )
-                is not None,
+                ),
             )
             for regex_description, sample_string in zip(
                 regex_descriptions, regex_examlpes

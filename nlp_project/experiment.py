@@ -184,7 +184,7 @@ def run_experiment() -> None:
         futures = []
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
-            for problem in algo_problems.problems[:20]:
+            for problem in algo_problems.problems[:5]:
                 futures.append(
                     executor.submit(evaluate_problem, solver, problem, solver_name)
                 )

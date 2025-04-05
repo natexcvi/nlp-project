@@ -11,7 +11,6 @@ class Solver(ABC):
     def __init__(self):
         self.llm_config = LLMConfig.from_config_toml()
         self.openai_client = get_openai_client(self.llm_config)
-        self.conversation_history: List[Dict[str, Any]] = []
         self.token_usage = {"input_tokens": 0, "output_tokens": 0}
 
     @abstractmethod
