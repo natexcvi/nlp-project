@@ -1,0 +1,178 @@
+details:
+  ChainOfThoughtSolver:
+    lines that contain only the letters 'agde' in some order.:
+      avg_score: 1.0
+      results:
+      - regex: ^[agde]+$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]+$
+        score: 1.0
+      token_usage:
+        input_tokens: 510
+        output_tokens: 1502
+    lines that contain the word 'dance':
+      avg_score: 1.0
+      results:
+      - regex: (?i).*\bdance\b.*
+        score: 1.0
+      - regex: (?i).*\bdance\b.*
+        score: 1.0
+      - regex: ^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: ^.*\bdance\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 485
+        output_tokens: 1309
+    lines that include at least three capital letters:
+      avg_score: 1.0
+      results:
+      - regex: ^(.*?[A-Z].*?){3,}.*$
+        score: 1.0
+      - regex: ^(.*?[A-Z]){3,}.*$
+        score: 1.0
+      - regex: (?=.*[A-Z].*[A-Z].*[A-Z]).*
+        score: 1.0
+      - regex: (.*[A-Z].*){3,}
+        score: 1.0
+      - regex: ^(.*?[A-Z].*?[A-Z].*?[A-Z].*)$
+        score: 1.0
+      token_usage:
+        input_tokens: 485
+        output_tokens: 1752
+    lines using words ending in 'er'.:
+      avg_score: 0.0
+      results:
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      token_usage:
+        input_tokens: 485
+        output_tokens: 1207
+    lines which contain the substring 'bar':
+      avg_score: 0.6
+      results:
+      - regex: (?=.*\bbar\b)
+        score: 0.0
+      - regex: (?=.*bar)
+        score: 1.0
+      - regex: ^.*bar.*$
+        score: 1.0
+      - regex: (?i)^.*\bbar\b.*$
+        score: 0.0
+      - regex: ^.*bar.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 485
+        output_tokens: 1690
+  DynamicFewShotSolver:
+    lines that contain only the letters 'agde' in some order.:
+      avg_score: 1.0
+      results:
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]+$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      - regex: ^[agde]*$
+        score: 1.0
+      token_usage:
+        input_tokens: 1470
+        output_tokens: 1979
+    lines that contain the word 'dance':
+      avg_score: 0.8
+      results:
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*dance.*$
+        score: 0.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      - regex: (?i)^.*\bdance\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 3241
+        output_tokens: 2995
+    lines that include at least three capital letters:
+      avg_score: 1.0
+      results:
+      - regex: (?m)^.*([A-Z].*){3,}.*$
+        score: 1.0
+      - regex: ^(?=.*[A-Z].*[A-Z].*[A-Z]).*$
+        score: 1.0
+      - regex: ^(.*?[A-Z]){3,}.*$
+        score: 1.0
+      - regex: ^(?:[^A-Z]*[A-Z]){3,}.*$
+        score: 1.0
+      - regex: ^(.*?[A-Z].*?){3,}.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 3291
+        output_tokens: 3531
+    lines using words ending in 'er'.:
+      avg_score: 0.2
+      results:
+      - regex: .*\b\w+er\b.*
+        score: 1.0
+      - regex: \b\w*?er\b
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      - regex: ^(\b\w*er\b\s*)+$
+        score: 0.0
+      - regex: \b\w*er\b
+        score: 0.0
+      token_usage:
+        input_tokens: 3349
+        output_tokens: 3101
+    lines which contain the substring 'bar':
+      avg_score: 0.6
+      results:
+      - regex: ^.*\bbar\b.*$
+        score: 0.0
+      - regex: (?i)(?=.*bar)
+        score: 1.0
+      - regex: (?=.*bar).*
+        score: 1.0
+      - regex: \bbar\b
+        score: 0.0
+      - regex: (?=.*bar)
+        score: 1.0
+      token_usage:
+        input_tokens: 4285
+        output_tokens: 3603
+summary:
+  avg_score: 0.72
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.72
+    DynamicFewShotSolver: 0.72
+  avg_tokens_per_model:
+    ChainOfThoughtSolver:
+      input_tokens: 2450
+      output_tokens: 7460
+    DynamicFewShotSolver:
+      input_tokens: 15636
+      output_tokens: 15209
+  num_iterations: 5
+  total_problems: 5
+  total_solvers: 2
