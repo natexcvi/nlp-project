@@ -1,7 +1,7 @@
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
-from typing import Any
+from typing import Any, Dict, List
 
 import yaml
 from pydantic import BaseModel, RootModel
@@ -15,6 +15,7 @@ from nlp_project.solvers.dyfs import DynamicFewShotSolver
 class EvaluationResult(BaseModel):
     scores: list[float]
     outputs: list[Any]
+    conversations: list[List[Dict[str, Any]]]
 
     @property
     def avg_score(self):
@@ -45,6 +46,17 @@ class ExperimentReport(RootModel):
     root: dict[str, SolverReport]
 
 
+class ConversationReport(BaseModel):
+    solver_name: str
+    problem_name: str
+    iteration: int
+    conversation: List[Dict[str, Any]]
+
+
+class ConversationsReport(RootModel):
+    root: List[ConversationReport]
+
+
 class ExperimentSummary(BaseModel):
     total_problems: int
     total_solvers: int
@@ -56,10 +68,11 @@ class ExperimentSummary(BaseModel):
 
 NUM_ITERATIONS = 5
 REPORT_FILE = "experiment_report.yaml"
+CONVERSATIONS_FILE = "conversations_report.yaml"
 
 
 def evaluate_problem(solver, problem, solver_name):
-    result = EvaluationResult(scores=[], outputs=[])
+    result = EvaluationResult(scores=[], outputs=[], conversations=[])
     total_input_tokens = 0
     total_output_tokens = 0
 
@@ -67,11 +80,12 @@ def evaluate_problem(solver, problem, solver_name):
         print(
             f"Evaluating problem '{problem.name}' with {solver_name} ({i+1}/{NUM_ITERATIONS})..."
         )
-        output = solver.solve(problem)
+        output, conversation = solver.solve(problem)
         score = problem.scorer_fn(output)
         print(f"Score: {score}, regex: {output.regex}")
         result.scores.append(score)
         result.outputs.append(output)
+        result.conversations.append(conversation)
 
         total_input_tokens += solver.token_usage["input_tokens"]
         total_output_tokens += solver.token_usage["output_tokens"]
@@ -80,6 +94,17 @@ def evaluate_problem(solver, problem, solver_name):
     print(
         f"Average score for problem '{problem.name}' with {solver_name}: {avg_score:.1f}"
     )
+
+    conversation_reports = [
+        ConversationReport(
+            solver_name=solver_name,
+            problem_name=problem.name,
+            iteration=i + 1,
+            conversation=conversation,
+        )
+        for i, conversation in enumerate(result.conversations)
+    ]
+
     return (
         solver_name,
         problem.name,
@@ -94,6 +119,7 @@ def evaluate_problem(solver, problem, solver_name):
                 output_tokens=total_output_tokens,
             ),
         ),
+        conversation_reports,
     )
 
 
@@ -152,6 +178,7 @@ def run_experiment() -> None:
     score_utils = ScoreUtils()
     algo_problems = RegexProblems(score_utils)
     report = {}
+    all_conversations = []
 
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = []
@@ -163,10 +190,14 @@ def run_experiment() -> None:
                 )
 
         for future in as_completed(futures):
-            solver_name, problem_name, problem_report = future.result()
+            solver_name, problem_name, problem_report, conversation_reports = (
+                future.result()
+            )
             report[solver_name][problem_name] = problem_report
+            all_conversations.extend(conversation_reports)
 
     experiment_report = ExperimentReport(root=report)
+    conversations_report = ConversationsReport(root=all_conversations)
     summary = generate_summary(report)
 
     reports_dir = "reports"
@@ -174,6 +205,9 @@ def run_experiment() -> None:
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     report_file = os.path.join(reports_dir, f"experiment_report_{timestamp}.yaml")
+    conversations_file = os.path.join(
+        reports_dir, f"conversations_report_{timestamp}.yaml"
+    )
 
     with open(report_file, "w") as f:
         yaml.dump(
@@ -185,3 +219,11 @@ def run_experiment() -> None:
             default_flow_style=False,
         )
     print(f"Report saved to {report_file}")
+
+    with open(conversations_file, "w") as f:
+        yaml.dump(
+            conversations_report.model_dump(),
+            f,
+            default_flow_style=False,
+        )
+    print(f"Conversations saved to {conversations_file}")

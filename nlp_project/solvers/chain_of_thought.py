@@ -1,3 +1,5 @@
+from typing import Any, Dict, List, Tuple
+
 from pydantic import BaseModel
 
 from nlp_project.dataset.base_problem import Problem
@@ -9,22 +11,24 @@ class ChainOfThoughtSolver(Solver):
         super().__init__()
         self.system_message = system_message
 
-    def solve(self, problem: Problem) -> BaseModel:
+    def solve(self, problem: Problem) -> Tuple[BaseModel, List[Dict[str, Any]]]:
         if issubclass(problem.response_format, BaseModel):
             completion_model = self.openai_client.beta.chat.completions.parse
         else:
             completion_model = self.openai_client.chat.completions.create
 
+        messages = [
+            {"role": "system", "content": self.system_message},
+            {"role": "user", "content": problem.statement},
+            {
+                "role": "user",
+                "content": "Solve the problem step-by-step, reasoning about each step.",
+            },
+        ]
+
         response = completion_model(
             model=self.llm_config.model,
-            messages=[
-                {"role": "system", "content": self.system_message},
-                {"role": "user", "content": problem.statement},
-                {
-                    "role": "user",
-                    "content": "Solve the problem step-by-step, reasoning about each step.",
-                },
-            ],
+            messages=messages,
             response_format=problem.response_format,
         )
 
@@ -33,7 +37,13 @@ class ChainOfThoughtSolver(Solver):
             "output_tokens": response.usage.completion_tokens,
         }
 
-        if hasattr(response.choices[0].message, "parsed"):
-            return response.choices[0].message.parsed
+        conversation = messages.copy()
+        conversation.append(
+            {"role": "assistant", "content": response.choices[0].message.content}
+        )
+        self.conversation_history = conversation
 
-        return response.choices[0].message.content
+        if hasattr(response.choices[0].message, "parsed"):
+            return response.choices[0].message.parsed, self.conversation_history
+
+        return response.choices[0].message.content, self.conversation_history
