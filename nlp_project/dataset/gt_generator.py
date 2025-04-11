@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 from pydantic import BaseModel, Field
-from tenacity import retry, wait_random_exponential, stop_after_attempt, RetryError
+from tenacity import RetryError, retry, stop_after_attempt, wait_random_exponential
 from tqdm import tqdm
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
@@ -20,7 +20,7 @@ class StringSampleResponse(BaseModel):
     )
 
 
-class RegexExample(BaseModel):
+class RegexExamples(BaseModel):
     regex: str
     string_matches: list[str]
     string_mismatches: list[str]
@@ -111,9 +111,11 @@ if __name__ == "__main__":
 
     with open(data_file_path / "samples.json", "r") as f:
         regex_examples = json.load(f)
-        regex_examples = {k: RegexExample(**v) for k, v in regex_examples.items()}
+        regex_examples = {k: RegexExamples(**v) for k, v in regex_examples.items()}
 
-    for i, (regex, instructions) in enumerate(tqdm(list(zip(regexes, regexes_instructions)))):
+    for i, (regex, instructions) in enumerate(
+        tqdm(list(zip(regexes, regexes_instructions)))
+    ):
         if instructions in regex_examples:
             continue
 
@@ -127,7 +129,9 @@ if __name__ == "__main__":
         regex = regex.strip()
         try:
             res = gt_generator.generate_regex_string_samples(instructions, regex)
-            regex_examples[instructions] = RegexExample(regex=regex, **res.model_dump())
+            regex_examples[instructions] = RegexExamples(
+                regex=regex, **res.model_dump()
+            )
         except RetryError as e:
             print(f"Error: {e} on regex pattern: {instructions}")
             continue

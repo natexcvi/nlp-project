@@ -4,17 +4,13 @@ import sympy as sp
 from pydantic import BaseModel
 
 from nlp_project.clients.openai_client import LLMConfig, get_openai_client
-from nlp_project.dataset.gt_generator import RegexExample
+from nlp_project.dataset.gt_generator import RegexExamples
+from nlp_project.dataset.regex_models import RegexResponse
 
 
 class SemanticContainment(BaseModel):
     found: bool
     extracted_match: str
-
-
-class RegexResponse(BaseModel):
-    regex: str
-    reasoning: str
 
 
 class ScoreUtils:
@@ -80,7 +76,7 @@ class ScoreUtils:
         return regex1 == regex2
 
     def validate_against_test_cases(
-        self, regex_response: RegexResponse, example: RegexExample
+        self, regex_response: RegexResponse, example: RegexExamples
     ):
         try:
             return all(

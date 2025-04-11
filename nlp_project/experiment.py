@@ -8,10 +8,12 @@ import yaml
 from pydantic import BaseModel, RootModel
 from tqdm import tqdm
 
-from nlp_project.dataset.regex_problem import RegexProblems
+from nlp_project.dataset.regex_problem import (
+    RegexExampleGenerationProblems,
+    RegexProblems,
+)
 from nlp_project.dataset.score_utils import ScoreUtils
 from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
-from nlp_project.solvers.dyfs import DynamicFewShotSolver
 
 
 class EvaluationResult(BaseModel):
@@ -25,7 +27,7 @@ class EvaluationResult(BaseModel):
 
 
 class IndividualResult(BaseModel):
-    regex: str
+    output: Any
     score: float
 
 
@@ -110,7 +112,10 @@ def evaluate_problem(solver, problem, solver_name):
         problem.name,
         ProblemReport(
             results=[
-                IndividualResult(regex=output.regex, score=score)
+                IndividualResult(
+                    output=output,
+                    score=score,
+                )
                 for output, score in zip(result.outputs, result.scores)
             ],
             avg_score=avg_score,
@@ -168,34 +173,48 @@ def generate_summary(report):
 
 def run_experiment(sample_size: Optional[int] = None) -> None:
     solvers = {
-        "DynamicFewShotSolver": DynamicFewShotSolver(
+        # "DynamicFewShotSolver": DynamicFewShotSolver(
+        #     "Your task is to create a regex according to the user provided instructions."
+        # ),
+        "ChainOfThoughtSolver-BuildRegex": ChainOfThoughtSolver(
             "Your task is to create a regex according to the user provided instructions."
         ),
-        "ChainOfThoughtSolver": ChainOfThoughtSolver(
-            "Your task is to create a regex according to the user provided instructions."
+        "ChainOfThoughtSolver-FindExamples": ChainOfThoughtSolver(
+            "Your task is to find examples that match/don't match the regex according to the user provided instructions."
         ),
     }
     score_utils = ScoreUtils()
-    algo_problems = RegexProblems(score_utils)
+    regex_problem_set = RegexProblems(score_utils)
+    regex_examples_problem_set = RegexExampleGenerationProblems(score_utils)
+
+    assert len(regex_problem_set.problems) == len(
+        regex_examples_problem_set.problems
+    ), "Problem sets must be of equal size"
+
+    problem_sample_index = random.sample(
+        range(len(regex_problem_set.problems)), sample_size
+    )
+
+    solver_problem_mapping = {
+        "ChainOfThoughtSolver-BuildRegex": regex_problem_set.problems,
+        "ChainOfThoughtSolver-FindExamples": regex_examples_problem_set.problems,
+    }
+
     report = {}
     all_conversations = []
 
-    sampled_problems = (
-        random.sample(algo_problems.problems, sample_size)
-        if sample_size
-        else algo_problems.problems
-    )
-
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = []
-        total_tasks = len(solvers) * len(sampled_problems)
+        total_tasks = len(solvers) * len(problem_sample_index)
 
         print(
-            f"Running experiment with {len(solvers)} solvers on {len(sampled_problems)} problems"
+            f"Running experiment with {len(solvers)} solvers on {total_tasks} problems"
         )
 
         for solver_name, solver in solvers.items():
             report[solver_name] = {}
+            problems = solver_problem_mapping[solver_name]
+            sampled_problems = (problems[i] for i in problem_sample_index)
             for problem in sampled_problems:
                 futures.append(
                     executor.submit(evaluate_problem, solver, problem, solver_name)
