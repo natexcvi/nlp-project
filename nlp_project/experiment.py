@@ -180,7 +180,7 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
             "Your task is to create a regex according to the user provided instructions."
         ),
         "ChainOfThoughtSolver-FindExamples": ChainOfThoughtSolver(
-            "Your task is to find examples that match/don't match the regex according to the user provided instructions."
+            "Your task is to find examples that match/don't match the regex described in the user provided instructions."
         ),
     }
     score_utils = ScoreUtils()
