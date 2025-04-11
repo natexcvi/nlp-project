@@ -187,10 +187,6 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
     regex_problem_set = RegexProblems(score_utils)
     regex_examples_problem_set = RegexExampleGenerationProblems(score_utils)
 
-    assert len(regex_problem_set.problems) == len(
-        regex_examples_problem_set.problems
-    ), "Problem sets must be of equal size"
-
     problem_sample_index = random.sample(
         range(len(regex_problem_set.problems)), sample_size
     )
@@ -199,6 +195,10 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
         "ChainOfThoughtSolver-BuildRegex": regex_problem_set.problems,
         "ChainOfThoughtSolver-FindExamples": regex_examples_problem_set.problems,
     }
+
+    assert (
+        len(set(len(solver_problem_mapping.values()))) == 1
+    ), "Problem sets must be of equal size"
 
     report = {}
     all_conversations = []
