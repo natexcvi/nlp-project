@@ -156,7 +156,7 @@
         ]
     },
     "lines containing the word 'art'.": {
-        "regex": ".*\b[Aa]rt\b.*",
+        "regex": ".*\\b[Aa]rt\\b.*",
         "string_matches": [
             "Art is beauty.",
             "the art museum is nearby",
@@ -207,8 +207,8 @@
             "I would love an oreo cookie"
         ]
     },
-    "lines having words ending with 'ne'.": {
-        "regex": ".*\\b[A-Za-z]*ne\\b.*",
+    "lines having words ending with 'ne' that are longer than just 'ne'.": {
+        "regex": ".*\\b[A-Za-z]+ne\\b.*",
         "string_matches": [
             "This sentience contains one line",
             "you are the only one",
@@ -217,7 +217,7 @@
         "string_mismatches": [
             "this sentence dosen't end with ne.",
             "laugh out loud",
-            "twenty one is greater than nineteen"
+            "twenty is greater than nineteen"
         ]
     },
     "lines that contain the numbers '9', and '10' as whole numbers": {
@@ -358,9 +358,9 @@
             "we went to the ZOO"
         ],
         "string_mismatches": [
-            "just some random text",
-            "Is the sky blue?",
-            "23 and me is a DNA testing company"
+            "just this random text",
+            "Is this sky grey?",
+            "23 is just that number"
         ]
     },
     "lines that use words starting with 's'.": {
@@ -381,7 +381,7 @@
         "string_matches": [
             "This has only one word",
             "Hell ya!",
-            ""
+            "Two words at least"
         ],
         "string_mismatches": [
             "race-car",
@@ -585,7 +585,7 @@
         ]
     },
     "lines that contain at least two words starting with the letter 'h' in them.": {
-        "regex": "(?i)(.*\bh[A-Za-z]*\b.*){2}",
+        "regex": "(.*\\b[Hh][A-Za-z]*\\b.*){2}",
         "string_matches": [
             "Hello, how are you?",
             "somtimes being happy is hard",
@@ -619,7 +619,7 @@
         ],
         "string_mismatches": [
             "lolly pops are delicious",
-            "people are hopeful",
+            "people are joyful",
             "ops i did it again"
         ]
     },
