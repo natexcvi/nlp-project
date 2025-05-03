@@ -18,12 +18,16 @@ class EdgeCase(BaseModel):
         ...,
         description="What aspects of the problem are highlighted by this case.",
     )
+    suggestion: str = Field(
+        ...,
+        description="A suggestion for how to improve the solution if it fails on this case.",
+    )
 
 
 class EdgeCases(BaseModel):
     edge_cases: list[EdgeCase] = Field(
         ...,
-        description=f"List of up to {MAX_EDGE_CASES} edge cases to help guide the process of solving a problem.",
+        description=f"List of up to {MAX_EDGE_CASES} edge cases to help guide the process of solving the problem.",
     )
 
 
@@ -38,7 +42,9 @@ class DynamicFewShotSolver(Solver):
                 "role": "system",
                 "content": (
                     "You are responsible for finding edge cases to help guide the "
-                    "process of solving a problem in the general case."
+                    "process of solving a problem in the general case. The agent in charge "
+                    "of solving the problem has received the following instructions:\n\n"
+                    f"{self.system_message}"
                 ),
             },
             {
