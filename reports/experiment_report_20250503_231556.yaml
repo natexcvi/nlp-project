@@ -1,0 +1,966 @@
+details:
+  ChainOfThoughtSolver:
+    lines that contain at least one word that starts with 'h' and ends with 'e'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: We want to match lines containing at least one word
+            starting with ''h'' and ending with ''e''.
+
+            Step 2: A word starting with ''h'' or ''H'' can be represented by \b[hH],
+            where \b is a word boundary to ensure the start of a word.
+
+            Step 3: The word ends with ''e'', so after the first letter, there can
+            be zero or more letters, followed by the letter ''e'' at a word boundary:
+            [a-zA-Z]*e\b.
+
+            Step 4: Combining these parts, the pattern to match such a word is \b[hH][a-zA-Z]*e\b.
+
+            Step 5: To match any line containing this word anywhere, the pattern is
+            wrapped with ^.* and .*$.
+
+            Step 6: The complete regex is ^.*\b[hH][a-zA-Z]*e\b.*$ which matches full
+            lines containing at least one word starting with ''h'' or ''H'' and ending
+            with ''e''.'
+          regex: ^.*\b[hH][a-zA-Z]*e\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We need to find lines that contain at least one word
+            starting with ''h'' and ending with ''e''.
+
+            Step 2: A word boundary ''\b'' is used to define the start and end of
+            a word.
+
+            Step 3: The word must start with ''h'' (case insensitive), so ''[hH]''
+            is used.
+
+            Step 4: Then zero or more alphabetic characters ''[a-zA-Z]*'' can follow.
+
+            Step 5: The word ends with ''e'', so ''e'' before the word boundary.
+
+            Step 6: The lookahead ''(?=.*\b[hH][a-zA-Z]*e\b)'' ensures the entire
+            line contains at least one such word.
+
+            Step 7: ''^'' and ''$'' match the entire line.
+
+            Step 8: The pattern ''.*'' matches the full line content.
+
+            Therefore, the final regex is ''^(?=.*\b[hH][a-zA-Z]*e\b).*$''.'
+          regex: ^(?=.*\b[hH][a-zA-Z]*e\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Understand the requirement: The line must contain at
+            least one whole word starting with ''h'' and ending with ''e''. Step 2:
+            Define a word: A word is a sequence of letters bounded by word boundaries.
+            \b is a word boundary marker. Step 3: Construct the word pattern: \b[hH][a-zA-Z]*e\b
+            means: a word boundary, then ''h'' or ''H'', followed by zero or more
+            letters, then an ''e'', then a word boundary. Step 4: To ensure at least
+            one such word in the entire line, use a positive lookahead (?=.*pattern).
+            Step 5: The entire line can be matched with ^.*$ anchors. Step 6: Combine
+            all: ^(?=.*\b[hH][a-zA-Z]*e\b).*$ ensures the line contains at least one
+            word starting with ''h'' (case-insensitive) and ending with ''e''.'
+          regex: ^(?=.*\b[hH][a-zA-Z]*e\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'To match lines containing at least one word that starts with
+            ''h'' and ends with ''e'', we need to identify word boundaries (\b) and
+            ensure the word starts with ''h'' or ''H'' (case-insensitive) and ends
+            with ''e''. The pattern \b[hH]\w*e\b matches such words: \b represents
+            word boundaries, [hH] ensures the first character is ''h'' or ''H'', \w*
+            allows for any number of word characters in between, and ''e'' is the
+            last character of the word. Wrapping this with ^.* and .*$ ensures the
+            entire line is matched if such a word exists anywhere in the line.'
+          regex: ^.*\b[hH]\w*e\b.*$
+        score: 1.0
+      - output:
+          reasoning: "1. The requirement is to match full lines containing at least\
+            \ one word starting with 'h' and ending with 'e'.\n2. Use a lookahead\
+            \ to assert that such a word exists anywhere in the line. The lookahead\
+            \ is '(?=.*\\b[hH][a-zA-Z]*e\\b)'.\n   - '\\b' asserts a word boundary.\n\
+            \   - '[hH]' matches 'h' or 'H' at the start of the word.\n   - '[a-zA-Z]*'\
+            \ matches zero or more letters following the initial 'h'.\n   - 'e' matches\
+            \ the ending character of the word.\n   - '\\b' ensures the word boundary\
+            \ at the end.\n3. The '.*' after the lookahead matches the entire line.\n\
+            4. '^' and '$' ensure the match is done on the full line.\n5. The regex\
+            \ is case-insensitive for the first letter to cover words starting with\
+            \ either 'h' or 'H'. If case sensitivity is desired, '[h]' can replace\
+            \ '[hH]'.\n\nThus, the regex matches any line containing at least one\
+            \ whole word that starts with 'h' or 'H' and ends with 'e'."
+          regex: ^(?=.*\b[hH][a-zA-Z]*e\b).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 635
+        output_tokens: 1165
+    lines that contain the letters 'ba'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'The task is to match full lines that contain the letters ''ba''
+            anywhere within them.
+
+
+            Step 1: We want to consider entire lines, so we include anchors ^ and
+            $ to indicate start and end of the line respectively.
+
+
+            Step 2: We want lines that contain ''ba'' at any position.
+
+
+            Step 3: Use .* to indicate zero or more characters before ''ba'' and zero
+            or more characters after ''ba''.
+
+
+            Thus, the regex is ^.*ba.*$ which will match any line containing the substring
+            ''ba''.'
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: To match full lines that contain the substring 'ba', the regex
+            should ensure that anywhere in the line, 'ba' appears. '.*' matches any
+            sequence of characters (including empty), so '^.*ba.*$' matches lines
+            starting with any characters, then 'ba', then any characters until the
+            end of the line.
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Identify that we need to match any line that contains
+            the substring ''ba''.
+
+            Step 2: Use ''.*'' to match any number of characters (including zero)
+            before ''ba''.
+
+            Step 3: Include ''ba'' literally to ensure the substring is present.
+
+            Step 4: Use ''.*'' after ''ba'' to match any number of characters following
+            it.
+
+            Step 5: Use ''^'' to indicate the start of the line and ''$'' to indicate
+            the end of the line, so the entire line is matched.
+
+            Therefore, the regex ''^.*ba.*$'' matches any line that contains the letters
+            ''ba'' anywhere.'
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: We need to match lines that contain the substring 'ba'. This
+            means the line can start with any characters (including none), then have
+            'ba', then any characters (including none) after it. Using '^' to mark
+            the start of the line and '$' for the end ensures we match the full line.
+            The regex '.*' matches any number (including zero) of any characters except
+            newline. So '^.*ba.*$' matches lines containing 'ba' anywhere in the line.
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: '1. The requirement is to match entire lines that contain the
+            substring ''ba''.
+
+            2. To match the entire line, we use anchors: ''^'' for the start of the
+            line and ''$'' for the end.
+
+            3. Between these anchors, we allow any characters (including none) before
+            and after ''ba''. This is done using ''.*'' which matches zero or more
+            characters of any kind.
+
+            4. The specific substring ''ba'' must appear somewhere in the line.
+
+            5. Therefore, the full regex is ''^.*ba.*$'' which matches lines containing
+            ''ba'' exactly as required.'
+          regex: ^.*ba.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 580
+        output_tokens: 617
+    lines that match 'billy' or 'bob'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: "The problem requires matching entire lines that are exactly\
+            \ either 'billy' or 'bob'. To solve this step-by-step:\n\n1. Understand\
+            \ the requirement: The line must be exactly 'billy' or exactly 'bob'.\
+            \ Partial matches or substrings are not acceptable.\n2. Construct the\
+            \ pattern to capture either word:\n   - Use parentheses for grouping:\
+            \ (billy|bob)\n   - The pipe '|' means OR, so it matches either 'billy'\
+            \ or 'bob'.\n3. Anchor the pattern to the start and end of the line to\
+            \ enforce exact matching:\n   - '^' is the start of the line\n   - '$'\
+            \ is the end of the line\n4. Putting it all together, the regex is: ^(billy|bob)$\n\
+            \nThis ensures only lines containing exactly 'billy' or 'bob' are matched."
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Identify the keywords to match. The keywords given are
+            ''billy'' and ''bob''.
+
+            Step 2: The regex should match entire lines that are exactly ''billy''
+            or ''bob'' with no extra characters.
+
+            Step 3: Use the alternation operator ''|'' to specify ''billy'' or ''bob''.
+
+            Step 4: Anchor the regex to the start (^) and end ($) of the line to ensure
+            full-line matching.
+
+            Step 5: Combine the above into the regex: ''^(billy|bob)$''.'
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: The goal is to match lines that are exactly 'billy' or 'bob'.
+            This means the entire line should be one of these two words with no additional
+            characters. To ensure the entire line matches, we use the start of line
+            (^) and end of line ($) anchors. The alternation operator '|' allows matching
+            either 'billy' or 'bob'. Therefore, the regex is ^(billy|bob)$.
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: We need a regex that matches lines that contain exactly either
+            'billy' or 'bob'. Since the match should be for the full line, we use
+            the anchors '^' for the start of the line and '$' for the end of the line.
+            Inside, we use the alternation operator '|', so the pattern '(billy|bob)'
+            matches either 'billy' or 'bob'. Thus, the full regex is '^(billy|bob)$'.
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: The pattern needs to match lines that contain either 'billy'
+            or 'bob' exclusively. To ensure the entire line matches, start the regex
+            with '^' (start of line) and end with '$' (end of line). Inside, use a
+            group with '|', the alternation operator, to match either 'billy' or 'bob'.
+            Thus, the full regex is '^(billy|bob)$'.
+          regex: ^(billy|bob)$
+        score: 0.0
+      token_usage:
+        input_tokens: 595
+        output_tokens: 647
+  DynamicFewShotSolver:
+    lines that contain at least one word that starts with 'h' and ends with 'e'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: "Let's address the edge cases step-by-step:\n\n1. Case Insensitivity:\n\
+            \   The original regex uses 'h' explicitly, which matches only lowercase\
+            \ 'h'. To match both uppercase and lowercase, we can either use the case-insensitive\
+            \ flag (e.g., /i) or include both cases explicitly in the character class.\
+            \ Since the instruction is for a pure regex pattern, adding [hH] handles\
+            \ both cases without relying on flags.\n\n2. Correct word boundaries:\n\
+            \   The word boundary \\b correctly identifies the start and end of a\
+            \ word. The word 'he' should definitely be matched since it starts with\
+            \ 'h' and ends with 'e'.\n\n3. Inclusion of any characters between:\n\
+            \   The middle characters \\w* allows zero or more word characters, so\
+            \ the word 'he' with zero characters between 'h' and 'e' matches as well.\n\
+            \n4. Anchoring and lookahead:\n   The positive lookahead (?=.*\\b[hH]\\\
+            w*e\\b) ensures that the line contains at least one such word.\n\nTherefore,\
+            \ by changing 'h' to [hH], the regex will correctly match 'he' and 'Hate'\
+            \ as words starting with 'h' or 'H' and ending with 'e'.\n\nFinal regex:\
+            \ ^(?=.*\\b[hH]\\w*e\\b).*$"
+          regex: ^(?=.*\b[hH]\w*e\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Identify the requirement: match lines containing at
+            least one word starting with ''h'' (case-insensitive) and ending with
+            ''e''.
+
+
+            Step 2: The earlier regex ^.*\b[hH][a-zA-Z]*e\b.*$ accomplishes exactly
+            this by checking for a word with word boundaries (\b) starting with ''h''
+            or ''H'', followed by any letters, and ending with ''e''.
+
+
+            Step 3: Testing with the provided edge case ''He will help soon'': The
+            words are ''He'', ''will'', ''help'', ''soon''. The word ''He'' starts
+            with ''H'' and ends with ''e'', so it matches.
+
+
+            Step 4: However, user says this should not match because even though ''He''
+            fulfills the pattern, the word ''He'' is two letters word that starts
+            with ''H'' and ends with ''e'', so logically it should match. If the user
+            wants to exclude such cases where the word is ''He'' or any similar case,
+            this needs clarification.
+
+
+            Step 5: Assuming user means that only longer words count or ''He'' is
+            not considered a ''word'' to match, then rules need to be specified. However,
+            from the instructions, the original regex is correct.
+
+
+            Step 6: Therefore, the current regex correctly passes the test and does
+            not falsely match words that only start with ''h'' but do not end with
+            ''e''.
+
+
+            Hence, no change is necessary from the first solution.'
+          regex: ^.*\b[hH][a-zA-Z]*e\b.*$
+        score: 1.0
+      - output:
+          reasoning: "Step 1: We want to strictly match words that start with 'h'\
+            \ (lowercase only, as per example) and end with 'e'. We use word boundaries\
+            \ (\\b) to ensure the 'h' is the first letter of the word, and the 'e'\
+            \ is the last letter of the word.\nStep 2: The pattern \\bh[a-zA-Z]*e\\\
+            b works as follows:\n  - \\b ensures the start of a word.\n  - h ensures\
+            \ the word starts with 'h' (lowercase).\n  - [a-zA-Z]* matches zero or\
+            \ more alphabetic characters in the middle.\n  - e ensures the word ends\
+            \ with 'e'.\n  - \\b ensures the end of the word.\nStep 3: Using the positive\
+            \ lookahead (?=.*\\bh[a-zA-Z]*e\\b) ensures that the line contains at\
+            \ least one such word.\nStep 4: Anchors (^) and ($) ensure matching the\
+            \ entire line.\nThis regex excludes words like 'horsehoe' if it does not\
+            \ start with 'h' at the word boundary and matches only proper words starting\
+            \ with 'h' and ending with 'e'."
+          regex: ^(?=.*\bh[a-zA-Z]*e\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The requirement is to match lines containing at least
+            one word starting with ''h'' and ending with ''e''. The example ''h-e''
+            should not match because it contains a hyphen, which breaks the word boundary
+            definition. Therefore, the regex should only match alphabetic sequences
+            without special characters inside.
+
+
+            Step 2: Words are sequences of letters (a-z, case-insensitive). The use
+            of word boundaries (\b) ensures the word is isolated from other punctuation
+            or characters.
+
+
+            Step 3: The word must start with ''h'' or ''H'' and end with ''e'' (lowercase
+            ''e''). The casing for starting with ''h'' is relaxed to accept ''H''
+            as well, consistent with normal word case freedom.
+
+
+            Step 4: The middle part of the word should only include lowercase letters,
+            so [a-z]* is used (excluding uppercase letters prevents matches like ''He''
+            if ''E'' is uppercase, however, given the example ''He'' should match,
+            the regex accepts uppercase for the first letter only).
+
+
+            Step 5: Using ^.* and .* at the end allows the word to be anywhere in
+            the line, and the anchors ensure matching the entire line.
+
+
+            Step 6: Overall regex: ^.*\b[hH][a-z]*e\b.*$
+
+
+            This means the line contains at least one whole word starting with ''h''
+            or ''H'', followed by any lowercase letters, ending with ''e''. This excludes
+            words containing non-alphabetic characters like hyphens, so ''h-e'' won''t
+            match.
+
+
+            Note: If strict lowercase for inner letters is not required, [a-zA-Z]*
+            can be used, but the example suggests case sensitivity only at start and
+            end.'
+          regex: ^.*\b[hH][a-z]*e\b.*$
+        score: 1.0
+      - output:
+          reasoning: The provided regex matches any line containing a word that starts
+            with 'h' and ends with 'e', with word boundaries ensuring proper word
+            segmentation. It does not attempt to verify spelling or semantic correctness
+            of words such as 'horsehoe' versus 'horseshoe'; regex cannot validate
+            English dictionary correctness. Therefore, the example 'a horsehoe is
+            a tool' contains the word 'horsehoe' which starts with 'h' and ends with
+            'e', matching the criteria. Regex only ensures pattern matching at a syntactic
+            level and cannot distinguish misspellings or the semantic meaning of words.
+            Handling spelling correctness requires a dictionary or natural language
+            processing, beyond regex capabilities.
+          regex: ^(?=.*\b[hH][a-zA-Z]*[eE]\b).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 3648
+        output_tokens: 2880
+    lines that contain the letters 'ba'.:
+      avg_score: 0.8
+      results:
+      - output:
+          reasoning: "The regex '^.*ba.*$' matches any line that contains the substring\
+            \ 'ba' anywhere in the line. \n\nFor the edge cases:\n1. 'cabin' contains\
+            \ 'ba' starting at the second character (positions 2 and 3), so it matches.\n\
+            2. 'alphabet' contains 'ab' but not 'ba', so it does not match, ensuring\
+            \ the correct order is required.\n\nThus, this regex correctly handles\
+            \ these edge cases."
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: The regex ^.*ba.*$ correctly matches any full line that contains
+            the substring 'ba', including cases where 'ba' is in the middle of the
+            line, such as 'alphabet'. The '.*' before and after 'ba' allow any characters
+            to appear before or after 'ba' within the line. Therefore, lines like
+            'alphabet' will match as expected. There is no need to change the regex
+            as it already handles this edge case properly.
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Address case sensitivity: We want to match ''ba'' regardless
+            of case (e.g., ''Ba'' should match). We can use the ''(?i)'' flag at the
+            start for case-insensitive matching.
+
+
+            Step 2: Ensure that ''ba'' appears consecutively:
+
+            - The sequence ''ba'' should be exactly those letters in that order.
+
+            - ''abacus'' has ''a'' then ''b'', not ''b'' then ''a'', so it should
+            not match.
+
+
+            Step 3: Construct the regex:
+
+            - ''^(?i)'' for case-insensitive matching starting at the line.
+
+            - ''.*'' matches any characters before ''ba''.
+
+            - ''ba'' matches the letters b followed by a, regardless of case because
+            of (?i).
+
+            - ''.*$'' matches any characters after.
+
+
+            Therefore, the regex ''^(?i).*ba.*$'' matches any line containing the
+            consecutive letters ''ba'' in any case combination, and won''t match lines
+            where ''ba'' is not present consecutively.'
+          regex: ^(?i).*ba.*$
+        score: 0.0
+      - output:
+          reasoning: 'The requirement is to match lines that contain the substring
+            ''ba''. To achieve this, the regex must match the entire line (from start
+            to end) but ensure that somewhere in the line ''ba'' occurs.
+
+
+            Step 1: The ''^'' anchor asserts the start of the line.
+
+            Step 2: ''.*'' matches zero or more characters of any kind, allowing any
+            text before ''ba''.
+
+            Step 3: ''ba'' matches the literal substring ''ba''.
+
+            Step 4: ''.*'' again allows any text after ''ba''.
+
+            Step 5: ''$'' asserts the end of the line.
+
+
+            Together: ''^.*ba.*$'' matches any line containing ''ba''.'
+          regex: ^.*ba.*$
+        score: 1.0
+      - output:
+          reasoning: The regex '^.*ba.*$' matches any line containing the substring
+            'ba' anywhere, including inside words such as in 'alphabet'. It uses '.*'
+            to match any number of characters before and after 'ba', so it handles
+            edge cases like substrings within words correctly.
+          regex: ^.*ba.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 1893
+        output_tokens: 1410
+    lines that match 'billy' or 'bob'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: In many text sources, lines end with newline characters such
+            as LF ('\n') or CRLF ('\r\n'). To match an entire line including the optional
+            newline at the end, we modify the regex to allow an optional '\r?\n' after
+            the words 'billy' or 'bob'. The anchors '^' and '$' are used to ensure
+            the entire line (including any trailing newline) is matched. Hence, the
+            updated regex is '^(billy|bob)\r?\n?$' to cover both Unix and Windows
+            style line endings.
+          regex: ^(billy|bob)\r?\n?$
+        score: 0.0
+      - output:
+          reasoning: 'Step-by-step reasoning:
+
+            1. We need to match lines that contain exactly ''billy'' or ''bob''.
+
+            2. To ensure the line matches entirely, we use ^ for start of line and
+            $ for end of line.
+
+            3. We use a group with the alternation operator | to match either ''billy''
+            or ''bob''.
+
+            4. So the regex becomes ^(billy|bob)$ which matches lines consisting exactly
+            of ''billy'' or ''bob''.'
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: The goal is to match lines that contain either 'billy' or 'bob'
+            exclusively. To ensure the entire line matches either 'billy' or 'bob',
+            we use the start of line anchor '^' and the end of line anchor '$'. Inside,
+            we use a group with an alternation '|', so '(billy|bob)'. This pattern
+            matches a line that is exactly 'billy' or exactly 'bob'.
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: 'We need a regex that matches an entire line that is exactly
+            ''billy'' or ''bob''.
+
+
+            Step 1: Identify the exact strings to match: ''billy'' or ''bob''.
+
+            Step 2: Use the alternation operator ''|'': (billy|bob) to denote either
+            ''billy'' or ''bob''.
+
+            Step 3: Ensure the entire line matches the string by adding start (^)
+            and end ($) anchors.
+
+
+            Therefore, the final regex is: ^(billy|bob)$'
+          regex: ^(billy|bob)$
+        score: 0.0
+      - output:
+          reasoning: 'The requirement is to match lines that contain either ''billy''
+            or ''bob'' exactly. To do this, I use anchors ''^'' and ''$'' to match
+            the whole line from start to end. Inside, I use a group with the alternation
+            operator ''|'': ''(billy|bob)'' which matches either ''billy'' or ''bob''.
+            This ensures the entire line matches exactly one of these two words.'
+          regex: ^(billy|bob)$
+        score: 0.0
+      token_usage:
+        input_tokens: 868
+        output_tokens: 686
+  SelfRefineSolver:
+    lines that contain at least one word that starts with 'h' and ends with 'e'.:
+      avg_score: 0.6
+      results:
+      - output:
+          reasoning: 'Step 1: The requirement is to find lines that contain at least
+            one word starting with ''h'' and ending with ''e'', with the matching
+            being case-insensitive.
+
+
+            Step 2: Use the word boundary \b at the start and end to detect whole
+            words only.
+
+
+            Step 3: Use ''h'' as the starting letter inside the word, then zero or
+            more characters that can be letters, apostrophes, or hyphens ([a-zA-Z''-]*),
+            followed by ''e'' at the end.
+
+
+            Step 4: To handle case insensitivity uniformly (both starting ''h'' and
+            ending ''e''), the regex engine''s case-insensitive flag should be used
+            (e.g., /i), which simplifies the pattern to lowercase letters only.
+
+
+            Step 5: Remove unnecessary anchors ^ and $, since we only need to search
+            for presence anywhere in the line.
+
+
+            Step 6: This pattern will match words like "he", "Home", "Horse", "he''s",
+            and "home-made" because:
+
+            - \b ensures whole words,
+
+            - [a-zA-Z''-]* allows letters plus apostrophes and hyphens,
+
+            - The starting ''h'' and ending ''e'' are case-insensitive via the flag.
+
+
+            Thus, the final regex is /\bh[a-zA-Z''-]*e\b/i, and the pattern presented
+            here is without flags because format doesn''t allow. Case-insensitive
+            matching should be enabled in usage context.'
+          regex: \bh[a-zA-Z'-]*e\b
+        score: 1.0
+      - output:
+          reasoning: "Step 1: Define the problem scope and assumptions.\n- We want\
+            \ to match entire lines that contain at least one word starting with 'h'\
+            \ and ending with 'e'.\n- The match should be case-insensitive for the\
+            \ entire word.\n- Words may contain Unicode letters, apostrophes, and\
+            \ hyphens between the starting 'h' and ending 'e' (e.g., \"home-like\"\
+            , \"he's\").\n- The definition of a word is a sequence bounded by word\
+            \ boundaries (\\b).\n\nStep 2: Use case-insensitive matching.\n- Instead\
+            \ of manually writing [hH] or [eE], use the case-insensitive flag if available.\n\
+            \nStep 3: Use Unicode-aware character classes.\n- Use \\p{L} to match\
+            \ any kind of letter from any language.\n\nStep 4: Define the inner pattern\
+            \ between the 'h' and 'e'.\n- Allow any number (including zero) of Unicode\
+            \ letters plus apostrophes and hyphens: [\\p{L}'-]*\n- This accepts words\
+            \ like \"home\", \"home-like\", \"he's\", \"h\xE9rope\".\n\nStep 5: Use\
+            \ lookahead to assert the presence of such a word anywhere in the line.\n\
+            - Positive lookahead: (?=.*\\b[h][\\p{L}'-]*[e]\\b)\n\nStep 6: Anchor\
+            \ start (^) and end ($) to match the entire line.\n- Use .* to match the\
+            \ full line content after asserting the lookahead.\n\nStep 7: Multiline\
+            \ considerations.\n- Apply the regex per line, either by splitting input\
+            \ on newlines or using multiline mode (depending on regex engine).\n\n\
+            Step 8: Example edge cases:\n- Lines containing words like \"He is home-like.\"\
+            \ - should match.\n- Lines with \"The hero's tale\" - 'hero's' starts\
+            \ with 'h' and ends with 's', so no match.\n- Lines with \"H\xE9lope is\
+            \ here.\" - accented characters accepted.\n\n\nFinal notes: \n- The regex\
+            \ uses Unicode property classes and requires a regex engine that supports\
+            \ these (e.g., Python's regex module, JavaScript with /u flag, recent\
+            \ Java versions).\n- Use the case-insensitive flag (typically /i) alongside\
+            \ Unicode flag (/u) if supported, to ensure correct matching.\n- Example\
+            \ regex flags: /iu or (?iu) if inline.\n\nRegex (without flags syntax):\
+            \ ^(?=.*\\b[h][\\p{L}'-]*[e]\\b).*$"
+          regex: ^(?=.*\b[h][\p{L}'-]*[e]\b).*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Requirement: Match lines containing at least one word
+            starting with ''h'' and ending with ''e'', without case sensitivity on
+            start or end.
+
+
+            Step 2: Case Insensitivity: To handle both uppercase and lowercase letters
+            without complex character classes, we use the case-insensitive flag (/i).
+
+
+            Step 3: Word boundaries: Use \b to ensure full words are matched.
+
+
+            Step 4: Word Characters: Original solution used [a-zA-Z]* which excludes
+            apostrophes or hyphens found in words like "he''s" or "home-like". We
+            expand the inner character class to [a-zA-Z''-]* to allow letters, apostrophes,
+            and hyphens inside the word.
+
+
+            Step 5: Unicode Considerations: Since regex support for Unicode varies,
+            we assume ASCII letters with apostrophes/hyphens for this pattern. For
+            environments supporting Unicode, \p{L} can replace [a-zA-Z] to match all
+            letters.
+
+
+            Step 6: Removing anchors (^.* and .*$): They''re unnecessary since word
+            boundaries and the pattern itself will find the match anywhere in the
+            line. This improves performance.
+
+
+            Final Pattern: \bh[a-zA-Z''-]*e\b with case-insensitive matching ensures:
+
+            - Words start with ''h'' or ''H''
+
+            - Words end with ''e'' or ''E''
+
+            - Words may contain letters, apostrophes, hyphens
+
+
+            Usage Note: The regex should be used with the case-insensitive flag (e.g.,
+            /i) for expected behavior.'
+          regex: \bh[a-zA-Z'-]*e\b
+        score: 1.0
+      - output:
+          reasoning: '1. To address case-insensitivity cleanly, I use the inline case-insensitive
+            flag (?i) at the start of the regex, making the pattern more readable
+            and avoiding explicit [hH] constructs.
+
+
+            2. Words can include apostrophes and hyphens (e.g., "have", "home-like"),
+            so the character class after the initial ''h'' now includes apostrophes
+            ('') and hyphens (-), represented as [\p{L}''-]*.
+
+
+            3. To correctly handle Unicode letters including accented or non-ASCII
+            characters, I use the \p{L} Unicode property, which matches any kind of
+            letter from any language. This requires a regex engine with Unicode property
+            support (such as Python''s ''regex'' module with the ''regex'' library,
+            or modern versions of JavaScript, Java, or .NET).
+
+
+            4. The word boundaries \b ensure that the pattern matches whole words,
+            avoiding partial matches inside longer words.
+
+
+            5. The positive lookahead (?=.*\b[h][\p{L}''-]*e\b) asserts that at least
+            one word starting with ''h'' and ending with ''e'' is present anywhere
+            in the line.
+
+
+            6. The anchors ^ and $ ensure that the regex matches the entire line.
+
+
+            7. This regex is applicable in Unicode-aware regex engines that support
+            lookaheads and Unicode properties. For example, in Python using the ''regex''
+            module (instead of built-in ''re''), or in modern JavaScript (with the
+            /u flag and (?<=) lookahead support), Java, or .NET.
+
+
+            Examples:
+
+            - Matches: "Have a nice home-like house." ("Have", "home-like", "house"
+            all match criteria)
+
+            - Matches: "Here is hope."
+
+            - Matches: "He''ll have time."
+
+            - Does not match: "The cat sat." (no word starting with ''h'' and ending
+            with ''e'')
+
+            - Does not match: "Happy days!" (''Happy'' ends with ''y'', so no match)'
+          regex: ^(?i)(?=.*\b[h][\p{L}'-]*e\b).*$
+        score: 0.0
+      - output:
+          reasoning: 'To address the feedback and improve the regex: 1) The pattern
+            uses the case-insensitive flag (/i) to simplify matching both uppercase
+            and lowercase letters, removing the need for ''[hH]''. 2) Inside the word,
+            instead of limiting to letters only, it uses ''[\w''-]*'' allowing word
+            characters (letters, digits, underscore), apostrophes, and hyphens to
+            accommodate words like "he''s" or "home-made". 3) The pattern ''\bh[\w''-]*e\b''
+            ensures a word boundary at start and end so it matches full words starting
+            with ''h'' and ending with ''e''. 4) The full regex ''^.*\bh[\w''-]*e\b.*$''
+            matches entire lines containing at least one such word. 5) Anchors ''^''
+            and ''$'' ensure full line matching. 6) Case-insensitive flag (/i) is
+            assumed available with the regex engine; if not, it should be enabled.
+            7) Word boundaries ''\b'' behave normally but note they treat underscores
+            as word characters, consistent with ''\w'', which should be acceptable.
+            Overall, this pattern robustly matches lines containing at least one word
+            that starts with ''h'' and ends with ''e'', considering apostrophes, hyphens,
+            digits, and case insensitivity.'
+          regex: ^.*\bh[\w'-]*e\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 6414
+        output_tokens: 3543
+    lines that contain the letters 'ba'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: 'The goal is to find lines containing the substring ''ba''. Generally,
+            regex engines match patterns anywhere within the input by default, so
+            the simple pattern ''ba'' is sufficient and more efficient than ''^.*ba.*$''.
+            Using anchors and wildcards is unnecessary unless matching the entire
+            line exactly is required. This pattern is case-sensitive: it only matches
+            lowercase ''b'' followed by ''a''. To match ''ba'' regardless of case
+            (e.g., ''Ba'', ''BA'', or ''bA''), one could use the case-insensitive
+            modifier such as ''(?i)ba'' if supported by the regex engine. If matching
+            whole words only, ''\bba\b'' would be used. For example, applying ''ba''
+            to lines like ''banana'' or ''cabaret'' will match because they contain
+            ''ba''; lines like ''bat'' also match, but ''abacus'' does not. In multiline
+            texts, ''ba'' will match within any line without needing ''^'' or ''$''
+            anchors. Thus, the simplified regex ''ba'' is suitable for finding lines
+            containing the substring ''ba'' efficiently and effectively.'
+          regex: ba
+        score: 0.0
+      - output:
+          reasoning: The goal is to match any line containing the substring 'ba' regardless
+            of case (e.g., 'ba', 'Ba', 'bA', 'BA'). Since most regex engines match
+            patterns anywhere in the line by default, we don't need to anchor the
+            pattern with '^' or '$', nor use '.*'. Using 'ba' alone matches the substring,
+            and adding '(?i)' makes the match case-insensitive. Therefore, '(?i)ba'
+            is a concise and clear regex to find lines containing 'ba' in any letter
+            case.
+          regex: (?i)ba
+        score: 0.0
+      - output:
+          reasoning: 'The goal is to find lines that contain the substring ''ba''.
+            In many tools and programming languages that perform line-by-line searching,
+            simply using ''ba'' is sufficient because it matches any occurrence of
+            ''ba'' within a line.
+
+
+            Anchors (^ and $) and ''.*'' are not necessary unless you specifically
+            need to match the entire line or process multiline strings as a single
+            input.
+
+
+            If case-insensitive matching is required, this regex needs to be used
+            with a case-insensitive flag (e.g., /ba/i in JavaScript or (?i)ba in some
+            regex engines).
+
+
+            Examples:
+
+            - Matches: "basket", "cab", "bacteria"
+
+            - Does not match: "ab", "bat" (unless contains ''ba'')
+
+
+            Therefore, the simplified regex is just ''ba'', relying on the environment''s
+            default behavior for line matching.'
+          regex: ba
+        score: 0.0
+      - output:
+          reasoning: The requirement is to find lines containing the substring "ba".
+            In most regex engines and tools, just using "ba" is sufficient because
+            they search for substrings by default without needing anchors or wildcards.
+            This regex is case-sensitive and will match lines containing lowercase
+            "ba". If case-insensitive matching is desired, the 'i' flag should be
+            used (e.g., /ba/i). For example, the line "basketball" matches, while
+            "cab" matches only if case-insensitive matching is applied. Lines like
+            "apple" or "cat" do not match. Thus, the simplified regex "ba" correctly
+            meets the criteria without unnecessary complexity.
+          regex: ba
+        score: 0.0
+      - output:
+          reasoning: To match lines containing the substring 'ba', the regex 'ba'
+            suffices since most regex engines test for substring matches by default
+            line-by-line. If case-insensitive matching is needed, a flag or pattern
+            like '[bB][aA]' can be used. Anchors and wildcards are unnecessary here,
+            making the regex simpler and more efficient.
+          regex: ba
+        score: 0.0
+      token_usage:
+        input_tokens: 4772
+        output_tokens: 2130
+    lines that match 'billy' or 'bob'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: 'The original regex ''^(billy|bob)$'' only matches lines where
+            the entire line is exactly ''billy'' or ''bob'', which is restrictive.
+            The updated regex ''\b(billy|bob)\b'' is designed to match lines that
+            contain the words ''billy'' or ''bob'' anywhere within them as whole words.
+            The ''\b'' word boundary anchors ensure that ''billy'' or ''bob'' are
+            matched as separate words and not as substrings within larger words such
+            as ''bobby'' or ''sillybilly''. This allows matching lines like ''I saw
+            billy today'' or ''bob is here'', but not ''bobby went home''.
+
+
+            Additionally, to handle case-insensitive matches (e.g., ''Billy'' or ''BOB''),
+            the regex should be used with a case-insensitive flag (often ''i''), which
+            depends on the environment using the regex.
+
+
+            Example matches:
+
+            - ''billy''
+
+            - ''Bob is coming''
+
+            - ''Did you see BILLY yesterday?''
+
+
+            Non-matches:
+
+            - ''bobby''
+
+            - ''sillybilly''
+
+
+            This approach balances flexibility (matching anywhere in the line) and
+            precision (matching whole words only) while enabling case-insensitive
+            matching if desired.'
+          regex: \b(billy|bob)\b
+        score: 0.0
+      - output:
+          reasoning: "The initial regex '^(billy|bob)$' only matches lines where the\
+            \ entire content is exactly 'billy' or 'bob'. However, the problem statement\
+            \ is ambiguous about whether 'billy' or 'bob' should appear anywhere within\
+            \ a line or match the entire line.\n\nTo handle the more general case\
+            \ where 'billy' or 'bob' may appear anywhere in the line:\n1. We remove\
+            \ the start (^) and end ($) anchors to allow matching substrings.\n2.\
+            \ We add word boundaries '\\b' around 'billy' and 'bob' to ensure we match\
+            \ these as whole words, avoiding partial matches inside longer words.\n\
+            3. We add '.*' before and after to match any characters before or after\
+            \ the target words, allowing them anywhere within the line.\n4. To handle\
+            \ case-insensitivity (e.g., matching 'Billy', 'BOB'), we use the inline\
+            \ flag '(?i)'.\n\nThus, the regex becomes '(?i).*\\b(billy|bob)\\b.*'.\
+            \ This regex matches any line containing 'billy' or 'bob' as whole words,\
+            \ case-insensitively.\n\nExamples of usage:\n- In Python:\n  import re\n\
+            \  pattern = re.compile(r'\\b(billy|bob)\\b', re.IGNORECASE)\n  match\
+            \ = pattern.search(line)  # True if 'billy' or 'bob' found anywhere\n\n\
+            - In grep (case-insensitive whole word match):\n  grep -i -w 'billy\\\
+            |bob' filename\n\nIf the user specifically wants to match lines exactly\
+            \ equal to 'billy' or 'bob', using '^' and '$' anchors without word boundaries\
+            \ and with case-insensitive flag would be appropriate.\n\nOverall, this\
+            \ solution clarifies the initial ambiguity, supports matching substrings,\
+            \ enforces whole-word matches, and supports case-insensitivity."
+          regex: (?i).*\b(billy|bob)\b.*
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Clarify that we want to match lines containing the words
+            ''billy'' or ''bob'' anywhere within them, not just lines that are exactly
+            those words.
+
+
+            Step 2: To match ''billy'' or ''bob'' as whole words (not as substrings
+            inside other words like ''billybob'' or ''billy1''), use word boundary
+            markers \b around the alternatives: \b(billy|bob)\b.
+
+
+            Step 3: Since case variations such as ''Billy'' or ''BOB'' should also
+            be matched, the regex should be used with a case-insensitive flag (e.g.,
+            /i) in the implementation.
+
+
+            Step 4: Avoid using anchors (^ and $) because these would restrict matches
+            to entire lines only.
+
+
+            This regex matches any line containing ''billy'' or ''bob'' as whole words
+            anywhere in the line, regardless of case, addressing the issues raised
+            and allowing flexibility for lines with additional text or punctuation.'
+          regex: \b(billy|bob)\b
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Clarify requirements: We want to match lines that contain
+            exactly ''billy'' or ''bob'' possibly with leading or trailing whitespace,
+            and we want case-insensitive matching (e.g. ''Billy'', ''BOB'' should
+            match).
+
+
+            Step 2: Handle optional whitespace at line boundaries: Use ''\s*'' at
+            start and end to allow lines like ''  billy  '' to match.
+
+
+            Step 3: Ensure matching either ''billy'' or ''bob'' exactly (no extra
+            characters): Use ''(billy|bob)''.
+
+
+            Step 4: Make matching case-insensitive: Use the inline flag ''(?i)'',
+            which makes the match ignore case.
+
+
+            Step 5: Add start ''^'' and end ''$'' anchors to ensure the entire line
+            matches the pattern possibly surrounded by whitespace.
+
+
+            Final Regex: ''^(?i)\s*(billy|bob)\s*$''
+
+
+            Examples:
+
+            - Matches: ''billy'', ''  Billy  '', ''BOB'', ''\tbob\n'' (assuming line
+            ends at \n)
+
+            - Does not match: ''billybob'', ''billy1'', ''bobbie'', ''hello billy''
+
+
+            This regex matches whole lines consisting of ''billy'' or ''bob'' ignoring
+            case and leading/trailing whitespace, addressing the feedback''s points.'
+          regex: ^(?i)\s*(billy|bob)\s*$
+        score: 0.0
+      - output:
+          reasoning: 'The feedback highlights the need for a regex that matches lines
+            containing the words ''billy'' or ''bob'' anywhere within the line, case-insensitively,
+            and matches them as whole words (not as substrings inside other words).
+
+
+            Step 1: Use word boundaries (\b) around the group (billy|bob) to ensure
+            matching whole words only.
+
+
+            Step 2: Remove the start (^) and end ($) anchors to allow the words to
+            appear anywhere in the line.
+
+
+            Step 3: Add case-insensitivity to match ''Billy'', ''BOB'', etc. The regex
+            itself doesn''t include flags, but this should be specified in the usage
+            context (e.g., the ''i'' flag in many regex engines).
+
+
+            Examples:
+
+            - Matches: "billy is here", "hello Bob!", "I saw BILLY and Bob today"
+
+            - Does not match: "billybob", "bobby", "bobcat"
+
+
+            Thus, the final regex is \b(billy|bob)\b with the case-insensitive flag
+            enabled to match the desired lines appropriately.'
+          regex: \b(billy|bob)\b
+        score: 0.0
+      token_usage:
+        input_tokens: 5145
+        output_tokens: 2686
+summary:
+  avg_score: 0.4888888888888888
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.6666666666666666
+    DynamicFewShotSolver: 0.6
+    SelfRefineSolver: 0.19999999999999998
+  llms:
+    <nlp_project.solvers.chain_of_thought.ChainOfThoughtSolver object at 0x11408d110>: gpt-4.1-mini
+    <nlp_project.solvers.dyfs.DynamicFewShotSolver object at 0x10ff75cd0>: gpt-4.1-mini
+    <nlp_project.solvers.self_refine.SelfRefineSolver object at 0x10fb41990>: gpt-4.1-mini
+  num_iterations: 5
+  total_problems: 3
+  total_solvers: 3
+  total_tokens_per_model:
+    ChainOfThoughtSolver:
+      input_tokens: 1810
+      output_tokens: 2429
+    DynamicFewShotSolver:
+      input_tokens: 6409
+      output_tokens: 4976
+    SelfRefineSolver:
+      input_tokens: 16331
+      output_tokens: 8359

@@ -692,7 +692,7 @@
         "regex": ".*[A-Z][A-Z].*",
         "string_matches": [
             "the alphabet starts with ABC",
-            "I'm a big fan of the NBA", 
+            "I'm a big fan of the NBA",
             "born in the USA is a great song"
         ],
         "string_mismatches": [
@@ -931,7 +931,7 @@
         ],
         "string_mismatches": [
             "Hi!",
-            "123 @#$%", 
+            "123 @#$%",
             "example@gmail.com"
         ]
     },
@@ -1429,11 +1429,11 @@
             "all animals are equal, but some are more equal than others"
         ]
     },
-    "lines that match 'billy' or 'bob'.": {
+    "lines that contain 'billy' or 'bob'.": {
         "regex": ".*(billy|bob).*",
         "string_matches": [
             "billybob is a unique name",
-            "Hi bob how are you?", 
+            "Hi bob how are you?",
             "bob and billy are best friends"
         ],
         "string_mismatches": [

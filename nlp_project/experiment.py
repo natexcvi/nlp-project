@@ -13,6 +13,7 @@ from nlp_project.dataset.regex_problem import (
     RegexProblems,
 )
 from nlp_project.dataset.score_utils import ScoreUtils
+from nlp_project.solvers.base_solver import Solver
 from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
 from nlp_project.solvers.dyfs import DynamicFewShotSolver
 from nlp_project.solvers.self_refine import SelfRefineSolver
@@ -70,6 +71,7 @@ class ExperimentSummary(BaseModel):
     avg_score_per_model: dict[str, float]
     total_tokens_per_model: dict[str, TokenUsageStats]
     num_iterations: int
+    llms: dict[str, str]
 
 
 NUM_ITERATIONS = 5
@@ -130,7 +132,7 @@ def evaluate_problem(solver, problem, solver_name):
     )
 
 
-def generate_summary(report):
+def generate_summary(report: dict, solvers: list[Solver]):
     unique_problems = set(
         problem_name
         for solver_report in report.values()
@@ -170,19 +172,24 @@ def generate_summary(report):
         avg_score_per_model=avg_score_per_model,
         total_tokens_per_model=total_tokens_per_model,
         num_iterations=NUM_ITERATIONS,
+        llms={str(solver): solver.llm_config.model for solver in solvers},
     )
 
 
 def run_experiment(sample_size: Optional[int] = None) -> None:
+    regex_system_message = (
+        "You are a regex generation assistant. Your task is to create a regex according to the user provided instructions. "
+        "Your regex should match a full line that meets the criteria."
+    )
     solvers = {
         "DynamicFewShotSolver": DynamicFewShotSolver(
-            "Your task is to create a regex according to the user provided instructions."
+            regex_system_message,
         ),
         "ChainOfThoughtSolver": ChainOfThoughtSolver(
-            "Your task is to create a regex according to the user provided instructions."
+            regex_system_message,
         ),
         "SelfRefineSolver": SelfRefineSolver(
-            "Your task is to create a regex according to the user provided instructions."
+            regex_system_message,
         ),
         # "ChainOfThoughtSolver-FindExamples": ChainOfThoughtSolver(
         #     "Your task is to find examples that match/don't match the regex described in the user provided instructions."
@@ -237,7 +244,7 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
 
     experiment_report = ExperimentReport(root=report)
     conversations_report = ConversationsReport(root=all_conversations)
-    summary = generate_summary(report)
+    summary = generate_summary(report, solvers.values())
 
     reports_dir = "reports"
     os.makedirs(reports_dir, exist_ok=True)
