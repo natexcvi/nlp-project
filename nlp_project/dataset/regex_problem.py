@@ -34,7 +34,7 @@ class RegexProblems:
             )
         ]
 
-    def safe_regex_match(regex_str, text):
+    def safe_regex_match(self, regex_str, text):
         try:
             return re.match(regex_str, text) is not None
         except Exception as e:

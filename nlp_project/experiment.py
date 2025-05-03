@@ -14,6 +14,8 @@ from nlp_project.dataset.regex_problem import (
 )
 from nlp_project.dataset.score_utils import ScoreUtils
 from nlp_project.solvers.chain_of_thought import ChainOfThoughtSolver
+from nlp_project.solvers.dyfs import DynamicFewShotSolver
+from nlp_project.solvers.self_refine import SelfRefineSolver
 
 
 class EvaluationResult(BaseModel):
@@ -173,15 +175,18 @@ def generate_summary(report):
 
 def run_experiment(sample_size: Optional[int] = None) -> None:
     solvers = {
-        # "DynamicFewShotSolver": DynamicFewShotSolver(
-        #     "Your task is to create a regex according to the user provided instructions."
-        # ),
-        "ChainOfThoughtSolver-BuildRegex": ChainOfThoughtSolver(
+        "DynamicFewShotSolver": DynamicFewShotSolver(
             "Your task is to create a regex according to the user provided instructions."
         ),
-        "ChainOfThoughtSolver-FindExamples": ChainOfThoughtSolver(
-            "Your task is to find examples that match/don't match the regex described in the user provided instructions."
+        "ChainOfThoughtSolver": ChainOfThoughtSolver(
+            "Your task is to create a regex according to the user provided instructions."
         ),
+        "SelfRefineSolver": SelfRefineSolver(
+            "Your task is to create a regex according to the user provided instructions."
+        ),
+        # "ChainOfThoughtSolver-FindExamples": ChainOfThoughtSolver(
+        #     "Your task is to find examples that match/don't match the regex described in the user provided instructions."
+        # ),
     }
     score_utils = ScoreUtils()
     regex_problem_set = RegexProblems(score_utils)
@@ -192,12 +197,13 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
     )
 
     solver_problem_mapping = {
-        "ChainOfThoughtSolver-BuildRegex": regex_problem_set.problems,
-        "ChainOfThoughtSolver-FindExamples": regex_examples_problem_set.problems,
+        "DynamicFewShotSolver": regex_problem_set.problems,
+        "ChainOfThoughtSolver": regex_problem_set.problems,
+        "SelfRefineSolver": regex_problem_set.problems,
     }
 
     assert (
-        len(set(len(solver_problem_mapping.values()))) == 1
+        len(set(len(p) for p in solver_problem_mapping.values())) == 1
     ), "Problem sets must be of equal size"
 
     report = {}
