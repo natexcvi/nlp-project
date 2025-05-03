@@ -1,0 +1,923 @@
+details:
+  ChainOfThoughtSolver:
+    lines that contain the exact word 'Beaker' anywhere in the text.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: We need to match lines that contain the exact word ''Beaker''.
+            This means ''Beaker'' should be matched as a whole word, not as a substring
+            within another word.
+
+
+            Step 2: To match the exact word, we use the word boundary anchors \b around
+            ''Beaker'', resulting in \bBeaker\b.
+
+
+            Step 3: Since the word can appear anywhere in the line, we allow any characters
+            before and after it. This is done by using .* before and after the word.
+
+
+            Step 4: We want to match the entire line that contains ''Beaker'', so
+            we include ^ and $ at the start and end to match the full line.
+
+
+            Putting it all together, our regex becomes: ^.*\bBeaker\b.*$'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: To match lines that contain the exact word 'Beaker', we need
+            to ensure word boundaries to avoid partial matches like 'Beakers' or 'Beakerman'.
+            Using \b before and after 'Beaker' ensures the match is the full word
+            only. The pattern ^.* and .* $ allow any characters before and after the
+            word in the line, so the entire line is matched if it contains 'Beaker'
+            as a standalone word anywhere. Thus, the regex ^.*\bBeaker\b.*$ matches
+            any line containing 'Beaker' as a full word.
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'To match lines that contain the exact word ''Beaker'' anywhere
+            in the text, we need to ensure that ''Beaker'' is matched as a whole word,
+            not as a substring of a longer word.
+
+
+            1. The regex ''^.*'' matches any characters from the start of the line.
+
+            2. The ''\b'' is a word boundary assertion that ensures ''Beaker'' is
+            matched as a whole word.
+
+            3. ''Beaker'' matches the exact word.
+
+            4. Another ''\b'' asserts the end of the word boundary.
+
+            5. ''.*$'' matches any characters until the end of the line.
+
+
+            Putting it all together, ''^.*\bBeaker\b.*$'' matches any line containing
+            the word ''Beaker'' exactly, anywhere in the text.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: "The task is to match lines that contain the exact word 'Beaker'\
+            \ anywhere in the text. The key requirement is to match the whole line,\
+            \ but only if 'Beaker' appears as a whole word, not as a substring of\
+            \ another word. \n\nStep 1: Match the start of the line with ^.\nStep\
+            \ 2: Allow any characters before the word 'Beaker', which can be matched\
+            \ by .* (zero or more of any characters).\nStep 3: Use word boundaries\
+            \ \\b to ensure 'Beaker' is matched as a whole word. That is, \\bBeaker\\\
+            b.\nStep 4: Allow any characters after the word 'Beaker' with .*.\nStep\
+            \ 5: Match the end of the line with $.\n\nHence, the full regex is ^.*\\\
+            bBeaker\\b.*$, which matches any entire line that contains the word 'Beaker'\
+            \ isolated by word boundaries anywhere in the text."
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'To match lines containing the exact word ''Beaker'' anywhere
+            in the text, we need to ensure that ''Beaker'' appears as a whole word,
+            not as part of another word like ''Beakers'' or ''Beakery''.
+
+
+            Step 1: Use word boundaries (\b) around ''Beaker'' to ensure the exact
+            word match.
+
+
+            Step 2: Use ''.*'' before and after ''\bBeaker\b'' to allow any characters
+            before or after the word in the line.
+
+
+            Step 3: Anchor the regex to match the entire line by using ''^'' for start
+            and ''$'' for end to ensure full line match.
+
+
+            Combining these steps results in: ''^.*\bBeaker\b.*$''. This regex matches
+            any line that contains the whole word ''Beaker'' anywhere.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 690
+        output_tokens: 920
+    lines that contain words ending with 'la'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: The problem is to find lines containing words that end with 'la'.
+            A word that ends with 'la' can be represented with the regex pattern \b\w*la\b,
+            where \b means word boundary, \w* means zero or more word characters (letters,
+            digits, underscore), and 'la' is the suffix we want. To check if a line
+            contains such a word, we can use a positive lookahead (?=.*\b\w*la\b)
+            that ensures there is at least one word ending with 'la' somewhere in
+            the line. The overall regex matches the entire line (^.*$), but requires
+            that condition with the lookahead before matching the line. This ensures
+            lines without such words are not matched.
+          regex: ^(?=.*\b\w*la\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Identify the requirement: lines that contain words ending
+            with ''la''.
+
+            Step 2: We need to match entire lines, so the regex should match from
+            start (^) to end ($).
+
+            Step 3: The word ending with ''la'' can be matched using word boundaries
+            and word characters. The pattern \b matches a word boundary.
+
+            Step 4: The words ending with ''la'' can be represented as \w*la\b, where
+            \w* matches zero or more word characters before ''la'' and \b ensures
+            ''la'' is at the end of the word.
+
+            Step 5: The rest of the line can be any characters, so use .* before and
+            after to allow any content.
+
+
+            Putting all together: ^.*\b\w*la\b.*$ which matches lines containing at
+            least one word ending with ''la''.'
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We need to find lines that contain words ending with
+            ''la''.
+
+            Step 2: A word ending with ''la'' can be represented as ''\b\w+la\b''.
+            Here, ''\b'' represents a word boundary, ensuring we match whole words,
+            ''\w+'' matches one or more word characters before ''la'', and ''la''
+            is the literal suffix.
+
+            Step 3: To enforce that the line contains at least one such word, we use
+            a positive lookahead ''(?=.*\b\w+la\b)''. This ensures that somewhere
+            in the line there is a word that ends with ''la''.
+
+            Step 4: We use ''^'' and ''$'' to match the full line.
+
+            Step 5: ''.*'' is used to allow any characters in the line before and
+            after the matched word.
+
+
+            Putting it all together, the regex ''^(?=.*\b\w+la\b).*$'' matches entire
+            lines that contain at least one word ending with ''la''.'
+          regex: ^(?=.*\b\w+la\b).*$
+        score: 1.0
+      - output:
+          reasoning: We need to match lines that contain at least one word ending
+            with 'la'. A 'word' can be defined as a sequence of word characters (letters,
+            digits, underscores) bounded by word boundaries. To ensure the word ends
+            with 'la', we look for a word boundary '\b', followed by one or more word
+            characters '\w+', followed by 'la', and then another word boundary '\b'.
+            Surrounding this with '.*' allows any characters before or after on the
+            line, thus matching the entire line if it contains such a word. The '^'
+            and '$' anchors ensure the regex matches the entire line. Therefore, '^.*\b\w+la\b.*$'
+            correctly matches lines that contain words ending with 'la'.
+          regex: ^.*\b\w+la\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We need to match lines that contain words ending with
+            "la". A word ending with "la" means a sequence of word characters (\w)
+            that end with "la".
+
+            Step 2: Use word boundary tokens \b to ensure we''re matching whole words.
+
+            Step 3: The pattern \b\w*la\b matches any word ending with "la".
+
+            Step 4: To match the whole line containing such a word, we add ^ and $
+            anchors, and allow any characters before and after the word with .*.
+
+            Step 5: Escape the backslashes in the regex to ensure they are interpreted
+            correctly.
+
+
+            Hence, the regex ^.*\b\w*la\b.*$ matches any line containing a word ending
+            with "la".'
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 660
+        output_tokens: 978
+    lines using 'min' before 'imal':
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'To match lines that use ''min'' before ''imal'', the regex needs
+            to ensure that ''min'' appears somewhere in the line before ''imal''.
+            The pattern ''^.*min.*imal.*$'' does the following: ''^'' asserts the
+            start of the line; ''.*'' matches any characters (zero or more) before
+            ''min''; ''min'' matches the literal string ''min''; ''.*'' matches any
+            characters between ''min'' and ''imal''; ''imal'' matches the literal
+            string ''imal''; the final ''.*'' matches anything remaining after ''imal'';
+            and ''$'' asserts the end of the line. This ensures ''min'' occurs before
+            ''imal'' somewhere on the line.'
+          regex: ^.*min.*imal.*$
+        score: 1.0
+      - output:
+          reasoning: The user wants to match lines that include 'min' before 'imal'.
+            This means that in the line, the substring 'min' appears somewhere before
+            'imal'. To capture this, we ensure the line contains 'min' followed by
+            zero or more characters, and then 'imal'. The regex '^.*min.*imal.*$'
+            matches any line where 'min' appears first, followed at some point by
+            'imal'. The anchors '^' and '$' ensure it matches the whole line.
+          regex: ^.*min.*imal.*$
+        score: 1.0
+      - output:
+          reasoning: The user wants to match lines that use 'min' before 'imal'. This
+            means the line should contain 'min' appearing somewhere before 'imal'.
+            To ensure 'min' occurs before 'imal', the regex matches any characters
+            (.*), then 'min', then any characters (.*), then 'imal', and then any
+            characters till the end of the line. The caret ^ and dollar $ ensure the
+            entire line is matched, as requested.
+          regex: ^.*min.*imal.*$
+        score: 1.0
+      - output:
+          reasoning: To match a line that uses the substring 'min' before 'imal',
+            we need the line to contain 'min' first and then 'imal' later. The regex
+            '^.*min.*imal.*$' ensures that from the start of the line (^) we have
+            any characters (.*), then 'min', then any characters (.*), then 'imal',
+            then any characters (.*) until the end of the line ($). This guarantees
+            'min' appears somewhere before 'imal' in the line. Using '.*' allows any
+            characters to be present in between or before/after these substrings.
+          regex: ^.*min.*imal.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The user wants lines that use ''min'' before ''imal''.
+            This means the substring ''min'' appears somewhere in the line, followed
+            later by the substring ''imal''.
+
+            Step 2: To ensure both appear in order, we construct a regex that matches
+            any characters (''.*''), then ''min'', then any characters again, then
+            ''imal''.
+
+            Step 3: Since the requirement is to match the whole line that meets this
+            criteria, we wrap the pattern with ''^'' and ''$'' anchors.
+
+            Final regex: ''^.*min.*imal.*$'' matches full lines where ''min'' occurs
+            before ''imal''.'
+          regex: ^.*min.*imal.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 660
+        output_tokens: 662
+  DynamicFewShotSolver:
+    lines that contain the exact word 'Beaker' anywhere in the text.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: The task is to match lines containing the exact word
+            ''Beaker'' anywhere in the text. Step 2: To identify the exact word, we
+            use word boundaries \b on both sides of ''Beaker''. This ensures it doesn''t
+            match substrings like ''Beakers'' or ''Beakered''. Step 3: Since ''Beaker''
+            can occur anywhere within the line, we''ll allow any characters before
+            and after it, so we use ''.*'' before and after the word boundary expression.
+            Step 4: ''^'' and ''$'' anchors ensure the regex matches the entire line.
+            Therefore, the final regex is ''^.*\bBeaker\b.*$''.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: To match lines that contain the exact word 'Beaker' anywhere
+            in the line, we need to ensure that 'Beaker' appears as a whole word,
+            not part of another word. This is done by using word boundaries \b before
+            and after 'Beaker'. The caret ^ and dollar sign $ anchor the match to
+            the start and end of the line, ensuring the entire line is matched. The
+            .* before and after allows any characters to appear before or after 'Beaker'
+            in the line.
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: "The requirement is to match any line containing the exact word\
+            \ 'Beaker'. To ensure 'Beaker' is matched as a whole word, word boundaries\
+            \ \\b are used around it. \n\nStep-by-step:\n1. Use \\bBeaker\\b to match\
+            \ the word 'Beaker' exactly, preventing partial matches like 'Beakers'\
+            \ or 'Beakery'.\n2. The regex should match the entire line, so '^' and\
+            \ '$' are anchors to match the start and end of the line.\n3. '.*' before\
+            \ and after the word allows for any characters to appear on either side\
+            \ in the line.\n\nHence, the final regex is '^.*\\bBeaker\\b.*$' which\
+            \ matches any line containing the word 'Beaker' anywhere."
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: To match the exact word ''Beaker'' in a line, we use
+            \bBeaker\b to denote word boundaries, ensuring ''Beaker'' is matched as
+            a whole word.
+
+
+            Step 2: The issue with the previous regex was the use of a positive lookahead
+            and full line matching, which is unnecessary for this.
+
+
+            Step 3: Matching the entire line directly with ^ and $ anchors.
+
+
+            Step 4: The pattern ^.*\bBeaker\b.*$ matches any line that contains the
+            word ''Beaker'' with word boundaries, excluding ''Beaker'' joined directly
+            to other letters or alphanumerics (like ''Beaker-Beaker'' would not match
+            since - is not considered a word character, so the word boundary exists,
+            but since ''Beaker'' repeats, each is matched as a word).
+
+
+            Step 5: Regarding ''Beaker-Beaker'', since ''-'' is a non-word character,
+            \b before and after ''Beaker'' counts as word boundaries, so ''Beaker''
+            is matched twice there. However, since the user wants lines with ''Beaker''
+            as a word, hyphenated words with ''Beaker'' separated by punctuation are
+            considered valid matches. If ''Beaker-Beaker'' should not match, because
+            it does not consider ''Beaker'' as a separate word (tied to another word
+            with punctuation), this regex allows it. To exclude matches where ''Beaker''
+            is immediately attached to punctuation characters like ''-'', we need
+            a stricter regex.
+
+
+            But in standard word boundary semantics, ''Beaker'' in ''Beaker-Beaker''
+            is two separate words, so it matches.
+
+
+            If you want to disallow ''Beaker'' when attached by punctuation, custom
+            logic beyond \b boundaries would be needed, but as per usual definition,
+            this regex suffices.
+
+
+            Step 6: Multiline input: When applying regex line-by-line, this regex
+            works for each line independently.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: To match lines that contain the exact word 'Beaker', we need
+            to ensure 'Beaker' is a whole word and not part of another word. Using
+            word boundaries '\b' around 'Beaker' ensures that. The '.*' on both sides
+            allows any characters before or after the word in the line. Anchors '^'
+            and '$' ensure the entire line is matched.
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 2102
+        output_tokens: 1618
+    lines that contain words ending with 'la'.:
+      avg_score: 0.8
+      results:
+      - output:
+          reasoning: The previous regex already uses word boundaries (\b) around the
+            word to ensure matching exact words ending with 'la'. This means it will
+            not match words such as 'alphabets' where 'la' appears in the middle.
+            The regex looks for a word boundary followed by zero or more word characters
+            ending with 'la' and then a word boundary, ensuring the word ends exactly
+            with 'la'. Thus, it correctly avoids false positives like 'alphabets'.
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      - output:
+          reasoning: The original regex correctly matches lines containing words ending
+            with 'la' using the pattern \b\w*la\b. However, it did not account for
+            case sensitivity. For example, 'LALA' at the end should also be matched,
+            but the regex was case-sensitive by default. To fix this, I added the
+            inline case-insensitive modifier (?i) at the beginning of the regex. This
+            allows matching words ending with 'la' in any case, such as 'La', 'LA',
+            or 'la'. This ensures words like 'alpha' (ends with 'a' only) won't match
+            because the pattern searches specifically for words ending with 'la',
+            not just 'a'. Thus, the final regex matches full lines that contain at
+            least one word ending with 'la' in any case.
+          regex: ^(?i).*\b\w*la\b.*$
+        score: 0.0
+      - output:
+          reasoning: The regex uses word boundaries (\b) around the pattern '\w*la'
+            to ensure that the matched segment is a whole word ending with 'la'. In
+            the example 'atlas', the word ends with 'as', so it does not match because
+            the required ending 'la' is not at the end of a word boundary. This prevents
+            false positives for words that contain 'la' internally but do not end
+            with it. The use of '\b' at both ends ensures the matched substring is
+            a complete word ending exactly with 'la'.
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Determine the requirement: lines that contain words
+            ending with ''la''.
+
+            Step 2: Understand what signifies a word ending with ''la'': it should
+            be a word boundary before and after, and the word should end with ''la''.
+
+            Step 3: Construct regex components:
+
+            - ''\b'': word boundary
+
+            - ''\w*'': zero or more word characters
+
+            - ''la'': literal characters ''la''
+
+            Step 4: Combine these into a pattern to match a word ending with ''la'':
+            \b\w*la\b
+
+            Step 5: Since we need to match full lines containing such a word, allow
+            any characters before and after: ''^.*'' and ''.*$''
+
+            Step 6: Put it all together: ''^.*\b\w*la\b.*$''
+
+            This regex matches any line that contains at least one word that ends
+            with ''la''.'
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We want to match lines containing words ending with
+            ''la''.
+
+            Step 2: To identify a word ending with ''la'', we look for word boundaries
+            and word characters. Using ''\b'' to mark word boundaries and ''\w*''
+            to match zero or more word characters before ''la''. So, ''\b\w*la\b''
+            matches a word ending in ''la''.
+
+            Step 3: To ensure the entire line is matched, we use ''^'' for start of
+            line and ''$'' for end of line.
+
+            Step 4: To allow for any text before or after the matching word, we use
+            ''.*'' before and after the ''\b\w*la\b''.
+
+            Step 5: We escape backslashes in regex properly.
+
+
+            Therefore, the full regex is ''^.*\b\w*la\b.*$'' which matches any line
+            containing at least one word ending with ''la''.'
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 2328
+        output_tokens: 1618
+    lines using 'min' before 'imal':
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: "The user's clarification indicates that 'min' and 'imal' should\
+            \ appear sequentially without any characters in between\u2014essentially\
+            \ forming the substring 'minimal'.\n\nStep 1: Recognize that 'min' directly\
+            \ followed by 'imal' forms 'minimal'.\nStep 2: Therefore, the regex should\
+            \ match lines containing the full substring 'minimal'.\nStep 3: The regex\
+            \ '^.*minimal.*$' ensures that the entire line is matched if it contains\
+            \ 'minimal' anywhere.\n\nThis adjustment prevents matches like 'min imal'\
+            \ where a space separates 'min' and 'imal', as only the exact substring\
+            \ 'minimal' will match."
+          regex: ^.*minimal.*$
+        score: 0.0
+      - output:
+          reasoning: The user clarified that 'min' should occur immediately before
+            'imal' without any characters between them. Thus, the only valid match
+            is the substring 'minimal' exactly, not just 'min' and 'imal' appearing
+            anywhere in the line separately. Therefore, the regex should look for
+            the full substring 'minimal' in the line. The anchors ^ and $ ensure the
+            entire line is matched. The '.*' on either side allows for any content
+            before or after 'minimal' on the same line.
+          regex: ^.*minimal.*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: From the previous reasoning, we want to match lines
+            that contain ''min'' before ''imal''.
+
+            Step 2: The user points out that ''MINimal'' should match, which means
+            the matching should be case insensitive.
+
+            Step 3: To achieve case insensitivity, we add the inline modifier ''(?i)''
+            at the beginning of the regex.
+
+            Step 4: The lookahead ''(?=.*min.*imal)'' ensures ''min'' appears before
+            ''imal'' in the line.
+
+            Step 5: Combined, the regex ''^(?i)(?=.*min.*imal).*$'' matches lines
+            that contain both ''min'' and ''imal'' substrings in order, ignoring case.
+
+            Step 6: This regex full line match satisfies the requirement with case
+            insensitivity.
+
+            Step 7: Therefore, the final regex is ''^(?i)(?=.*min.*imal).*$''.'
+          regex: ^(?i)(?=.*min.*imal).*$
+        score: 0.0
+      - output:
+          reasoning: "Step 1: The user wants to match lines that have 'min' immediately\
+            \ followed by 'imal', i.e., the substring 'minimal', with no characters\
+            \ in between.\nStep 2: From the edge cases, 'min imal' should not match\
+            \ because there is a space between 'min' and 'imal'. Thus, we need 'min'\
+            \ directly followed by 'imal' with no characters between.\nStep 3: Another\
+            \ edge case is 'adminimal', which should not match; this implies that\
+            \ 'min' must start the line and be inside the string 'minimal' exactly\u2014\
+            \ no prefixes like 'ad' allowed.\nStep 4: Therefore, the entire line must\
+            \ be exactly 'minimal' (no extra characters before or after). Using anchors\
+            \ '^' and '$' ensures a full-line match.\nStep 5: The regex '^minimal$'\
+            \ matches lines that consist exactly of the word 'minimal', satisfying\
+            \ the requirements and edge cases."
+          regex: ^(minimal)$
+        score: 0.0
+      - output:
+          reasoning: 'The user wants to match lines where ''min'' is followed exactly
+            by ''imal''. This means the sequence ''minimal'' should appear exactly
+            in the line.
+
+
+            In the previous solution, we allowed any characters between ''min'' and
+            ''imal'', which caused false positives (e.g., ''minimize'' has ''min''
+            then ''imize'', not ''imal'').
+
+
+            Therefore, the correct approach is to match lines containing the exact
+            substring ''minimal''.
+
+
+            Regex explanation:
+
+            - ''^'' and ''$'' denote the start and end of the line.
+
+            - ''.*minimal.*'' means that somewhere in the line, the substring ''minimal''
+            appears.
+
+
+            This ensures that ''min'' occurs immediately before ''imal'', as ''minimal''
+            is the literal concatenation of ''min'' and ''imal''.
+
+
+            Hence, ''^.*minimal.*$'' matches lines containing ''minimal'' correctly.'
+          regex: ^.*minimal.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 3676
+        output_tokens: 2043
+  SelfRefineSolver:
+    lines that contain the exact word 'Beaker' anywhere in the text.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'To match lines containing the exact word ''Beaker'', we need
+            to ensure it appears as a whole word, not as a substring of another word.
+
+
+            Step 1: Use word boundaries ''\b'' around ''Beaker'' to ensure it''s matched
+            as a whole word.
+
+
+            Step 2: Since the word may appear anywhere in the line, we use a positive
+            lookahead ''(?=.*\bBeaker\b)'' to assert that ''Beaker'' is present somewhere.
+
+
+            Step 3: ''^'' and ''$'' anchors specify the start and end of the line,
+            ensuring the regex matches the whole line.
+
+
+            Step 4: The ''.*'' outside the lookahead captures the entire line.
+
+
+            Thus, the regex ''^(?=.*\bBeaker\b).*$'' matches any entire line containing
+            the exact word ''Beaker''.'
+          regex: ^(?=.*\bBeaker\b).*$
+        score: 1.0
+      - output:
+          reasoning: '1. The requirement is to match full lines that contain the exact
+            word ''Beaker''.
+
+            2. Using word boundaries (\b) ensures that ''Beaker'' is matched as an
+            exact word and not as a substring of another word, e.g. ''Beakers'' or
+            ''Beakery''.
+
+            3. The pattern \bBeaker\b matches the word ''Beaker'' surrounded by word
+            boundaries.
+
+            4. To match a full line containing this word anywhere, use ''^.*'' at
+            the start to match anything before the word, and ''.*$'' at the end to
+            match anything after it.
+
+            5. Therefore, the final regex is ''^.*\bBeaker\b.*$''.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: To match lines that contain the exact word 'Beaker' anywhere
+            in the text, we need to ensure that 'Beaker' appears as a whole word,
+            not as part of another word. The word boundary token \b ensures 'Beaker'
+            is matched as a standalone word. Using a lookahead `(?=.*\bBeaker\b)`
+            ensures the line contains the word 'Beaker'. We then match the entire
+            line with `.*` anchored by ^ and $ to match the full line. This approach
+            matches any line that contains the exact word 'Beaker' anywhere in it.
+          regex: ^(?=.*\bBeaker\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The requirement is to match lines that contain the exact
+            word ''Beaker''.
+
+            Step 2: Exact word means word boundaries must be taken into account to
+            avoid matching substrings like ''Beakers'', ''Beakery''.
+
+            Step 3: Use \b to mark word boundaries around ''Beaker''.
+
+            Step 4: ''.*'' before and after allows for any characters on the line.
+
+            Step 5: ''^'' and ''$'' anchors ensure the regex matches the full line
+            containing the word.
+
+            Final regex: ''^.*\bBeaker\b.*$'' ensures any line that contains the word
+            ''Beaker'' anywhere is matched.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The goal is to match any line that contains the exact
+            word ''Beaker''.
+
+            Step 2: Using word boundaries \b around ''Beaker'' ensures that it matches
+            the whole word exactly, not as part of another word (e.g., it won''t match
+            ''Beakers'' or ''NotBeaker'').
+
+            Step 3: The ^ and $ anchors ensure that the entire line is matched. Since
+            the word can be anywhere on the line, we use .* before and after ''\bBeaker\b''
+            to match any characters.
+
+            Step 4: Combining all, ''^.*\bBeaker\b.*$'' matches lines containing the
+            exact word ''Beaker'' anywhere.'
+          regex: ^.*\bBeaker\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 672
+        output_tokens: 803
+    lines that contain words ending with 'la'.:
+      avg_score: 0.4
+      results:
+      - output:
+          reasoning: "Step 1: The goal is to match any line containing at least one\
+            \ word ending with 'la'.\n\nStep 2: Instead of \\w, which matches only\
+            \ ASCII letters, digits, and underscore, we use \\p{L} to include all\
+            \ Unicode letters. This helps match accented and non-ASCII characters\
+            \ correctly.\n\nStep 3: Words might contain apostrophes (\u2019 or '),\
+            \ or hyphens (-), so we include these in the character class: [\\p{L}\u2019\
+            '-]\n\nStep 4: The pattern [\\p{L}\u2019'-]*la matches zero or more of\
+            \ these characters followed by 'la'.\n\nStep 5: Use word boundaries (\\\
+            b) to ensure matching whole words ending with 'la'.\n\nStep 6: We remove\
+            \ unnecessary anchors (^, $) and leading/trailing '.*' to keep the regex\
+            \ concise and efficient. The regex engine will find matches anywhere in\
+            \ a line by default.\n\nStep 7: Users should enable the Unicode flag (often\
+            \ \"u\" flag in many languages) to support \\p{{L}} correctly.\n\nExamples:\n\
+            - Matches: \"cola\", \"la\", \"d\u2019la\", \"armad\u2019la\", \"co-la\"\
+            \n- Lines like \"He said la.\" or \"The word arma-d\u2019la is unusual.\"\
+            \ will be matched.\n\nBy focusing on Unicode letters and common word-internal\
+            \ special characters, this regex robustly matches words ending with 'la'\
+            \ in diverse inputs without extraneous anchors."
+          regex: "\\b[\\p{L}\u2019'-]*la\\b"
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Understand the requirement more precisely. We want lines
+            containing words that end with ''la'', where a ''word'' has at least one
+            character before ''la'' (to exclude the standalone word ''la'' if not
+            desired). Step 2: The pattern \b\w+la\b matches words ending with ''la''
+            where \w+ ensures at least one preceding word character, and \b enforces
+            word boundaries so that punctuation adjacent to words won''t adversely
+            affect matching. Step 3: To match lines that contain such words anywhere,
+            we don''t need a positive lookahead; we can simply use a pattern that
+            matches any line containing the pattern: ^.*\b\w+la\b.*$ Step 4: Considering
+            case insensitivity (words like ''La'', ''La'') are likely valid, the regex
+            is prefixed with the case-insensitive modifier (?i). Step 5: This approach
+            is simpler and more efficient than using lookaheads, and clearly matches
+            full lines containing at least one qualifying word. It correctly handles
+            words adjacent to punctuation via word boundaries and excludes isolated
+            ''la'' if that''s the intent.'
+          regex: (?i)^.*\b\w+la\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The goal is to match lines containing words ending with
+            ''la'', including variations such as uppercase/lowercase letters (e.g.,
+            ''La'', ''LA''), and words containing apostrophes or hyphens (e.g., "o''la",
+            "co-la").
+
+
+            Step 2: To handle case-insensitivity, the inline modifier `(?i)` is added
+            at the start, making the match case-insensitive, so ''la'', ''La'', ''LA'',
+            etc., are all matched.
+
+
+            Step 3: The word boundary `\b` is used to identify the start and end of
+            words.
+
+
+            Step 4: Within the word characters, we expand the character set from just
+            `\w` (letters, digits, underscore) to also include apostrophes (`''`)
+            and hyphens (`-`). So, the character class `[\w''-]` is used to match
+            word characters plus apostrophes and hyphens.
+
+
+            Step 5: The pattern `[\w''-]*la` matches zero or more allowed characters
+            followed by ''la''. This allows words like ''la'' (no leading characters),
+            ''o''la'', or ''co-la''.
+
+
+            Step 6: The trailing `\b` ensures the word ends after ''la''.
+
+
+            Step 7: The pattern does not use `^.*` and `.*$` because we want to find
+            lines containing at least one such word, so partial matches within lines
+            are sufficient.
+
+
+            Examples:
+
+            - Matches: "La", "vila", "o''la", "co-la", "alpha-la", "LA"
+
+            - Does not match: "labrador", "label", "calamity" (words that don''t end
+            with ''la'')
+
+
+            This regex is suitable for finding any words ending with ''la'' in a line,
+            respecting case insensitivity and including apostrophes and hyphens within
+            words.'
+          regex: (?i)\b[\w'-]*la\b
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The requirement is to match words ending with ''la'',
+            considering only alphabetic characters for the word and allowing case-insensitivity
+            (so ''La'', ''LA'', etc. are also matched). Step 2: To restrict the word
+            to alphabet characters only, replace `\w*` with `[a-z]*`. This excludes
+            digits and underscores. Step 3: Add the word boundary `\b` on both sides
+            to ensure we match whole words ending with ''la''. Step 4: To handle case-insensitivity,
+            apply the inline modifier `(?i)` at the start of the regex, so letters
+            like ''LA'', ''La'', or ''la'' all match. Step 5: Remove the leading `^`
+            and trailing `$` anchors and the greedy `.*` because to check if a line
+            contains such a word, it''s more efficient to search for the pattern anywhere
+            in the line rather than matching the entire line. Step 6: The final regex
+            `(?i)\b[a-z]*la\b` matches any word consisting of alphabetic characters
+            ending with ''la'' in a case-insensitive way. Examples: - Matches: ''koala'',
+            ''GaLa'', ''penLa'' - Does not match: ''co_lla'', ''pa5la'', ''bLa123''
+            because of digits or underscores.'
+          regex: (?i)\b[a-z]*la\b
+        score: 0.0
+      - output:
+          reasoning: To match lines containing words that end with 'la', we need to
+            identify a full word boundary followed by any number of word characters
+            ending with 'la', and then another word boundary. The pattern \b\w*la\b
+            matches such words. Wrapping this with .* at the start and end ensures
+            the entire line is matched if such a word occurs anywhere in the line.
+            Anchors ^ and $ ensure the regex matches the entire line.
+          regex: ^.*\b\w*la\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 4260
+        output_tokens: 2277
+    lines using 'min' before 'imal':
+      avg_score: 0.2
+      results:
+      - output:
+          reasoning: The goal is to find lines where the substring 'min' occurs before
+            the substring 'imal' anywhere within the line. Since 'imal' can directly
+            follow 'min' (as in the word 'minimal'), adjacency is allowed. Therefore,
+            the regex 'min.*imal' searches for 'min' followed by any number (including
+            zero) of any characters, then 'imal'. This pattern does not enforce line
+            start or end anchors, allowing matching anywhere within the line, and
+            correctly matches cases like 'minimal', 'dummyminimal', and also multiple
+            occurrences such as in 'minimalimal'. It will not match lines where 'min'
+            occurs after 'imal', or where only one of the substrings exists. Examples
+            of matching lines include 'minimal', 'environmental minimal', and 'dummy
+            minimal animal', but not 'animalmin' or 'terminal'.
+          regex: min.*imal
+        score: 0.0
+      - output:
+          reasoning: 'Given the user''s feedback, let''s carefully interpret and refine
+            the regex:
+
+
+            1. The original regex ''^.*min.*imal.*$'' matches lines where ''min''
+            appears before ''imal'', including substrings like ''minimal'' where ''min''
+            and ''imal'' overlap.
+
+
+            2. The user is concerned about overlapping substrings (e.g., ''minimal''
+            where ''min'' and ''imal'' overlap) and wants to clarify whether this
+            should be allowed. Since the user''s statement is ambiguous but they want
+            distinct ''min'' before ''imal'', we will ensure ''min'' occurs before
+            ''imal'' in the line in a non-overlapping way.
+
+
+            3. To do this, we can use a positive lookahead pattern to enforce order
+            strictly.
+
+
+            4. Using a lookahead like ''^(?=.*min)(?=.*imal)'' only guarantees both
+            substrings exist anywhere but not order. Therefore, we must ensure ''min''
+            is before ''imal''.
+
+
+            5. One approach is to use: ''^.*min.*imal.*$'' with a non-greedy match
+            to prevent matching the last ''imal'' too far in the line. However, this
+            still allows overlapping matches.
+
+
+            6. To avoid overlaps, consider the use of lookahead: ''^(?=.*min)(?=.*imal)(?=.*min.*imal)''
+            ensures ''min'' and ''imal'' both appear and ''min'' precedes ''imal''.
+
+
+            7. Since the user also noted that anchoring with ''^'' and ''$'' may be
+            unnecessarily restrictive, but here it still makes sense to match the
+            entire line.
+
+
+            8. To avoid matching ''minimal'' where ''min'' and ''imal'' overlap (which
+            is effectively the same word), the regex alone cannot fully enforce this
+            without complex lookaround or word boundary logic. The user did not clarify
+            if ''min'' and ''imal'' must be whole words or unit substrings.
+
+
+            9. Assuming substrings are okay but should not overlap, our regex ensures
+            order by ''(?=.*min.*imal)''.
+
+
+            10. Therefore, the provided regex ensures both substrings exist and that
+            ''min'' occurs before ''imal'' without simplistically matching overlap.
+
+
+            If further restrictions are needed such as separate words or word boundaries,
+            the regex can be adjusted with ''\b'' boundaries, but this was not explicitly
+            requested.'
+          regex: ^(?=.*min)(?=.*imal.*min)(?=.*min.*imal).*$
+        score: 0.0
+      - output:
+          reasoning: "Step 1: Clarify the requirement regarding substrings:\n- We\
+            \ want to match lines where the substring 'min' appears before the substring\
+            \ 'imal'.\n- To avoid matching the overlapping substrings as in the word\
+            \ 'minimal' (where 'min' and 'imal' overlap), we treat 'min' and 'imal'\
+            \ as separate words or substrings bounded by word boundaries (\\b). This\
+            \ means 'min' and 'imal' should be separate entities, not overlapping\
+            \ parts of a longer word.\n\nStep 2: Case sensitivity:\n- The problem\
+            \ statement did not specify case sensitivity, so this regex assumes case-sensitive\
+            \ matching. For case-insensitive matching, an inline modifier or regex\
+            \ flag would be needed, e.g., (?i).\n\nStep 3: Use of anchors:\n- The\
+            \ anchors ^ and $ specify that the regex applies to the entire line, matching\
+            \ full lines only.\n\nStep 4: Regex construction details:\n- (?=.*\\bmin\\\
+            b) ensures the line contains the word 'min'.\n- (?=.*\\bimal\\b) ensures\
+            \ the line contains the word 'imal'.\n- (?=.*\\bmin\\b.*\\bimal\\b) ensures\
+            \ 'min' appears before 'imal' in the line.\n- The final .* allows the\
+            \ entire line to match once these conditions are met.\n\nStep 5: Examples:\n\
+            - Matches:\n  - \"The min value is less than the imal value\"\n  - \"\
+            Here min comes first and then imal\"\n- Does not match:\n  - \"minimal\
+            \ conditions\" (because 'min' and 'imal' overlap within one word)\n  -\
+            \ \"The imal comes before min\"\n\nThis approach ensures that 'min' and\
+            \ 'imal' are distinct substrings occurring in order, not overlapping parts\
+            \ of the same word.\n\nIf case-insensitive matching is desired, add the\
+            \ inline modifier at the start: (?i)^...$"
+          regex: ^(?=.*\bmin\b)(?=.*\bimal\b)(?=.*\bmin\b.*\bimal\b).*$
+        score: 0.0
+      - output:
+          reasoning: "The original problem asks to match lines where the substring\
+            \ 'min' appears before 'imal'. However, the problem statement does not\
+            \ clarify whether these should be whole words, or if overlapping occurrences\
+            \ count.\n\nAssuming that matching substrings anywhere in the line suffices\
+            \ (not necessarily whole words), and that we don\u2019t want to match\
+            \ overlapping occurrences where 'min' is part of 'minimal' (which contains\
+            \ both), then removing line anchors '^' and '$' simplifies the regex while\
+            \ still verifying order.\n\nThe updated regex 'min.*imal' matches any\
+            \ line containing 'min' followed at some point later by 'imal'. \n\nIf\
+            \ whole word matching or excluding overlaps is needed, using word boundaries\
+            \ (\\bmin\\b.*\\bimal\\b) or more complex regex would be necessary, but\
+            \ this is not specified here.\n\nExamples:\n- Matches: 'minimal', 'admin\
+            \ is similar', 'minimum for the animal'\n- Does not match: 'imal is before\
+            \ min', 'main'\n\nThus, 'min.*imal' is a concise and efficient way to\
+            \ match lines with 'min' before 'imal' in a substring context."
+          regex: min.*imal
+        score: 0.0
+      - output:
+          reasoning: 'The goal is to match entire lines where the substring ''min''
+            appears before the substring ''imal''. It''s important to clarify that
+            ''min'' and ''imal'' may overlap within a word such as ''minimal''. This
+            regex matches such cases because it searches for ''min'' followed at some
+            later position by ''imal'', regardless of overlap or separation.
+
+
+            Step-by-step reasoning:
+
+            1. ''^'' anchors the match to the start of the line.
+
+            2. ''.*'' allows any characters before the first substring.
+
+            3. ''min'' matches the literal substring ''min''.
+
+            4. ''.*'' allows any characters (including zero) between ''min'' and ''imal''.
+
+            5. ''imal'' matches the literal substring ''imal''.
+
+            6. ''.*'' allows any characters after ''imal'' to the end of the line.
+
+            7. ''$'' anchors the match to the end of the line.
+
+
+            Because ''min'' and ''imal'' can overlap (as in ''minimal''), this regex
+            is suitable when overlapping substrings are acceptable. If you require
+            ''min'' and ''imal'' to be distinct or bounded by word boundaries, the
+            regex would need to be adjusted accordingly.
+
+
+            Thus, this regex matches entire lines containing ''min'' appearing before
+            ''imal'', including in overlapping scenarios like ''minimal''. The anchors
+            ^ and $ ensure a full-line match as requested.'
+          regex: ^.*min.*imal.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 4026
+        output_tokens: 2573
+summary:
+  avg_score: 0.7111111111111111
+  avg_score_per_model:
+    ChainOfThoughtSolver: 1.0
+    DynamicFewShotSolver: 0.6
+    SelfRefineSolver: 0.5333333333333333
+  llms:
+    <nlp_project.solvers.chain_of_thought.ChainOfThoughtSolver object at 0x111256310>: gpt-4.1-mini
+    <nlp_project.solvers.dyfs.DynamicFewShotSolver object at 0x111b6e310>: gpt-4.1-mini
+    <nlp_project.solvers.self_refine.SelfRefineSolver object at 0x11108d190>: gpt-4.1-mini
+  num_iterations: 5
+  total_problems: 3
+  total_solvers: 3
+  total_tokens_per_model:
+    ChainOfThoughtSolver:
+      input_tokens: 2010
+      output_tokens: 2560
+    DynamicFewShotSolver:
+      input_tokens: 8106
+      output_tokens: 5279
+    SelfRefineSolver:
+      input_tokens: 8958
+      output_tokens: 5653

@@ -1,0 +1,1031 @@
+details:
+  ChainOfThoughtSolver:
+    lines containing either the standalone word 'run' or 'hat' (not as part of other words):
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: "Step 1: We need to match lines containing either the standalone\
+            \ word 'run' or 'hat'. \nStep 2: Using word boundaries \\b around the\
+            \ words ensures they are matched as whole words only, not as part of other\
+            \ words.\nStep 3: The pattern \\b(run|hat)\\b matches either 'run' or\
+            \ 'hat' as a standalone word.\nStep 4: To match the entire line containing\
+            \ this word, we use a lookahead (?=.*\\b(run|hat)\\b) to assert the word\
+            \ presence somewhere in the line.\nStep 5: We use ^ and $ anchors to match\
+            \ the full line.\nStep 6: The final regex is ^(?=.*\\b(run|hat)\\b).*$\
+            \ which matches any line containing 'run' or 'hat' as standalone words."
+          regex: ^(?=.*\b(?:run|hat)\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We need to match lines containing either the word ''run''
+            or ''hat'' as standalone words.
+
+            Step 2: To ensure ''run'' or ''hat'' are standalone words, use word boundaries
+            \b around them.
+
+            Step 3: We want to match lines that contain either word anywhere, so use
+            ''.*'' before and after the word boundary group.
+
+            Step 4: The expression \b(?:run|hat)\b matches either ''run'' or ''hat''
+            as whole words.
+
+            Step 5: Enclose the entire pattern with ^ and $ to match the full line.
+
+
+            Final regex: ^(?:.*\b(?:run|hat)\b.*)$'
+          regex: ^(?:.*\b(?:run|hat)\b.*)$
+        score: 1.0
+      - output:
+          reasoning: 'First, we need to match lines that contain either the word ''run''
+            or the word ''hat'' as standalone words, not as parts of other words.
+            Using word boundaries ''\b'' ensures that ''run'' and ''hat'' are matched
+            only as whole words. The pattern ''\brun\b'' matches the standalone word
+            ''run'', and ''\bhat\b'' matches ''hat''. For the entire line match, we
+            surround the expression with ''^'' and ''$''. The non-capturing group
+            ''(?: ... )'' includes the two alternatives separated by ''|'', so the
+            expression matches lines containing either ''run'' or ''hat'' as whole
+            words.'
+          regex: ^(?:.*\brun\b.*|.*\bhat\b.*)$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The requirement is to find lines containing the standalone
+            word ''run'' or ''hat'', not as part of other words.
+
+            Step 2: Use word boundaries ''\b'' to ensure ''run'' or ''hat'' are matched
+            as whole words.
+
+            Step 3: Use the alternation operator ''|'' to match either ''run'' or
+            ''hat''.
+
+            Step 4: The pattern is: ''\b(run|hat)\b''.
+
+            Step 5: To match an entire line that contains these words, we add ''.*''
+            before and after the word pattern to allow other characters.
+
+            Step 6: Use ''^'' and ''$'' anchors to match the full line.
+
+            Final regex: ''^.*\b(run|hat)\b.*$'''
+          regex: ^.*\b(run|hat)\b.*$
+        score: 1.0
+      - output:
+          reasoning: '1. The user wants lines that contain the standalone word ''run''
+            or ''hat''.
+
+            2. \b is a word boundary anchor in regex, which ensures the word is standalone
+            and not part of another word.
+
+            3. (run|hat) matches either ''run'' or ''hat''.
+
+            4. .* before and after allows any characters before or after the word
+            on the line.
+
+            5. ^ and $ anchors ensure matching the entire line, as requested.
+
+
+            Hence the regex ^(?:.*\b(run|hat)\b.*)$ matches lines containing either
+            ''run'' or ''hat'' as standalone words.'
+          regex: ^(?:.*\b(run|hat)\b.*)$
+        score: 1.0
+      token_usage:
+        input_tokens: 645
+        output_tokens: 864
+    lines using the word 'hero'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: We want to match lines that contain the word ''hero''
+            as a whole word.
+
+            Step 2: To ensure ''hero'' is matched as a separate word, we use word
+            boundaries ''\b'' around ''hero''.
+
+            Step 3: The pattern ''.*'' before and after ''hero'' allows for any characters
+            before and after the word within the same line.
+
+            Step 4: Anchoring with ''^'' and ''$'' ensures the regex matches the entire
+            line.
+
+            Therefore, the regex ''^.*\bhero\b.*$'' matches any full line containing
+            the word ''hero''.'
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The goal is to match entire lines that contain the word
+            ''hero'' as a whole word.
+
+            Step 2: Use ''^'' to indicate the start of the line and ''$'' for the
+            end, to match the full line.
+
+            Step 3: Use ''.*'' before and after to allow any characters before and
+            after the word.
+
+            Step 4: Use word boundary ''\b'' around ''hero'' to ensure it matches
+            the word ''hero'' exactly, not as part of another word (e.g., ''heroic''
+            should not match).
+
+            Step 5: Combine all parts to get ''^.*\bhero\b.*$'' which matches any
+            line that contains the word ''hero''.'
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Understand the requirement - The regex should match
+            full lines containing the word ''hero''.
+
+            Step 2: Use word boundaries ''\b'' around ''hero'' to ensure it matches
+            the word ''hero'' exactly, not part of another word.
+
+            Step 3: ''^'' and ''$'' anchor the regex to match the entire line.
+
+            Step 4: ''.*'' before and after allows any characters before or after
+            the word ''hero'' in the line.
+
+            Thus, ''^.*\bhero\b.*$'' matches any line that contains the word ''hero''
+            as a standalone word.'
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The goal is to match lines that contain the word ''hero''.
+
+            Step 2: To ensure we''re matching ''hero'' as a whole word, we use the
+            word boundaries \b around ''hero''. This prevents partial matches inside
+            words like ''heron'' or ''heroes''.
+
+            Step 3: Since the entire line should be matched, we anchor the regex with
+            ^ at the start and $ at the end.
+
+            Step 4: Between these anchors, we allow any characters before and after
+            ''hero'' by using .* which matches any character (except newline) zero
+            or more times.
+
+            Combining all these gives the pattern ^.*\bhero\b.*$ which matches any
+            line containing the word ''hero'' as a distinct word.'
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: The user wants to match lines that contain the word 'hero'. To
+            ensure 'hero' is matched as a whole word and not part of another word
+            (like 'heron' or 'heroes'), I used the word boundary '\b' before and after
+            'hero'. The pattern '^.*' at the start and '.*$' at the end ensure the
+            entire line is matched, with any characters before or after 'hero'. Thus,
+            the regex '^.*\bhero\b.*$' matches any full line that contains the word
+            'hero' anywhere in it.
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 575
+        output_tokens: 764
+    lines using words that end in 'y' or 'i'.:
+      avg_score: 0.8
+      results:
+      - output:
+          reasoning: 'Step 1: Understanding the requirement: We need to match full
+            lines that contain words ending with either ''y'' or ''i''.
+
+
+            Step 2: Identifying word boundaries: To ensure we are matching entire
+            words, we look for word boundaries (\b).
+
+
+            Step 3: Constructing the pattern for words ending with ''y'' or ''i'':
+            We use \w* to match zero or more word characters followed by [yi], ensuring
+            the word ends with either ''y'' or ''i''.
+
+
+            Step 4: Incorporate this into a full line match: We allow any characters
+            before and after such a word, so the line contains at least one word ending
+            with ''y'' or ''i''.
+
+
+            Step 5: Combine and anchor the regex: Using ^ and $ to match the full
+            line, and using .* to allow any characters around the word.
+
+
+            Resulting regex: ^(.*\b\w*[yi]\b.*)+$ matches any line that contains at
+            least one word ending with ''y'' or ''i''.'
+          regex: ^(.*\b\w*[yi]\b.*)+$
+        score: 1.0
+      - output:
+          reasoning: 'The requirement is to match full lines that contain words ending
+            with either ''y'' or ''i''. Here''s the step-by-step reasoning:
+
+
+            1. We need to find words that end with ''y'' or ''i''. A word can be represented
+            by word characters \w+. Words ending with ''y'' or ''i'' can be matched
+            by \w*[yi]. This ensures any number of word characters, followed by either
+            ''y'' or ''i'' at the end.
+
+
+            2. To ensure matching these words as full words, we use word boundaries
+            \b around the word pattern: \b\w*[yi]\b.
+
+
+            3. Since we want lines that use such words anywhere in the line, we use
+            a positive lookahead to assert that the line contains at least one such
+            word: (?=.*\b\w*[yi]\b).
+
+
+            4. Finally, we match the whole line: ^.*$.
+
+
+            Combining these gives us ^(?=.*\b\w*[yi]\b).*$ which matches any line
+            that contains at least one word ending with ''y'' or ''i''.'
+          regex: ^(?=.*\b\w*[yi]\b).*$
+        score: 1.0
+      - output:
+          reasoning: "Step 1: Understand the requirement. We need to match full lines\
+            \ where every word ends with either 'y' or 'i'.\n\nStep 2: Break down\
+            \ the requirement.\n- Each line contains one or more words.\n- Each word\
+            \ consists of word characters (\\w). \n- Each word must end with either\
+            \ 'y' or 'i'.\n- The words are separated by spaces.\n\nStep 3: Construct\
+            \ the regex for one word ending with 'y' or 'i'.\n- \\w* matches zero\
+            \ or more word characters.\n- [yi] matches either 'y' or 'i' at the end\
+            \ of the word.\n- \\b asserts a word boundary.\nTherefore, a word ending\
+            \ with 'y' or 'i' is \\b\\w*[yi]\\b.\n\nStep 4: Match one or more occurrences\
+            \ of such words separated by spaces.\n- (?:\\b\\w*[yi]\\b\\s*)+ matches\
+            \ one or more words ending with 'y' or 'i' with optional spaces following\
+            \ each word.\n\nStep 5: Use ^ and $ to match the full line from start\
+            \ to end.\n\nFinal regex: ^(?:\\b\\w*[yi]\\b\\s*)+$"
+          regex: ^(?:\b\w*[yi]\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: "The user wants to match full lines that contain words ending\
+            \ with 'y' or 'i'. To solve this, we need a regex that matches an entire\
+            \ line only if it contains any word that ends with 'y' or 'i'. \n\nStep\
+            \ 1: Identify words ending with 'y' or 'i'. A word is typically defined\
+            \ by word boundaries \\b, so to find words ending with 'y' or 'i', we\
+            \ use \\b\\w*[yi]\\b.\n- \\b word boundary ensures isolated words.\n-\
+            \ \\w* matches zero or more word characters before the letter.\n- [yi]\
+            \ matches either 'y' or 'i'.\n\nStep 2: The regex must match full lines\
+            \ that contain at least one such word. We use a positive lookahead (?=.*\\\
+            b\\w*[yi]\\b) to assert that the line contains such a word.\n\nStep 3:\
+            \ ^ and $ are used to match the full line. The pattern becomes ^(?=.*\\\
+            b\\w*[yi]\\b).*$\n\nThis regex matches any line that contains at least\
+            \ one word ending with 'y' or 'i' while matching the entire line."
+          regex: ^(?=.*\b\w*[yi]\b).*$
+        score: 1.0
+      - output:
+          reasoning: '1. The goal is to match entire lines that contain at least one
+            word ending with ''y'' or ''i''.
+
+            2. We consider words as sequences of word characters (typically letters,
+            digits, and underscores).
+
+            3. The word boundary \b is used to ensure we match whole words.
+
+            4. The pattern \w*[yi] matches words that end with either ''y'' or ''i''.
+            Here, \w* matches zero or more word characters preceding the final ''y''
+            or ''i''.
+
+            5. Wrapping with \b ensures the character before ''y'' or ''i'' is the
+            end of the word.
+
+            6. The pattern is embedded in a line-match: ^.*\b\w*[yi]\b.*$, which matches
+            any line containing such a word.
+
+            7. This fully matches lines containing words that end with ''y'' or ''i''.'
+          regex: ^.*\b\w*[yi]\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 605
+        output_tokens: 1272
+  DynamicFewShotSolver:
+    lines containing either the standalone word 'run' or 'hat' (not as part of other words):
+      avg_score: 0.8
+      results:
+      - output:
+          reasoning: The original pattern matched standalone 'run' or 'hat' using
+            word boundaries, but it was case sensitive and might not handle punctuation
+            following the word correctly. To handle this, I added the case insensitive
+            flag (?i) so 'Run' or 'RUN' also match. Word boundaries \b work well with
+            punctuation because they match transitions between word characters (letters,
+            digits, underscore) and non-word characters (such as punctuation, spaces).
+            Therefore, \b(run|hat)\b will match 'Run!' correctly as the word 'Run'
+            is followed by a non-word character '!'. The anchors ^ and $ ensure the
+            whole line is matched, and .* allows any characters before or after the
+            matched word. This regex now matches lines containing standalone 'run'
+            or 'hat', regardless of case and with punctuation nearby.
+          regex: ^(?i).*\b(run|hat)\b.*$
+        score: 0.0
+      - output:
+          reasoning: 'The requirement is to match lines containing either the standalone
+            word ''run'' or ''hat''. This means the words must not be part of other
+            words (like ''running'' or ''that'').
+
+
+            Step 1: Use word boundaries \b around the words ''run'' and ''hat'' to
+            ensure they are standalone words.
+
+
+            Step 2: The line can contain any characters before or after those words,
+            so we use .* before and after the word boundaries.
+
+
+            Step 3: Use alternation | to match lines containing either ''run'' or
+            ''hat''.
+
+
+            Step 4: Anchor the regex to the start ^ and end $ of the line to match
+            the whole line.
+
+
+            Thus, the regex is ^(.*\brun\b.*|.*\bhat\b.*)$ which matches lines containing
+            either standalone ''run'' or ''hat''.'
+          regex: ^(.*\brun\b.*|.*\bhat\b.*)$
+        score: 1.0
+      - output:
+          reasoning: 'The original regex used \b word boundaries, which match positions
+            between word characters and non-word characters. However, hyphen (-) is
+            considered a non-word character, so ''big-hat'' matched \bhat\b incorrectly
+            because \b treats ''-'' as a boundary, but in this context, ''hat'' is
+            part of a hyphenated word and should not match.
+
+
+            To prevent matching ''hat'' when it occurs as part of hyphenated words,
+            we need to ensure that the characters before and after ''run'' or ''hat''
+            are not word characters (letters, digits, underscore). That means the
+            character before (if any) is either start-of-line (^) or a non-word character
+            ([^\w]), and the character after (if any) is either end-of-line ($) or
+            a non-word character ([^\w]). This approach treats hyphens as part of
+            a word, disallowing ''hat'' to match when preceded or followed by a hyphen.
+
+
+            Therefore, the pattern is:
+
+            - ^(.*   # start of line and match any characters
+
+            - (?:^|[^\w])    # non-word character or start of line before the word
+
+            - (run|hat)       # the standalone word
+
+            - (?:[^\w]|$)    # non-word character or end of line after the word
+
+            - .*)$            # any characters until end of line
+
+
+            Using this pattern ensures that ''run'' or ''hat'' are matched only when
+            they are truly standalone, not part of hyphenated or concatenated words.'
+          regex: ^(.*(?:^|[^\w])(run|hat)(?:[^\w]|$).*)$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We want to match lines containing the standalone word
+            ''run'' or ''hat''. The key is to match ''run'' or ''hat'' when they are
+            standalone, i.e., not part of other words.
+
+
+            Step 2: Previously, we used \b word boundaries, but the issue arises due
+            to the treatment of hyphens. In many regex engines, word boundaries consider
+            hyphens as boundaries, meaning ''run-hat'' would incorrectly match both
+            ''run'' and ''hat'' as standalone words.
+
+
+            Step 3: The user points out ''run-hat race'' should NOT match since ''run''
+            and ''hat'' are connected by a hyphen and are not truly standalone.
+
+
+            Step 4: Therefore, we need more precise boundaries than \b. We want to
+            ensure that the character before ''run'' or ''hat'' is either the start
+            of line or a non-alphanumeric character (excluding underscore), and the
+            character after is the end of line or a non-alphanumeric character (excluding
+            underscore). But to exclude hyphen as a delimiter (i.e., hyphen connects
+            the words, not a separator), we''ll exclude hyphen from valid boundary
+            characters.
+
+
+            Step 5: Use negative lookbehind and lookahead to check that the character
+            before is not an alphanumeric character (A-Za-z0-9), and the character
+            after is not alphanumeric. This excludes underscores and hyphens.
+
+
+            Step 6: This pattern: (?<![A-Za-z0-9])(?:run|hat)(?![A-Za-z0-9]) matches
+            ''run'' or ''hat'' when not preceded or followed by alphanumeric characters.
+
+
+            Step 7: Wrapping in a lookahead and full line anchors: ^(?=.*(?<![A-Za-z0-9])(?:run|hat)(?![A-Za-z0-9])).*$
+
+
+            This way, ''run-hat race'' does not match since the ''run'' is followed
+            immediately by hyphen (which is not alphanumeric, so might still pass),
+            but since hyphen is not alphanumeric, it might still match. However, the
+            user wants ''run-hat'' not to count as standalone words.
+
+
+            Step 8: To solve this, we should exclude hyphen explicitly. So treat hyphen
+            as part of word characters. So we adjust the negative lookbehind/lookahead
+            to also exclude hyphen, i.e., [A-Za-z0-9-].
+
+
+            Final adjusted regex:
+
+            ^(?=.*(?<![A-Za-z0-9-])(?:run|hat)(?![A-Za-z0-9-])).*$
+
+
+            This ensures that ''run'' or ''hat'' are not adjacent to alphanumeric
+            characters or hyphens, so ''run-hat'' won''t match.'
+          regex: ^(?=.*(?<![A-Za-z0-9])(?:run|hat)(?![A-Za-z0-9])).*$
+        score: 1.0
+      - output:
+          reasoning: To match lines containing the standalone word 'run' or 'hat',
+            we need to ensure these words are not part of other words. Using the word
+            boundary token '\b' before and after 'run' and 'hat' ensures that these
+            are whole words. The regex '\b(run|hat)\b' matches either 'run' or 'hat'
+            as standalone words. Wrapping this in '.*' on both sides allows matching
+            these words anywhere in the line. Finally, the '^' and '$' anchors match
+            the entire line containing this pattern. Thus, the full regex is '^(.*\b(run|hat)\b.*)$'
+            which matches lines containing the standalone word 'run' or 'hat'.
+          regex: ^(.*\b(run|hat)\b.*)$
+        score: 1.0
+      token_usage:
+        input_tokens: 3356
+        output_tokens: 2836
+    lines using the word 'hero'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: 'Step 1: Previous regex matches the word ''hero'' in any line
+            using word boundaries for whole word matching.
+
+            Step 2: To handle case insensitivity (e.g., matching ''Hero'', ''HERO'',
+            etc.), add the inline case-insensitive flag (?i).
+
+            Step 3: The regex ^(?i).*\bhero\b.*$ now matches any line containing the
+            word ''hero'' regardless of case, respecting whole word boundaries.
+
+            This addresses the edge case where ''Hero'' (capitalized) should also
+            match.'
+          regex: ^(?i).*\bhero\b.*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The initial regex ^.*\bhero\b.*$ correctly matches lines
+            containing the whole word ''hero''.
+
+            Step 2: However, it fails for case variants like ''HERO'', ''Hero'', etc.
+
+            Step 3: To handle this, we add the case-insensitive flag (?i) at the start
+            of the regex.
+
+            Step 4: Thus, the updated regex ^(?i).*\bhero\b.*$ matches the whole line
+            if it contains ''hero'' in any case variant.
+
+            This will match lines such as ''There was a HERO in the story.'' as well.'
+          regex: ^(?i).*\bhero\b.*$
+        score: 0.0
+      - output:
+          reasoning: 'The original regex matches lines containing the word ''hero''
+            as a whole word, but it is case-sensitive, so lines with ''HERO'' or ''Hero''
+            would not match.
+
+
+            To handle case insensitivity, we add the inline modifier ''(?i)'' at the
+            start. This makes the regex match ''hero'' regardless of case.
+
+
+            So, the updated regex is:
+
+            ^ - start of line
+
+            (?i) - case-insensitive modifier
+
+            .* - any characters
+
+            \bhero\b - whole word ''hero''
+
+            .* - any characters
+
+            $ - end of line
+
+
+            This satisfies the requirement to match lines containing the word ''hero''
+            with any capitalization.'
+          regex: ^(?i).*\bhero\b.*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The original regex ^.*\bhero\b.*$ matches lines containing
+            the word ''hero'' as a whole word.
+
+            Step 2: However, it is case-sensitive, so it doesn''t match ''Hero'' with
+            a capital H.
+
+            Step 3: To handle case-insensitivity, we add the inline case-insensitive
+            flag `(?i)` at the start of the regex.
+
+            Step 4: This allows matching ''hero'', ''Hero'', ''HERO'', etc., while
+            still matching the entire line that contains the word.
+
+
+            Final regex: ^(?i).*\bhero\b.*$'
+          regex: ^(?i).*\bhero\b.*$
+        score: 0.0
+      - output:
+          reasoning: The previous regex '\bhero\b' correctly matches the word 'hero'
+            as a standalone word, but it was case sensitive by default. To include
+            cases like 'HERO', 'Hero', or 'hero', we must make the regex case insensitive.
+            Using the inline flag '(?i)' at the start will make the entire pattern
+            case insensitive. Anchors '^' and '$' ensure the entire line is matched.
+            The '.*' before and after allow any characters before and after the word
+            'hero' on the line. Thus, '^(?i).*\bhero\b.*$' will match any line containing
+            the word 'hero' regardless of casing.
+          regex: ^(?i).*\bhero\b.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 3128
+        output_tokens: 2267
+    lines using words that end in 'y' or 'i'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'The initial regex matched lines where all words end with ''y''
+            or ''i'', but the user wants to match lines that contain at least one
+            word ending with ''y'' or ''i'', regardless of other words in the line.
+
+
+            Step 1: User clarifies that lines such as "stay in the city" or "sky and
+            hi" should match because they contain words ending with ''y'' or ''i''.
+
+
+            Step 2: Change the approach from matching lines where every word ends
+            with ''y'' or ''i'' to matching lines that contain at least one such word.
+
+
+            Step 3: Use a positive lookahead assertion to verify the presence of a
+            word ending with ''y'' or ''i'' anywhere in the line:
+
+            - `(?=.*\b\w+[yi]\b)`
+
+
+            This lookahead checks for the existence of a word boundary, followed by
+            one or more word characters, ending with ''y'' or ''i'', then another
+            word boundary.
+
+
+            Step 4: Following the lookahead, we match the entire line from start to
+            end with `.*`.
+
+
+            Step 5: Anchors `^` and `$` ensure that the match covers the entire line.
+
+
+            This regex satisfies the requirement to match full lines containing at
+            least one word ending with ''y'' or ''i'', while allowing any other words
+            to be present.'
+          regex: ^(?=.*\b\w+[yi]\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Analyze the requirement and edge cases again. The goal
+            is to match entire lines that contain at least one word ending in either
+            ''y'' or ''i''. Step 2: Review the edge cases: "I see a kiwi and a bonsai
+            tree" contains words "kiwi" and "bonsai" ending in ''i'', so the line
+            should match. "The sky is so blue today" contains "sky" ending in ''y'',
+            so it should match. "A shiny toy is on the table" has "shiny" and "toy"
+            ending in ''y'', so it should match. Step 3: Ensure the regex matches
+            lines that contain at least one word ending with ''y'' or ''i'', regardless
+            of other words. Step 4: Use word boundaries \b to detect word endings:
+            \b\w*[yi]\b matches a word ending with ''y'' or ''i''. Step 5: Use .*
+            before and after to allow any characters before and after such a word
+            on the same line. Step 6: Anchor the regex with ^ and $ to ensure it matches
+            the entire line. Step 7: Therefore, the regex ^.*\b\w*[yi]\b.*$ matches
+            any line containing at least one word ending with ''y'' or ''i''. This
+            covers the edge cases properly and meets the user requirements.'
+          regex: ^.*\b\w*[yi]\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'The task is to create a regex that matches entire lines which
+            contain words ending specifically with ''y'' or ''i''. A word here can
+            be defined as a sequence of word characters (letters, digits, or underscore)
+            that ends with either ''y'' or ''i''.\n\nStep 1: Define what a word ending
+            with ''y'' or ''i'' looks like. It''s a sequence of word characters (\w+)
+            followed by either ''y'' or ''i'' (written as [yi]) and then word boundary
+            (\b) to mark the end of the word. So, \b\w+[yi]\b matches such a word.\n\nStep
+            2: We want to find lines that use such words. This means the line contains
+            at least one such word. The easiest way is to match lines that contain
+            one or more occurrences of such words.\n\nStep 3: To match the entire
+            line, we use ^ and $ anchors. The pattern inside can be: any characters
+            (.*), then the word (\b\w+[yi]\b), then any characters (.*). However,
+            this allows only one word, but the user said ''lines using words that
+            end in y or i'' - so one or more such words is acceptable.\n\nStep 4:
+            To ensure at least one such word exists anywhere in the line, we can use:
+            ^(?:.*\b\w+[yi]\b.*)+$ . This ensures the entire line is matched, and
+            it contains at least one word ending with ''y'' or ''i''.\n\nTherefore,
+            the regex ^(?:.*\b\w+[yi]\b.*)+$ matches full lines that contain at least
+            one word ending in ''y'' or ''i''.'
+          regex: ^(?:.*\b\w+[yi]\b.*)+$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Understand the requirement - we need to match entire
+            lines that contain words ending with ''y'' or ''i''. Step 2: A word ending
+            with ''y'' or ''i'' can be matched with the regex pattern ''\b\w*[yi]\b''.
+            Here, \b ensures word boundary, \w* matches zero or more word characters
+            before the final ''y'' or ''i''. Step 3: To ensure the entire line contains
+            at least one such word, we use a positive lookahead ''(?=.*\b\w*[yi]\b)''.
+            This asserts that somewhere in the line, there is a word ending with ''y''
+            or ''i''. Step 4: The regex anchors ''^'' and ''$'' ensure matching the
+            whole line. Step 5: Final regex is ''^(?=.*\b\w*[yi]\b).*$'', matching
+            full lines with at least one word ending in ''y'' or ''i''.'
+          regex: ^(?=.*\b\w*[yi]\b).*$
+        score: 1.0
+      - output:
+          reasoning: "The requirement is to match full lines that contain at least\
+            \ one word that ends with 'y' or 'i'. \n\nStep 1: Identify a word ending\
+            \ with 'y' or 'i'. A word consists of word characters (\\w) and ends with\
+            \ either 'y' or 'i', so the pattern for such word is \\b\\w+[yi]\\b where\
+            \ \\b denotes word boundary.\n\nStep 2: The line can have any characters\
+            \ before or after such a word, so we use .* to match any characters.\n\
+            \nStep 3: We want to match the whole line, so we anchor start (^) and\
+            \ end ($), and ensure the pattern accounts for the entire line: ^(?:.*\\\
+            b\\w+[yi]\\b.*)$\n\nThis regex matches any line that contains at least\
+            \ one word ending with 'y' or 'i'."
+          regex: ^(?:.*\b\w+[yi]\b.*)$
+        score: 1.0
+      token_usage:
+        input_tokens: 2734
+        output_tokens: 2226
+  SelfRefineSolver:
+    lines containing either the standalone word 'run' or 'hat' (not as part of other words):
+      avg_score: 0.6
+      results:
+      - output:
+          reasoning: The user wants to match lines containing either the standalone
+            word 'run' or 'hat', not as part of other words. To ensure the words are
+            standalone, word boundaries (\b) are used around 'run' and 'hat'. The
+            pattern \b(?:run|hat)\b matches either 'run' or 'hat' as a whole word.
+            Enclosing it within .* on both sides allows for those words to appear
+            anywhere in the line. Anchoring the pattern with ^ and $ ensures it matches
+            the entire line. Therefore, the resulting regex is ^(?:.*\b(?:run|hat)\b.*)$
+            which matches any line containing either standalone 'run' or 'hat'.
+          regex: ^(?:.*\b(?:run|hat)\b.*)$
+        score: 1.0
+      - output:
+          reasoning: 'The goal is to match lines containing the standalone word ''run''
+            or ''hat''. To ensure these words are standalone and not part of other
+            words, we use word boundaries (\b) around ''run'' and ''hat''.
+
+
+            The pattern \brun\b matches ''run'' as a separate word.
+
+            The pattern \bhat\b matches ''hat'' as a separate word.
+
+
+            To match lines containing either, we use alternation with the | operator
+            inside a non-capturing group: (?: ... | ... ).
+
+
+            Because we want to match the entire line, we use ^ at the start and $
+            at the end.
+
+
+            Each alternative is wrapped with .* before and after to allow for any
+            text surrounding these words within the line.
+
+
+            Hence, the full regex is: ^(?:.*\brun\b.*|.*\bhat\b.*)$'
+          regex: ^(?:.*\brun\b.*|.*\bhat\b.*)$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We want to match lines containing either the standalone
+            word ''run'' or ''hat''.
+
+
+            Step 2: To ensure words are standalone and not part of other words, we
+            use word boundaries ''\b''. This prevents matches like ''running'' or
+            ''hatch''.
+
+
+            Step 3: The pattern ''\b(run|hat)\b'' matches either ''run'' or ''hat''
+            as whole words.
+
+
+            Step 4: Since the word can appear anywhere in the line, surround the word
+            pattern with ''.*'' to allow any characters before and after.
+
+
+            Step 5: Anchor the regex with ''^'' and ''$'' to match the full line.
+
+
+            Final regex: ''^(?:.*\b(?:run|hat)\b.*)$'''
+          regex: ^(?:.*\b(?:run|hat)\b.*)$
+        score: 1.0
+      - output:
+          reasoning: '1. Target words to match are ''run'' and ''hat'' as standalone
+            words, not as substrings of other words.
+
+            2. Using word boundaries ''\b'' ensures that ''run'' or ''hat'' is matched
+            only when it appears as a whole word. This correctly matches words adjacent
+            to punctuation (e.g., ''run,'' or ''hat.'') because ''\b'' matches transitions
+            between word characters and non-word characters.
+
+            3. The regex is simply ''\b(run|hat)\b'' without anchors (e.g., ''^''
+            or ''$'') since many line-by-line searching tools (like grep) don''t require
+            full-line anchors when matching lines containing a pattern.
+
+            4. There are no capturing groups needed; the parentheses are for grouping
+            alternation only.
+
+            5. Case sensitivity is often important; typically, matching should be
+            case-insensitive to capture variations like ''Run'' or ''HAT''. To do
+            this, use the appropriate case-insensitive flag depending on the tool
+            (e.g., ''i'' flag in many regex engines).
+
+            6. Escaping is provided as a standard literal regex pattern; in languages
+            requiring string escaping (like Python or JavaScript), backslash signs
+            will need double escaping (e.g., "\\b"), but here we provide the raw regex
+            pattern itself.
+
+
+            Example test cases:
+
+            - "I like to run every morning." -> matches ''run''
+
+            - "She wears a hat." -> matches ''hat''
+
+            - "Running is fun." -> no match (because ''run'' is part of ''Running'')
+
+            - "That hat is nice." -> matches ''hat'' (not ''that'')
+
+            - "Run, don''t walk." -> matches ''Run'' with case-insensitive flag
+
+
+            In summary, use the regex ''\b(run|hat)\b'' with case-insensitive matching
+            enabled in your regex engine.'
+          regex: \b(run|hat)\b
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The task is to match lines containing either the standalone
+            word ''run'' or ''hat'', with case insensitivity (so also matching ''Run'',
+            ''HAT'', etc.).
+
+
+            Step 2: To match standalone words only, use the word boundary token ''\b''
+            around the alternation: ''\b(run|hat)\b''. This ensures the matches are
+            not part of larger words like ''running'' or ''that''.
+
+
+            Step 3: Combine the words with the alternation operator ''|'' inside the
+            grouped pattern to prevent redundant scanning and simplify the regex.
+
+
+            Step 4: Instead of anchor and ''.*'', rely on the regex engine''s search
+            capability to find the pattern anywhere in the line, improving efficiency
+            and simplifying the regex.
+
+
+            Step 5: Add the case-insensitive flag ''(?i)'' as a prefix to the pattern,
+            ensuring ''Run'', ''rUn'', ''HAT'', etc., are matched.
+
+
+            Step 6: This regex efficiently matches any line containing either ''run''
+            or ''hat'' as standalone words, regardless of casing, without unnecessary
+            complexity or potential performance drawbacks.'
+          regex: (?i)\b(run|hat)\b
+        score: 0.0
+      token_usage:
+        input_tokens: 2999
+        output_tokens: 2002
+    lines using the word 'hero'.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: We need to match lines containing the word ''hero''.
+
+            Step 2: To match the whole line, we use ^ and $ anchors.
+
+            Step 3: To ensure ''hero'' is matched as a whole word (not part of another
+            word), we use word boundaries \b around ''hero''.
+
+            Step 4: To match any characters before and after ''hero'', we use .* before
+            and after.
+
+
+            Putting it all together: ''^.*\bhero\b.*$'' matches any line containing
+            the whole word ''hero'', including cases where ''hero'' appears anywhere
+            in the line.'
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: The requirement is to match lines that use the word 'hero'. To
+            ensure we match 'hero' as a whole word and not as part of another word
+            (e.g. 'heron'), we use word boundaries '\b' around 'hero'. The regex '^.*\bhero\b.*$'
+            matches an entire line that contains the standalone word 'hero' anywhere
+            within it. '^' and '$' ensure matching the full line, and '.*' allow for
+            any characters before and after the word.
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: The goal is to match any line that contains the whole word 'hero'.
+            To ensure 'hero' is matched as a complete word and not as part of another
+            word, word boundaries (\b) are used around 'hero'. The pattern '^.*\bhero\b.*$'
+            matches any line that has zero or more characters before and after the
+            word 'hero'. The '^' and '$' ensure the regex matches the entire line,
+            capturing lines that contain the word 'hero' anywhere in the text.
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: We want to match lines that use the word 'hero'. To ensure 'hero'
+            is matched as a whole word, we use word boundaries '\b' around 'hero'.
+            The '.*' before and after '\bhero\b' allows for any characters before
+            and after the word on the same line. '^' and '$' anchor the match to the
+            start and end of the line respectively, so the entire line is matched
+            if it contains the word 'hero'.
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      - output:
+          reasoning: To match lines that contain the word 'hero' as a whole word,
+            I use the word boundary assertion \b on both sides of 'hero'. This ensures
+            that 'hero' is matched as a standalone word and not as part of another
+            word like 'heroes' or 'heron'. The pattern '^.*' and '.*$' allow for any
+            characters before and after the word 'hero', matching the entire line.
+            Anchoring with '^' and '$' ensures the regex applies to the whole line.
+          regex: ^.*\bhero\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 575
+        output_tokens: 622
+    lines using words that end in 'y' or 'i'.:
+      avg_score: 0.2
+      results:
+      - output:
+          reasoning: "Let's refine the regex step-by-step based on the feedback:\n\
+            \n1. **Word Definition**: We want words consisting only of alphabetic\
+            \ letters (a-z, A-Z). Hence, replace `\\w` with `[a-zA-Z]`.\n\n2. **Word\
+            \ Length**: Words must have at least one letter before the ending 'y'\
+            \ or 'i', so use `[a-zA-Z]+[yiYI]` to ensure a minimum length of two characters\
+            \ (e.g. \"my\", \"Ki\"). This avoids matching zero-length strings before\
+            \ the ending letter.\n\n3. **Word Boundaries**: Use `\\b` at the end only\
+            \ to assert the end of the word after the last letter. No need at the\
+            \ start since `[a-zA-Z]+` anchors the start of the word.\n\n4. **Case-insensitive\
+            \ Ending**: Allow both uppercase and lowercase 'y' or 'i' by including\
+            \ `[yiYI]` in the regex.\n\n5. **Whitespace Separation**: Words can be\
+            \ separated by one or more whitespace characters (`\\s+`), which includes\
+            \ spaces, tabs, and more.\n\n6. **No Trailing Whitespace**: Enforce that\
+            \ the last word is immediately followed by end-of-line `$`, ensuring no\
+            \ trailing whitespace.\n\n7. **Whole Line Matching**: The regex starts\
+            \ with `^` and ends with `$` to match an entire line.\n\n8. **Repeat for\
+            \ Multiple Words**: Use a non-capturing group `(?: ... )+` to match one\
+            \ or more words, each followed by either whitespace or the end of line.\n\
+            \n**Final Regex:** `^(?:[a-zA-Z]+[yiYI]\\b(?:\\s+|$))+$`\n\n**Examples:**\n\
+            - Matches:\n  - `happy kiwi` (both words end with 'y' and 'i')\n  - `My\
+            \ Hippy KIMI` (mixed case endings)\n- Does not match:\n  - `happy kiwi\
+            \ ` (trailing space)\n  - `happy kiwi1` (word ending with digit)\n  -\
+            \ `happy, kiwi` (comma included)\n  - Empty line\n\nThis refined regex\
+            \ correctly matches lines where every word ends with 'y' or 'i', words\
+            \ contain only letters, whitespace is flexible, and no trailing whitespace\
+            \ is allowed."
+          regex: ^(?:[a-zA-Z]+[yiYI]\b(?:\s+|$))+$
+        score: 0.0
+      - output:
+          reasoning: 'To refine the regex based on the feedback and address the issues
+            step-by-step:
+
+
+            1. **Restrict to letters only:** Instead of \w which includes digits and
+            underscores, use [a-zA-Z] to allow only alphabetic characters.
+
+
+            2. **Ensure words end with ''y'' or ''i'':** Each word is at least one
+            letter, ending with either ''y'' or ''i'', represented as [a-zA-Z]*[yi].
+            Here, "*" allows for words with one or more letters (e.g., ''y'' alone
+            counts as a single-letter word ending in ''y'').
+
+
+            3. **Word separation:** Words must be separated by at least one whitespace
+            character, so use \s+ between words to avoid matching concatenated words
+            without spaces. This also correctly handles tabs and multiple spaces.
+
+
+            4. **Line anchors:** Use ^ and $ to ensure the pattern matches the whole
+            line.
+
+
+            5. **Allow trailing whitespace handling implicitly:** The last word is
+            followed by end of line ($), not necessarily whitespace.
+
+
+            6. **No punctuation allowed:** Since only letters are matched in words,
+            punctuation adjacent to words will cause the line not to match.
+
+
+            7. **Grouping:** The non-capturing group (?:...) allows matching one or
+            more words with the required pattern.
+
+
+            This refined regex ensures only lines composed entirely of words made
+            from letters ending in ''y'' or ''i'', separated by spaces (or other whitespace),
+            are matched fully from start to end with no extraneous characters.'
+          regex: ^(?:[a-zA-Z]*[yi](?:\s+|$))+$
+        score: 0.0
+      - output:
+          reasoning: "The goal is to match full lines containing at least one word\
+            \ ending with the letter 'y' or 'i', case-insensitive, and considering\
+            \ words as sequences of alphabetic characters only (no digits or underscores).\n\
+            \nStep-by-step refinement:\n\n1. **Definition of 'word':** To avoid matching\
+            \ undesired characters such as digits and underscores, the internal word\
+            \ characters are restricted to alphabetic letters `[a-z]+`. This ensures\
+            \ we match words consisting only of letters.\n\n2. **Ending characters:**\
+            \ The last character of the word is explicitly matched as \"[yi]\", and\
+            \ together with case-insensitive matching (enabled via `(?i)`), it captures\
+            \ 'y', 'Y', 'i', or 'I'.\n\n3. **Word boundary:** `\\b` is used after\
+            \ `[yi]` to ensure the matched sequence ends at a word boundary, preventing\
+            \ the match of partial words.\n\n4. **Full line matching:** The regex\
+            \ uses `^` and `$` anchors to match entire lines.\n\n5. **Case insensitivity:**\
+            \ The inline modifier `(?i)` makes the whole pattern case-insensitive,\
+            \ which handles uppercase 'Y'/'I' without needing to explicitly add uppercase\
+            \ letters in the character class.\n\n6. **Simplicity and efficiency:**\
+            \ Instead of using a lookahead, the pattern simply matches any characters\
+            \ (`.*`) before and after the word pattern, achieving readability and\
+            \ simplicity. This avoids scanning the line twice.\n\n**Final regex:**\
+            \ `^(?i).*[a-z]+[yi]\\b.*$`\n\n**Examples:**\n- Matches:\n  - \"Happy\
+            \ day\" (matches 'Happy')\n  - \"Origami is fun\" (matches 'Origami')\n\
+            \  - \"Party tonight\" (matches 'Party')\n  - \"Sushi and Pastry\" (matches\
+            \ 'Sushi' and 'Pastry')\n- Does not match:\n  - \"abc123\" (digits present,\
+            \ no word ending in 'y' or 'i')\n  - \"Test_line\" (underscore inside\
+            \ word)\n  - \"Try!\" if 'Try!' is considered a word without the exclamation\
+            \ mark, 'Try' ends with 'y' so line matches\n\nThis solution ensures only\
+            \ alphabetic words ending in 'y' or 'i' (case-insensitive) are considered,\
+            \ addressing all issues raised."
+          regex: ^(?i).*[a-z]+[yi]\b.*$
+        score: 0.0
+      - output:
+          reasoning: 'The task is to find lines containing words ending with ''y''
+            or ''i'', where words consist only of alphabetic characters (no digits
+            or underscores). The previous regex used ''\w*'', which incorrectly matches
+            digits and underscores, and allowed zero characters before the final letter,
+            enabling single-letter words like ''y'' or ''i'' to match, which may or
+            may not be intended.
+
+
+            Improvements made:
+
+            1. Replace ''\w*'' with ''[a-zA-Z]*'' to restrict the word characters
+            to only letters.
+
+            2. Remove the anchors ''^'' and ''$'' to allow matching the presence of
+            such words anywhere within the line, since matching the entire line is
+            unnecessary.
+
+            3. Use word boundaries ''\b'' to ensure full word matches, properly handling
+            punctuation adjacent to words (e.g., ''happy,'' or ''ski!'').
+
+
+            This regex will find any occurrence of a word made up solely of letters,
+            ending with ''y'' or ''i'' in a line. It accepts words of length at least
+            one (including ''y'' or ''i'' alone), and handles punctuation and adjacent
+            non-word characters correctly.
+
+
+            If Unicode letters need to be supported, a Unicode property class like
+            ''\p{L}'' could replace ''[a-zA-Z]'', but that depends on regex engine
+            support."'
+          regex: \b[a-zA-Z]*[yi]\b
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Clarify the intention to match lines containing words
+            ending specifically with ''y'' or ''i'', considering both lowercase and
+            uppercase letters.
+
+            Step 2: Decide that single-letter words ''y'' or ''i'' should not be matched
+            based on typical word usage, thus requiring at least one character before
+            the final letter.
+
+            Step 3: Replace ''\w'' with ''[a-zA-Z]'' to restrict word characters to
+            alphabetic letters only, excluding digits and underscores.
+
+            Step 4: Use ''\b[a-zA-Z]+[yiYI]\b'' to match words of at least two alphabetic
+            characters ending with ''y'' or ''i'' in any case.
+
+            Step 5: Employ a positive lookahead ''(?=.*\b[a-zA-Z]+[yiYI]\b)'' to assert
+            the presence of such a word anywhere in the line.
+
+            Step 6: Anchor the regex with ''^'' and ''$'' and match the full line
+            with ''.*'' to ensure the pattern applies to the entire line.
+
+            Step 7: Reasoning includes acknowledgment of case sensitivity by including
+            both uppercase and lowercase endings and exclusion of digits/underscores,
+            improving accuracy.
+
+            The final regex effectively matches any line containing at least one alphabetic
+            word of length two or more ending with ''y'' or ''i'', regardless of case.'
+          regex: ^(?=.*\b[a-zA-Z]+[yiYI]\b).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 5514
+        output_tokens: 3054
+summary:
+  avg_score: 0.711111111111111
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.9333333333333332
+    DynamicFewShotSolver: 0.6
+    SelfRefineSolver: 0.6
+  llms:
+    <nlp_project.solvers.chain_of_thought.ChainOfThoughtSolver object at 0x10678ac50>: gpt-4.1-mini
+    <nlp_project.solvers.dyfs.DynamicFewShotSolver object at 0x1063d0850>: gpt-4.1-mini
+    <nlp_project.solvers.self_refine.SelfRefineSolver object at 0x106bd6190>: gpt-4.1-mini
+  num_iterations: 5
+  total_problems: 3
+  total_solvers: 3
+  total_tokens_per_model:
+    ChainOfThoughtSolver:
+      input_tokens: 1825
+      output_tokens: 2900
+    DynamicFewShotSolver:
+      input_tokens: 9218
+      output_tokens: 7329
+    SelfRefineSolver:
+      input_tokens: 9088
+      output_tokens: 5678

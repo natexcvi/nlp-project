@@ -43,8 +43,13 @@ class DynamicFewShotSolver(Solver):
                 "content": (
                     "You are responsible for finding edge cases to help guide the "
                     "process of solving a problem in the general case. The agent in charge "
-                    "of solving the problem has received the following instructions:\n\n"
-                    f"{self.system_message}"
+                    "of solving the problem has received the following instructions: "
+                    f"'{self.system_message}'"
+                    " and is expected to provide a solution to the problem statement."
+                    "Do not overthink the problem statement, and stick to the most reasonable interpretation of it. "
+                    "Do not add any requirements not mentioned in the problem statement or direclty resulting from its "
+                    "most plausible interpretation. The edge cases should be diverse and cover a range of scenarios, "
+                    "including both common and uncommon inputs."
                 ),
             },
             {
@@ -54,16 +59,7 @@ class DynamicFewShotSolver(Solver):
             {
                 "role": "user",
                 "content": (
-                    "Generate edge cases for this problem. Each case should highlight "
-                    "a different aspect of the problem. Remember: the goal is to help "
-                    "guide the process of solving the problem in the general case. "
-                    "Do not overthink it, and when in doubt as for what the user "
-                    "intended in their problem statement, opt for the most common and "
-                    "reasonable interpretation. "
-                    "You MUST check and validate your edge cases. It's "
-                    "Particularly important that you do not generate edge cases that are "
-                    "misleading or incorrect, because it will confuse the user and "
-                    "do more harm than not having edge cases at all."
+                    "What edge cases could the user who is solving this problem have missed?"
                 ),
             },
         ]
@@ -83,7 +79,7 @@ class DynamicFewShotSolver(Solver):
     def __stringify_edge_cases(self, edge_cases: list[EdgeCase]) -> str:
         return "\n".join(
             [
-                f'{edge_case.input} -> {"should match" if edge_case.is_match else "should not match"} [{edge_case.explanation}]'
+                f'{edge_case.input} -> {"should match" if edge_case.is_match else "should not match"} [Explanation: {edge_case.explanation}; Suggestion: {edge_case.suggestion}]'
                 for edge_case in edge_cases
             ]
         )

@@ -179,7 +179,8 @@ def generate_summary(report: dict, solvers: list[Solver]):
 def run_experiment(sample_size: Optional[int] = None) -> None:
     regex_system_message = (
         "You are a regex generation assistant. Your task is to create a regex according to the user provided instructions. "
-        "Your regex should match a full line that meets the criteria."
+        "Your regex should match a full line that meets the criteria. "
+        "Inline modifiers are only allowed at the beginning of the regex, if used."
     )
     solvers = {
         "DynamicFewShotSolver": DynamicFewShotSolver(

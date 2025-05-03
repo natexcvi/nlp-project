@@ -63,7 +63,8 @@ class SelfRefineSolver(Solver):
                 "content": (
                     "Please provide constructive feedback on this solution. "
                     "Identify specific issues and provide concrete suggestions for improvement. "
-                    "Focus on correctness, completeness, and edge cases the solution might not handle well."
+                    "Focus on correctness, completeness, and edge cases the solution might not handle well. "
+                    "If the solution is already good, please say so without adding any issues."
                 ),
             },
         ]
@@ -149,11 +150,6 @@ class SelfRefineSolver(Solver):
 
         # Refinement loop
         for iteration in range(self.max_iterations):
-            # If no evaluator available or no issues found, we're done
-            if not problem.solution_evaluator:
-                conversation_history.extend(conversation)
-                return current_solution, conversation_history
-
             # Get feedback for refinement
             feedback, feedback_conversation = self.__generate_feedback(
                 problem, current_solution

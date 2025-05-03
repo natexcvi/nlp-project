@@ -1,0 +1,1151 @@
+details:
+  ChainOfThoughtSolver:
+    lines that have at least one capital letter.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: We want to match lines that contain at least one capital
+            letter anywhere.
+
+            Step 2: Use a positive lookahead (?=.*[A-Z]) to assert that somewhere
+            in the line there is at least one uppercase letter A through Z.
+
+            Step 3: The ^ and $ anchors ensure we match the entire line.
+
+            Step 4: The .* after the lookahead consumes the entire line.
+
+            Thus, the regex ^(?=.*[A-Z]).*$ matches any line that has at least one
+            uppercase letter.'
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We want to match entire lines, so we use ^ and $ anchors
+            to represent the start and end of the line.
+
+
+            Step 2: The requirement is that each line must have at least one capital
+            letter (A-Z).
+
+
+            Step 3: To ensure the presence of at least one capital letter anywhere
+            in the line, we use a positive lookahead assertion: (?=.*[A-Z]). This
+            checks that there is at least one uppercase letter somewhere ahead in
+            the line.
+
+
+            Step 4: The .* after the lookahead matches the entire line content.
+
+
+            Therefore, the complete regex is: ^(?=.*[A-Z]).*$
+
+
+            This matches any full line containing at least one uppercase letter.'
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: 'To match lines containing at least one capital letter, we need
+            to ensure the line has any uppercase character. Step 1: Use a positive
+            lookahead `(?=.*[A-Z])` to assert that somewhere in the line, there is
+            an uppercase letter from A to Z. Step 2: Use `^` at the start and `$`
+            at the end to match the entire line fully. Step 3: Use `.*` to match any
+            characters before and after the uppercase letter. This ensures the whole
+            line is matched only if it contains at least one uppercase letter.'
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: We want lines that have at least one capital letter,
+            so the regex must match any line containing at least one uppercase letter
+            from A to Z.
+
+
+            Step 2: ''^'' asserts the start of the line, and ''$'' asserts the end
+            of the line to ensure the entire line matches.
+
+
+            Step 3: ''.*'' matches zero or more characters (any character except newline),
+            allowing any content before and after the uppercase letter.
+
+
+            Step 4: ''[A-Z]'' matches any single uppercase letter.
+
+
+            Putting it all together, ''^.*[A-Z].*$'' matches lines that contain at
+            least one uppercase letter anywhere in the line.'
+          regex: ^.*[A-Z].*$
+        score: 1.0
+      - output:
+          reasoning: "To match lines that have at least one capital letter, I need\
+            \ to ensure the line contains any uppercase letter from A to Z. \n\nStep\
+            \ 1: Use the start of line anchor `^` to start checking from the beginning.\n\
+            Step 2: Use a positive lookahead `(?=.*[A-Z])` to assert that somewhere\
+            \ ahead in the line there is at least one capital letter.\nStep 3: Use\
+            \ `.*` to match the rest of the line after confirming it contains the\
+            \ uppercase letter.\nStep 4: Use the end of line anchor `$` to ensure\
+            \ the entire line is matched.\n\nThis regex effectively matches any line\
+            \ with at least one uppercase letter anywhere in it."
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 660
+        output_tokens: 746
+    lines using words beginning with the letter 'g':
+      avg_score: 0.4
+      results:
+      - output:
+          reasoning: 'To match lines using words beginning with the letter ''g'',
+            I first consider what defines a word: a sequence of word characters bounded
+            by word boundaries (\b). The words should start with ''g'' or ''G'' to
+            include both lowercase and uppercase. So, each word is matched by \b[gG]\w*\b.
+            Since the entire line should consist solely of such words, possibly separated
+            by spaces, I use a non-capturing group (?:...) repeating one or more times,
+            with optional whitespace after each word: (?:\b[gG]\w*\b\s*)+. The anchors
+            ^ and $ ensure the match covers the entire line. Thus, this regex matches
+            full lines composed only of words beginning with ''g''.'
+          regex: ^(?:\b[gG]\w*\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Understand the requirement: We need to match full lines
+            where every word starts with the letter ''g'' (either uppercase or lowercase).
+
+
+            Step 2: Define a word beginning with ''g'' or ''G'': \b[gG]\w*\b
+
+            - \b ensures word boundary at start and end of the word.
+
+            - [gG] matches ''g'' or ''G'' at the start.
+
+            - \w* matches the rest of the word characters.
+
+
+            Step 3: The line can contain multiple such words separated by spaces,
+            so we use (?:...\s*)+ to match one or more words followed by optional
+            spaces.
+
+
+            Step 4: Use ^ and $ to ensure the entire line matches this pattern.
+
+
+            Hence, the regex is: ^(?:\b[gG]\w*\b\s*)+$'
+          regex: ^(?:\b[gG]\w*\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: The task is to create a regex that matches a full line containing
+            at least one word that begins with the letter 'g' or 'G'. A word is considered
+            as a sequence of word characters \w bounded by word boundaries (\b). The
+            regex \b[gG]\w*\b matches a word starting with 'g' or 'G'. Placing it
+            inside .*\b[gG]\w*\b.* ensures that the whole line is matched but only
+            lines containing such a word. The anchors ^ and $ ensure matching the
+            entire line.
+          regex: ^.*\b[gG]\w*\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The user wants to match lines that use words beginning
+            with the letter ''g''.
+
+            Step 2: Words are sequences of word characters, so \b matches word boundaries.
+
+            Step 3: To match words beginning with ''g'', the pattern is \b[gG]\w*\b,
+            where [gG] matches ''g'' or ''G''.
+
+            Step 4: The user wants lines that use words beginning with ''g'', which
+            implies at least one such word. So the line should contain one or more
+            occurrences of \b[gG]\w*\b.
+
+            Step 5: To match entire lines, ensure the regex matches the whole line:
+            start ^ and end $ anchors.
+
+            Step 6: Because the line may contain other words too, but must contain
+            words beginning with ''g'', use a pattern that matches any characters,
+            but ensures that at least one word starts with ''g''. Since the user said
+            "lines using words beginning with g", we take it to mean lines that contain
+            at least one such word.
+
+            Step 7: The pattern (?:\b[gG]\w*\b.*)+ ensures at least one word starting
+            with ''g'' and then any characters after.
+
+            Step 8: Anchors are placed to match the whole line.
+
+
+            This yields the regex ^(?:\b[gG]\w*\b.*)+$ which matches lines containing
+            at least one word starting with ''g''.'
+          regex: ^(?:\b[gG]\w*\b.*)+$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: We want to match lines that contain at least one word
+            beginning with the letter ''g''.
+
+            Step 2: Use word boundaries (\b) to ensure we match whole words.
+
+            Step 3: \bg matches a word boundary followed by the letter ''g''.
+
+            Step 4: \w* matches zero or more word characters following ''g'', completing
+            the word.
+
+            Step 5: Putting it together, \bg\w*\b matches a word starting with ''g''.
+
+            Step 6: Surround by ^.* and .*$ to allow the matching word anywhere in
+            the line, matching the entire line.
+
+
+            Thus, the regex ^.*\bg\w*\b.*$ matches any line that has at least one
+            word starting with the letter ''g''.'
+          regex: ^.*\bg\w*\b.*$
+        score: 1.0
+      token_usage:
+        input_tokens: 665
+        output_tokens: 1036
+    lines using words that begin with 'z'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: 'Step 1: Interpret the requirement: The line must use words that
+            begin with ''z''. This implies each word in the line should start with
+            the letter ''z'' (case-insensitive).
+
+
+            Step 2: Decide on pattern boundaries: Since the whole line should be checked,
+            ''^'' and ''$'' are used to anchor the pattern to the start and end of
+            the line.
+
+
+            Step 3: Define a word that begins with ''z'': Use word boundary ''\b''
+            to mark the start of a word, then match ''z'' or ''Z'', followed by zero
+            or more word characters ''\w*''. This assures the word starts with ''z''
+            and can have additional letters.
+
+
+            Step 4: Use repetition for lines with multiple words: After each word,
+            optional whitespace ''\s*'' can follow, so use a non-capturing group ''(?:
+            ... )+'' to indicate one or more such words.
+
+
+            Step 5: Combine all: The full regex becomes ''^(?:\b[zZ]\w*\b\s*)+$'',
+            ensuring every word in the line begins with ''z'' or ''Z'' and the line
+            consists only of such words (with whitespace in between).'
+          regex: ^(?:\b[zZ]\w*\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: 'To match lines consisting only of words that start with the
+            letter ''z'' (case-insensitive) and possibly separated by spaces, I followed
+            this reasoning:
+
+
+            1. Word boundary and word start: I use \b to mark the start and end of
+            a word to ensure full-word matching.
+
+            2. The word should start with ''z'' or ''Z'': [zZ].
+
+            3. Followed by zero or more word characters: \w* (letters, digits, or
+            underscores).
+
+            4. The word is surrounded by word boundaries: \b.
+
+            5. A line can contain one or more such words separated by space(s): (\b[zZ]\w*\b\s*)+.
+
+            6. Anchoring the regex to match the entire line: ^ and $.
+
+
+            This regex matches entire lines consisting solely of words that start
+            with ''z'' or ''Z'', separated by whitespace.'
+          regex: ^(\b[zZ]\w*\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Identify words beginning with the letter ''z'' or ''Z''.
+            The pattern \b[zZ][a-zA-Z]*\b matches a word boundary, then ''z'' or ''Z'',
+            followed by zero or more letters, and ending with a word boundary.
+
+
+            Step 2: Ensure that the entire line consists of words beginning with ''z''
+            or ''Z''. The entire line should be made up of one or more such words
+            separated by spaces. To enforce this, we use a non-capturing group (?:...)
+            repeated one or more times. Each repetition matches a word starting with
+            ''z''/''Z'' followed by optional spaces.
+
+
+            Step 3: Anchor the regex from start (^) to end of line. This ensures the
+            whole line is made up of only words beginning with ''z'' or ''Z'' and
+            spaces.
+
+
+            Thus, the regex ^(?:\b[zZ][a-zA-Z]*\b(?:\s+|$))+ matches an entire line
+            where every word starts with ''z'' or ''Z''.'
+          regex: ^(?:\b[zZ][a-zA-Z]*\b(?:\s+|$))+
+        score: 0.0
+      - output:
+          reasoning: '1. The problem asks to match full lines where the words all
+            begin with the letter ''z'' (case-insensitive).
+
+            2. I want to match one or more words starting with ''z'' or ''Z''.
+
+            3. A word boundary \b is used to assert the start of a word.
+
+            4. The word itself begins with [zZ], followed by zero or more word characters
+            (\w*).
+
+            5. \b again to assert the end of the word.
+
+            6. Words may be separated by spaces, so after each word, \s* matches optional
+            spaces.
+
+            7. The entire line must be matched, so the pattern is anchored with ^
+            at the start and $ at the end.
+
+            8. (?: ... )+ is a non-capturing group that repeats for one or more words.
+
+            This regex matches lines consisting entirely of words starting with ''z''
+            or ''Z'', separated by spaces.'
+          regex: ^(?:\b[zZ]\w*\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Identify the requirement: lines using words that begin
+            with ''z''.
+
+            Step 2: Words beginning with ''z'' or ''Z'' are matched by \b[zZ]\w*\b.
+            Here, \b asserts a word boundary, [zZ] matches either ''z'' or ''Z'',
+            \w* matches zero or more word characters following the initial ''z'',
+            and \b asserts the end of the word.
+
+            Step 3: Since the line should consist of only such words, possibly separated
+            by spaces, we use a non-capturing group (?: ... )+ to match one or more
+            such words with optional spaces after each.
+
+            Step 4: The \s* inside the group allows for zero or more whitespace characters
+            after each word.
+
+            Step 5: Anchors ^ and $ are added to ensure the entire line matches this
+            pattern.
+
+            Thus, the final regex "^(?:\b[zZ]\w*\b\s*)+$" matches lines consisting
+            entirely of words beginning with ''z'' or ''Z'', allowing for spaces.'
+          regex: ^(?:\b[zZ]\w*\b\s*)+$
+        score: 0.0
+      token_usage:
+        input_tokens: 660
+        output_tokens: 1207
+  DynamicFewShotSolver:
+    lines that have at least one capital letter.:
+      avg_score: 1.0
+      results:
+      - output:
+          reasoning: 'Step 1: We want to match lines that contain at least one capital
+            letter (A-Z). Step 2: We use ^ and $ to ensure the regex matches the entire
+            line from start to end. Step 3: The expression .* matches any sequence
+            of zero or more characters. Step 4: We insert [A-Z] somewhere in the pattern
+            to ensure there is at least one uppercase letter. Positioned as ^.*[A-Z].*$
+            this means the line can start with any characters, have at least one uppercase
+            letter somewhere, and then continue with any characters until the end.
+            Step 5: This ensures the entire line is matched only if it contains at
+            least one uppercase letter.'
+          regex: ^.*[A-Z].*$
+        score: 1.0
+      - output:
+          reasoning: The regex ^(?=.*[A-Z]).*$ correctly matches any line containing
+            at least one uppercase letter, regardless of surrounding whitespace or
+            newline characters. The lookahead (?=.*[A-Z]) ensures that somewhere in
+            the line there is a capital letter, and .* consumes all characters including
+            whitespace before and after the capital letter until the end of line ($).
+            As such, the input consisting of whitespace plus a capital letter followed
+            by newline will be matched correctly because \s is covered by ., and the
+            presence of the capital letter is asserted by the lookahead. Thus, no
+            change is needed to handle the given edge case.
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: To find lines with at least one capital letter, we use a positive
+            lookahead '(?=.*[A-Z])' which asserts that somewhere in the line there
+            is an uppercase letter A-Z. '^' and '$' anchor the match to the entire
+            line. '.*' matches any characters before and after the capital letter.
+            This ensures the whole line is matched only if it contains at least one
+            uppercase letter.
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: Understand the requirement: We need a regex that matches
+            entire lines containing at least one uppercase letter.
+
+
+            Step 2: Define the line start and end anchors:^ and $ ensure the match
+            corresponds to a full line.
+
+
+            Step 3: Allow any characters before the uppercase letter: .* will match
+            zero or more of any characters.
+
+
+            Step 4: Match at least one uppercase letter: [A-Z] matches any single
+            uppercase letter.
+
+
+            Step 5: Allow any characters after the uppercase letter: .* again allows
+            zero or more characters after the uppercase letter.
+
+
+            Step 6: Combine these into the full regex: ^.*[A-Z].*$
+
+
+            This ensures the line contains at least one uppercase letter anywhere
+            in it.'
+          regex: ^.*[A-Z].*$
+        score: 1.0
+      - output:
+          reasoning: 'The goal is to create a regex that matches lines that contain
+            at least one capital letter. Step 1: We need to ensure the line contains
+            at least one uppercase letter, which is represented by [A-Z]. Step 2:
+            To assert that the line contains at least one uppercase letter anywhere,
+            we use a positive lookahead: (?=.*[A-Z]), which means ''there exists a
+            position where zero or more characters (.*) are followed by an uppercase
+            letter [A-Z]''. Step 3: The caret ^ and dollar $ denote the start and
+            end of the line, so the entire line is matched. Step 4: After the lookahead,
+            we match the entire line with .*. This way, only lines with at least one
+            capital letter will match.'
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      token_usage:
+        input_tokens: 1021
+        output_tokens: 890
+    lines using words beginning with the letter 'g':
+      avg_score: 0.6
+      results:
+      - output:
+          reasoning: 'Step 1: The original regex matched full lines consisting only
+            of words starting with ''g'', but the user''s examples include lines with
+            a mix of words, punctuation, and numbers, where the line should be matched
+            if it contains any word starting with ''g'' or ''G''.
+
+
+            Step 2: Therefore, the regex should match lines that contain at least
+            one word beginning with ''g'' or ''G'', anywhere in the line, irrespective
+            of other words or characters.
+
+
+            Step 3: \b[gG]\w*\b matches a whole word starting with ''g'' or ''G''.
+
+
+            Step 4: Wrapping this pattern with .* allows any characters before or
+            after, so the entire line is matched if it contains this pattern anywhere.
+
+
+            Step 5: ^ and $ anchor the match to the entire line.
+
+
+            This approach ensures lines like "Great games generate great growth.",
+            "go ahead and get it!", "gigantic!", and "123 ghosts and goblins" are
+            matched, because each contains at least one word beginning with ''g''
+            or ''G''.'
+          regex: ^.*\b[gG]\w*\b.*$
+        score: 1.0
+      - output:
+          reasoning: The user's clarified requirement is to match full lines that
+            contain at least one word beginning with 'g' or 'G'. The previous regex
+            matched lines where every word started with 'g', which is too restrictive.
+            This updated regex uses:^ - start of line.* - any characters, allowing
+            the whole line to be matched at start\b[gG]\w*\b - a whole word starting
+            with 'g' or 'G'.* - any characters after the matched word$ - end of line
+            This ensures that the entire line is matched if it contains at least one
+            word that starts with 'g' or 'G' anywhere in the line, fulfilling the
+            requirement exemplified by the edge cases.
+          regex: ^.*\b[gG]\w*\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The user clarified that the entire line should only
+            contain words starting with letter ''g''. So we need the entire line to
+            consist entirely of such words.
+
+
+            Step 2: Use word boundaries \b around each word. Each word begins with
+            ''g'' or ''G'', so [gG][a-zA-Z]* matches a word starting with ''g'' followed
+            by letters only.
+
+
+            Step 3: The user points out punctuation attached to words should be handled.
+            To do this, after the word boundary, allow optional punctuation marks
+            (like !, ., ,, etc.). We use [[:punct:]]* to match zero or more punctuation
+            characters.
+
+
+            Step 4: Words may be separated by spaces, so after each word (and optional
+            punctuation) allow for zero or more spaces \s*.
+
+
+            Step 5: We repeat this pattern for all words on the line, from start (^)
+            to end ($). The non-capturing group (?:...) repeated one or more times
+            (+) expresses that.
+
+
+            Step 6: This regex matches lines where every token is a word starting
+            with ''g'' (case-insensitive), possibly followed by punctuation, and separated
+            by spaces.
+
+
+            Example:
+
+            - "gloriously great!" would match because both "gloriously" and "great"
+            are words starting with ''g'', "great" ends with "!" which is handled.
+
+            - "Go get the yellow garden gloves" would not match because "the" and
+            "yellow" do not start with ''g''.
+
+
+            Final regex: ^(?:\b[gG][a-zA-Z]*\b[[:punct:]]*\s*)+$'
+          regex: ^(?:\b[gG][a-zA-Z]*\b[[:punct:]]*\s*)+$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The requirement is to match lines that contain at least
+            one word starting with the letter ''g'' or ''G''.
+
+
+            Step 2: The original regex allowed matching any line because it matched
+            the entire line even if the word starting with ''g'' was not present.
+
+
+            Step 3: To correct this, we use a positive lookahead ''(?=.*\b[Gg][a-zA-Z]*\b)''
+            which asserts that somewhere in the line there is a word starting with
+            ''g'' or ''G''.
+
+
+            Step 4: The rest of the line is matched by ''.*'', with ''^'' and ''$''
+            anchoring the regex to the start and end of the line.
+
+
+            Step 5: This regex will only match lines that contain at least one word
+            beginning with ''g'' or ''G'', avoiding false positives like ''The game
+            started quickly.'' where no words start with ''g''.
+
+
+            Step 6: This satisfies the requirement strictly.'
+          regex: ^(?=.*\b[Gg][a-zA-Z]*\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'The user wants lines using words beginning with the letter ''g'',
+            and the additional examples clarify that all words on the line must begin
+            with ''g'' or ''G''. Also, words attached to punctuation like ''go!''
+            should cause the line to not match.
+
+
+            Step 1: Words must begin with ''g'' or ''G''. So start each word pattern
+            with [gG].
+
+
+            Step 2: Words should only contain letters (assuming this from the examples),
+            so after the initial ''g'' letter, match zero or more letters a-z or A-Z:
+            [a-zA-Z]*.
+
+
+            Step 3: The line contains one or more such words separated by spaces.
+            So we have one word pattern, then zero or more occurrences of a space
+            and another word pattern: (?: [gG][a-zA-Z]*)*.
+
+
+            Step 4: Anchors ^ and $ ensure the entire line matches this pattern, allowing
+            only proper words and spaces.
+
+
+            Step 5: This pattern excludes words with punctuation because punctuation
+            is not matched by [a-zA-Z]*; for example, ''go!'' fails because ''!''
+            is not a letter.
+
+
+            Step 6: The line ''green grass grows wildly'' is rejected because ''wildly''
+            does not start with ''g''. The pattern requires all words to start with
+            ''g'' or ''G''.
+
+
+            Hence, the final regex is ^(?:[gG][a-zA-Z]*)(?: [gG][a-zA-Z]*)*$'
+          regex: '^(?:[gG][a-zA-Z]*)(?: [gG][a-zA-Z]*)*$'
+        score: 0.0
+      token_usage:
+        input_tokens: 3912
+        output_tokens: 2785
+    lines using words that begin with 'z'.:
+      avg_score: 0.6
+      results:
+      - output:
+          reasoning: "Step 1: The goal is to match lines comprised of words that begin\
+            \ with the letter 'z' or 'Z'.\n\nStep 2: The original regex allows words\
+            \ beginning with 'z' or 'Z' and optional spaces following. However, it\
+            \ does not allow leading whitespace before the words.\n\nStep 3: To accommodate\
+            \ leading whitespace, we include '^\\s*' at the start \u2014 this matches\
+            \ the beginning of the line followed by any amount of whitespace.\n\n\
+            Step 4: The pattern '(?:\\b[zZ]\\w*\\b\\s*)+' matches one or more words\
+            \ starting with 'z' or 'Z', each followed by optional whitespace.\n\n\
+            Step 5: '$' ensures we match until the end of the line, so the entire\
+            \ line should be just these words (with possible leading whitespace).\n\
+            \nStep 6: This regex does not match words not starting with 'z' (e.g.,\
+            \ 'buzz' or 'fizz' are ignored because they don't start with 'z'), but\
+            \ it does match words like 'Zebra' or 'zebra' regardless of case.\n\n\
+            Therefore, this regex covers case insensitivity for 'z', allows leading\
+            \ whitespace, and ensures only words that start with 'z' or 'Z' make up\
+            \ the line."
+          regex: ^\s*(?:\b[zZ]\w*\b\s*)+$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The user clarifies that the line should be matched if
+            it contains any word beginning with ''z'' or ''Z'', anywhere in the line.
+            Step 2: Previously, the regex only matched lines fully consisting of words
+            starting with ''z'', which is too restrictive. Step 3: To match lines
+            that contain at least one word beginning with ''z'' or ''Z'' anywhere,
+            we use a regex that allows any characters before and after the word. Step
+            4: The pattern \b[zZ]\w*\b matches any word starting with ''z'' or ''Z''.
+            Step 5: We wrap the pattern with ^.* and .*$ to allow any characters before
+            and after, so lines that contain at least one ''z'' word anywhere will
+            match. Step 6: Thus, ^.*\b[zZ]\w*\b.*$ matches lines that contain one
+            or more words beginning with ''z'' or ''Z'' regardless of their position.'
+          regex: ^.*\b[zZ]\w*\b.*$
+        score: 1.0
+      - output:
+          reasoning: "The user clarified the requirements with examples and explanations:\n\
+            \n1. Lines should match if they contain at least one word beginning with\
+            \ 'z' or 'Z', not necessarily all words.\n2. Words that do not start with\
+            \ 'z' can be present, so the entire line does not only consist of 'z'-starting\
+            \ words.\n3. The regex should be case-insensitive to 'z' (or explicitly\
+            \ allow 'Z').\n4. Words are separated by spaces and punctuation may be\
+            \ ignored here since examples don't show punctuation impacting the word\
+            \ start.\n\nStep-by-step reasoning:\n- Use a positive lookahead `(?=.*\\\
+            b[zZ])` to assert that somewhere in the line there is a word starting\
+            \ with 'z' or 'Z'.\n- The rest of the line can be anything, so use `.*`\
+            \ to match all characters.\n- Anchors `^` and `$` ensure matching the\
+            \ full line.\n\nThis way, lines with at least one word starting with 'z'\
+            \ or 'Z' match, while others do not. \n\nExamples:\n- \"Zebra runs swiftly.\"\
+            \ matches because \"Zebra\" starts with 'Z'.\n- \"Lazy dogs zoomed past.\"\
+            \ matches because \"zoomed\" starts with 'z'.\n- \"The puzzle was hard.\"\
+            \ does not match because no word starts with 'z' (\"puzzle\" contains\
+            \ 'z' but does not start with it).\n- \"A crazy zebra zigzagged zealously.\"\
+            \ matches because \"zebra\", \"zigzagged\", \"zealously\" start with 'z'.\n\
+            \nThis fulfills the user's examples and requirements."
+          regex: ^(?=.*\b[zZ])(?=.*\b[a-zA-Z]*\b).*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The pattern needs to match lines containing at least
+            one word that begins with ''z'' or ''Z''.
+
+            Step 2: Use word boundary ''\b'' to ensure matching the start of a word.
+
+            Step 3: Match ''z'' or ''Z'' as the first character of the word (case
+            insensitive for ''z'').
+
+            Step 4: Follow with zero or more word characters ''\w*'' to match the
+            remainder of the word.
+
+            Step 5: Use ''.*'' at the start and end to allow other content before
+            and after the word.
+
+            Step 6: Use ''^'' and ''$'' anchors to match the full line.
+
+            Thus, ''^.*\b[zZ]\w*\b.*$'' matches any line containing at least one word
+            starting with ''z'' or ''Z''.'
+          regex: ^.*\b[zZ]\w*\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Based on the user''s clarifications and edge cases, the updated
+            understanding is:
+
+
+            1. Case-insensitive matching is required, so both ''Z'' and ''z'' at word
+            start should be considered. The inline modifier (?i) at the start handles
+            this.
+
+            2. The line should match if it contains at least one word starting with
+            ''z'' or ''Z''. Other words in the line can be anything.
+
+            3. Words starting with ''z'' may have attached apostrophes, such as "zulu''s".
+            So allow a word to have an apostrophe inside after the initial ''z'' and
+            subsequent letters.
+
+            4. Punctuation aside from apostrophes is not clearly defined, but example
+            "z!" implies a word with ''z'' and an attached ''!'' might be considered
+            a separate token. Since ''\b'' word boundaries typically exclude punctuation,
+            the regex accounts for word boundaries around the ''z'' word.
+
+
+            Therefore:
+
+            - (?i) makes regex case-insensitive.
+
+            - .* allows any characters before and after.
+
+            - \b ensures word boundary.
+
+            - z\w*''?\w* matches a word starting with ''z'' optionally containing
+            an apostrophe.
+
+            - .* allows anything after.
+
+
+            This regex matches any line containing at least one word beginning with
+            ''z'' or ''Z'', fulfilling the updated requirements.'
+          regex: ^(?i).*\bz\w*'?\w*\b.*$
+        score: 0.0
+      token_usage:
+        input_tokens: 3497
+        output_tokens: 2380
+  SelfRefineSolver:
+    lines that have at least one capital letter.:
+      avg_score: 0.8
+      results:
+      - output:
+          reasoning: To match lines that contain at least one capital letter, we use
+            a positive lookahead assertion `(?=.*[A-Z])` which checks if there is
+            at least one uppercase letter anywhere in the line. The `^` and `$` anchors
+            ensure that we match the entire line. The `.*` after the lookahead matches
+            the full line after confirming the presence of an uppercase letter. This
+            regex will thus match any full line that contains one or more uppercase
+            letters.
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: The goal is to match lines that contain at least one capital
+            letter anywhere in the line. To achieve this, we use a positive lookahead
+            (?=.*[A-Z]) which asserts that there is at least one uppercase letter
+            [A-Z] in the line. The ^ anchors the match to the start of the line, and
+            the .*$ matches the entire line after verifying the positive lookahead
+            condition. This way, the full line will be matched only if it contains
+            at least one capital letter.
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: "The goal is to identify lines containing at least one uppercase\
+            \ letter.\n\n1. Simplifying the Regular Expression: Instead of explicitly\
+            \ matching the entire line with '^.*' and '.*$', it is often sufficient\
+            \ to use a regex that matches the uppercase letter itself. When using\
+            \ line-based matching tools or functions that operate line-by-line, searching\
+            \ for '\\p{Lu}' will return lines containing at least one uppercase letter.\n\
+            \n2. Unicode Awareness: '[A-Z]' only matches ASCII uppercase letters.\
+            \ To cover uppercase letters across all languages, including accented\
+            \ letters and non-English alphabets, the Unicode property '\\p{Lu}' (uppercase\
+            \ letter) should be used if the regex engine supports it.\n\n3. Practical\
+            \ Considerations: Some environments may require anchors for full line\
+            \ matching, but many tools utilize line-based matching inherently or allow\
+            \ searching for patterns anywhere in the line, making this unnecessary.\n\
+            \nExample test cases:\n- Match: 'Hello World' (contains 'H' and 'W')\n\
+            - Match: '\xE9l\xE8ve \xDCber' (contains '\xDC' which is uppercase)\n\
+            - No match: 'hello world'\n\nThus, the regex '\\p{Lu}' is concise, effective,\
+            \ and Unicode-aware for matching lines containing at least one uppercase\
+            \ letter."
+          regex: \p{Lu}
+        score: 0.0
+      - output:
+          reasoning: The goal is to match a full line that contains at least one uppercase
+            letter. To achieve this, we use a positive lookahead '(?=.*[A-Z])' which
+            asserts that from the start of the line (^) there is at least one uppercase
+            letter somewhere ahead. The '.*' after the lookahead consumes the whole
+            line, and the '$' ensures the match is anchored to the end of the line.
+            This regex matches any entire line containing at least one capital letter.
+          regex: ^(?=.*[A-Z]).*$
+        score: 1.0
+      - output:
+          reasoning: 'To match lines that have at least one capital letter, we need
+            to ensure the regex checks the entire line and finds any uppercase letter
+            from A to Z. Step 1: Use ''^'' and ''$'' anchors to match the full line.
+            Step 2: Use ''.*'' to match any characters before and after the letter.
+            Step 3: Use ''[A-Z]'' to find at least one uppercase letter. Putting it
+            all together: ''^.*[A-Z].*$'' matches any line containing at least one
+            capital letter.'
+          regex: ^.*[A-Z].*$
+        score: 1.0
+      token_usage:
+        input_tokens: 1967
+        output_tokens: 1257
+    lines using words beginning with the letter 'g':
+      avg_score: 0.2
+      results:
+      - output:
+          reasoning: 'Step 1: The original regex allowed trailing spaces after the
+            last word, which can cause unintended matches. Here, trailing spaces are
+            disallowed by demanding that after the last word, the line ends immediately.
+
+
+            Step 2: Instead of ''\w*'' which matches digits and underscores, we use
+            ''[a-zA-Z]*'' to restrict to letters only.
+
+
+            Step 3: Between words, exactly one space is required, so we use a space
+            character '' '' rather than ''\s*'' or ''\s+''. This avoids matching tabs
+            or multiple spaces and enforces a precise separator.
+
+
+            Step 4: The pattern matches one word starting with ''g'' or ''G'' using
+            ''\b[gG][a-zA-Z]*\b'', then zero or more additional occurrences prefixed
+            by a space and the same word pattern.
+
+
+            Step 5: The anchors ''^'' and ''$'' ensure the full line matches this
+            pattern exactly, with no trailing or leading spaces.
+
+
+            Step 6: Empty lines will not match because at least one word is required.
+
+
+            Example test cases:
+
+            - Matches: "gorge garden goose", "Garden"
+
+            - Does not match: "garden goose1", "garden  goose", "garden\tgoose", "garden
+            goose " (trailing space), ""
+
+
+            This refined regex strictly matches lines composed exclusively of words
+            starting with ''g'' or ''G'' containing only letters, separated by single
+            spaces, and no trailing or leading spaces.'
+          regex: '^(?:\b[gG][a-zA-Z]*\b)(?: [gG][a-zA-Z]*\b)*$'
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Clarify requirements: The line must consist solely of
+            words starting with ''g'' or ''G'', possibly including hyphens or apostrophes
+            in the word.
+
+            Step 2: To handle words with hyphens and apostrophes, extend the character
+            set after initial ''g'' to include [\w''-].
+
+            Step 3: Each word starts with a word boundary (\b) followed by ''g'' or
+            ''G'' and then zero or more of the allowed characters.
+
+            Step 4: Words should be separated by exactly one space to avoid trailing
+            whitespace at the end. Using (?: +) instead of \s* ensures no trailing
+            spaces.
+
+            Step 5: The pattern matches a first word and then optionally further words
+            separated by spaces.
+
+            Step 6: Anchors ^ and $ ensure the entire line matches this pattern.
+
+            Step 7: Empty lines or lines with only whitespace will not match, as the
+            pattern requires at least one ''g'' word.
+
+            Step 8: Punctuation adjacent to words (e.g., commas, exclamation points)
+            is not matched because the pattern demands words only; this fits the requirements
+            if punctuation is to be excluded.
+
+            This regex thus matches lines consisting entirely of words beginning with
+            ''g'' or ''G'', allowing hyphens and apostrophes within words, with words
+            separated by single spaces and no trailing whitespace.'
+          regex: '^(?:\b[gG][\w''-]*\b)(?: +\b[gG][\w''-]*\b)*$'
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: We need to match any line that contains at least one
+            word starting with the letter ''g'' or ''G''.
+
+            Step 2: A word boundary is represented by \b in regex, which helps us
+            isolate words.
+
+            Step 3: The pattern \b[gG]\w*\b matches words that start with ''g'' or
+            ''G'' followed by zero or more word characters.
+
+            Step 4: We wrap the word pattern with .* at the start and end to allow
+            any characters before or after the word, ensuring the entire line is matched.
+
+            Step 5: Using ^ and $ anchors ensures the regex matches the full line.
+
+            Therefore, the full regex is ^.*\b[gG]\w*\b.*$ which matches any line
+            containing words starting with ''g'' or ''G''.'
+          regex: ^.*\b[gG]\w*\b.*$
+        score: 1.0
+      - output:
+          reasoning: 'Step 1: The goal is to match full lines where each word starts
+            with ''g'' or ''G''.
+
+
+            Step 2: To include Unicode letters, we replace \w with \p{L}, which matches
+            any kind of letter from any language, improving internationalization.
+
+
+            Step 3: Each word is defined as starting with a word boundary (\b), followed
+            by ''g'' or ''G'', then zero or more letters (\p{L}*), ending with another
+            word boundary.
+
+
+            Step 4: To avoid matching trailing spaces, the line starts with one such
+            word: (?:\b[gG]\p{L}*\b)
+
+
+            Step 5: Any additional words must be preceded by at least one whitespace
+            character (\s+), ensuring words are separated properly and not concatenated.
+
+
+            Step 6: The rest of the line can have zero or more sequences of `space
+            + word` : (?:\s+\b[gG]\p{L}*\b)*
+
+
+            Step 7: Anchors ^ and $ ensure the regex matches the entire line with
+            no trailing spaces.
+
+
+            Step 8: This avoids allowing trailing spaces, requires at least one space
+            between words, and supports Unicode letters.
+
+
+            This refined regex should correctly match lines where all words start
+            with ''g'' or ''G'', separated by spaces, with no trailing or leading
+            spaces, and supports international alphabets.'
+          regex: ^(?:\b[gG]\p{L}*\b)(?:\s+\b[gG]\p{L}*\b)*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Clarify word definition: words must consist exclusively
+            of alphabetic characters and start with ''g'' or ''G''. So `\w` (which
+            includes digits and underscores) is replaced with `[a-zA-Z]*` to match
+            only letters following the initial ''g'' or ''G''.
+
+
+            Step 2: Carefully handle spacing: replace `\s*` (zero or more spaces)
+            with explicit space separators between words using ` +` (one or more spaces).
+            This avoids words merging without spaces.
+
+
+            Step 3: Match one or more words in the line:
+
+            - The first word: `[gG][a-zA-Z]*`
+
+            - Additional words (if any) come after one or more spaces: `(?: +[gG][a-zA-Z]*)*`
+
+
+            Step 4: Use anchors `^` and `$` to ensure full line match.
+
+
+            Step 5: This approach disallows trailing spaces at the end because trailing
+            spaces would break the pattern since it expects a word after spaces or
+            end of line.
+
+
+            Step 6: Punctuation is not handled here; lines with punctuation will not
+            match as requested. To include punctuation, pre-processing or more complex
+            patterns would be needed, but the current requirement excludes punctuation
+            from words.
+
+
+            Example matches:
+
+            - "goose giraffe"
+
+            - "Giant gorilla"
+
+
+            Non-matches:
+
+            - "goosegiraffe" (words joined, no spaces)
+
+            - "goose giraffe " (trailing space)
+
+            - "goose, giraffe" (punctuation present)
+
+            - "goose123 giraffe"
+
+
+            This refined regex robustly matches lines containing only words made up
+            of alphabetic characters starting with ''g'' or ''G'', separated by spaces,
+            with no trailing spaces or punctuation.'
+          regex: '^(?:[gG][a-zA-Z]*)(?: +[gG][a-zA-Z]*)*$'
+        score: 0.0
+      token_usage:
+        input_tokens: 5062
+        output_tokens: 3527
+    lines using words that begin with 'z'.:
+      avg_score: 0.0
+      results:
+      - output:
+          reasoning: "Step 1: The requirement is to match lines containing only words\
+            \ that start with 'z' or 'Z'.\n\nStep 2: Each word is defined as a sequence\
+            \ of word characters (letters, digits, underscore) starting with 'z' or\
+            \ 'Z'. Punctuation attached to words is not matched by this regex.\n\n\
+            Step 3: The pattern \\b[zZ]\\w*\\b matches a single word starting with\
+            \ 'z' or 'Z' with word boundaries to ensure whole word matching.\n\nStep\
+            \ 4: To allow multiple such words separated by spaces, the regex uses:\n\
+            \  - (?:\\b[zZ]\\w*\\b) for the first word,\n  - followed by (?:\\s+\\\
+            b[zZ]\\w*\\b)* for zero or more additional words each preceded by one\
+            \ or more spaces.\n\nStep 5: Anchors ^ and $ ensure the entire line matches\
+            \ this pattern with no leading or trailing spaces.\n\nStep 6: This regex\
+            \ does not match empty lines. If empty lines should be accepted, the pattern\
+            \ would need to be adjusted.\n\nSummary: This regex correctly matches\
+            \ lines consisting exclusively of one or more words that begin with 'z'\
+            \ or 'Z', separated by spaces, with no trailing or leading spaces and\
+            \ no punctuation attached to the words."
+          regex: ^(?:\b[zZ]\w*\b)(?:\s+\b[zZ]\w*\b)*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: Allow leading and trailing whitespace in the line using
+            ^\s* at the start and \s*$ at the end of the regex to ignore any spaces
+            or tabs before the first word and after the last word.
+
+
+            Step 2: Focus on matching words beginning with ''z'' or ''Z''. The problem
+            states words beginning with ''z'' but to be case insensitive, assume only
+            lowercase ''z'' as specified. If uppercase ''Z'' is needed, we can add
+            case insensitivity flag. Here, the regex explicitly uses ''z''.
+
+
+            Step 3: Match each word starting with ''z'' followed by zero or more word
+            characters using ''z\w*''. This allows matching single-letter words like
+            ''z'', which seems acceptable.
+
+
+            Step 4: Use \b after the word to ensure word boundary, so that trailing
+            punctuation is excluded and does not interfere with recognition.
+
+
+            Step 5: Separate words by single spaces only ('' +'') to be precise and
+            prevent tabs or other whitespace characters between words, as per the
+            feedback.
+
+
+            Step 6: The entire sequence of one or more such words is captured inside
+            a non-capturing group (?:...) and repeated with a ''+'' quantifier to
+            match at least one such word.
+
+
+            Step 7: The optional trailing spaces after the last word before end-of-line
+            are matched with \s*$.
+
+
+            Step 8: This pattern will not match lines with punctuation attached to
+            words (e.g., commas or periods right after words) since \b matches word
+            boundaries but punctuation breaks word boundaries, so this is consistent
+            with the clarified requirement.
+
+
+            Additional notes:
+
+            - The regex allows lines with multiple words all starting with ''z'',
+            separated by single spaces.
+
+            - Lines composed only of spaces or empty lines won''t match because the
+            group requires at least one word.
+
+            - The regex uses explicit spaces between words and does not accept tabs
+            or other whitespace for separation, as requested.
+
+            - Case sensitivity: The regex only matches lowercase ''z'' to start the
+            word, if uppercase is needed, a case-insensitive flag ''(?i)'' can be
+            added at the start.
+
+
+            Examples:
+
+            - Matches: "zebra zone zoom"
+
+            - Matches: "  zebra   zen  " (leading and trailing spaces and multiple
+            spaces between words would fail because we require single spaces, so this
+            could be adjusted if more flexible spacing is desired)
+
+            - Does not match: "zip, zap" (comma breaks the \b boundary)
+
+            - Does not match: "apple zebra" (first word does not start with ''z'')
+
+
+            This refined regex addresses the feedback by allowing leading/trailing
+            whitespace, requiring single spaces between words and matching only words
+            starting with the letter ''z'', excluding punctuation and tabs as separators.'
+          regex: '^\s*(?:z\w*\b(?: +|$))+\s*$'
+        score: 0.0
+      - output:
+          reasoning: '1. The regex anchors the match from start (^) to end ($) of
+            the line, ensuring the entire line fits the pattern.
+
+            2. Leading and trailing whitespace are allowed but not required; they''re
+            matched with ''^\s*'' and ''\s*$''.
+
+            3. Each word must start with ''z'' or ''Z'' followed by zero or more alphabetic
+            letters (a-z or A-Z), disallowing digits, underscores, or other symbols.
+            This ensures only valid alphabetic words starting with ''z'' count.
+
+            4. Between words, exactly one or more spaces are required (''\s+''), avoiding
+            issues with no spacing or multiple spaces collapsing.
+
+            5. The pattern matches one word starting with ''z'' ([zZ][a-zA-Z]*), then
+            zero or more occurrences of one or more spaces plus another such word.
+
+            6. This excludes punctuation since words are strictly alphabetic.
+
+
+            Examples:
+
+            - Matches: "zebra zip zest", "Zany Zoom", "  zebra  " (leading/trailing
+            spaces).
+
+            - Does not match: "zebra1", "zebra!", "ze-bra", " zoo  zip3".
+
+
+            This refined regex addresses the issues of spacing, punctuation, allowed
+            characters in words, and whitespace handling raised in the feedback.'
+          regex: ^\s*[zZ][a-zA-Z]*(?:\s+[zZ][a-zA-Z]*)*\s*$
+        score: 0.0
+      - output:
+          reasoning: 'Step 1: The goal is to match lines that contain one or more
+            words starting with ''z'' or ''Z'', possibly followed by common punctuation.
+
+            Step 2: Allow optional leading and trailing whitespace on the line by
+            using ^\s* at the start and \s*$ at the end.
+
+            Step 3: Each word must start with ''z'' or ''Z'' and is matched by \b[zZ]\w*\b.
+
+            Step 4: To handle punctuation immediately following a word (e.g., commas,
+            periods), add an optional character set [.,!?:;]? after the word boundary.
+
+            Step 5: Words are separated by at least one whitespace character (\s+).
+
+            Step 6: The first word with punctuation is matched by (?:\b[zZ]\w*\b[.,!?:;]?).
+            Subsequent words follow the same pattern but preceded by whitespace: (?:\s+(?:\b[zZ]\w*\b[.,!?:;]?))*.
+
+            Step 7: Combining all, the regex ensures the entire line comprises only
+            words beginning with ''z'' or ''Z'', optionally followed by common punctuation,
+            separated by spaces, with optional whitespace padding at start and end.
+
+            Step 8: This regex does not match empty lines, as at least one word is
+            required.
+
+            This pattern refines the previous one by ensuring no trailing whitespace
+            after the last word, handling common punctuation, and allowing optional
+            leading/trailing spaces on the line.'
+          regex: ^\s*(?:\b[zZ]\w*\b[.,!?:;]?)(?:\s+(?:\b[zZ]\w*\b[.,!?:;]?))*\s*$
+        score: 0.0
+      - output:
+          reasoning: "1. **Case insensitivity**: To match words starting with either\
+            \ uppercase 'Z' or lowercase 'z', I added the inline case-insensitive\
+            \ flag `(?i)` at the start, which applies to the whole pattern.\n\n2.\
+            \ **Word boundaries `\\b`**: Each word is bounded by `\\b` at both start\
+            \ and end, ensuring the match is entire words starting with 'z' or 'Z',\
+            \ not partial matches inside longer words.\n\n3. **Word pattern `(\\bz\\\
+            w*\\b)`**: Matches a single word beginning with 'z' or 'Z' followed by\
+            \ zero or more word characters.\n\n4. **Handling multiple words**: The\
+            \ first word is matched by `(\\bz\\w*\\b)`. Subsequent words, if any,\
+            \ are matched by `(?:\\s+\\bz\\w*\\b)*`, which enforces one or more spaces\
+            \ between words, disallowing multiple or zero spaces inconsistently.\n\
+            \n5. **Anchors `^` and `$`**: The start `^` and end `$` anchors require\
+            \ the entire line to match the pattern, so no extra characters or invalid\
+            \ words are allowed.\n\n6. **Spacing**: Only whitespace between words\
+            \ is allowed (`\\s+`), no trailing spaces after the last word.\n\n**Test\
+            \ case reasoning:**\n- \"Zebra zoom\" \u2014 matches (two words beginning\
+            \ with 'Z' with a single space).\n- \"zoo\" \u2014 matches (single lowercase\
+            \ 'z').\n- \" Zebra \" \u2014 does not match due to leading/trailing spaces.\n\
+            - \"zoo   zebra\" \u2014 does not match because multiple spaces between\
+            \ words are allowed by `\\s+` which includes multiple spaces, so this\
+            \ matches.\n- \"apple zebra\" \u2014 no match because the first word does\
+            \ not start with 'z'.\n\nThis refined regex addresses all the earlier\
+            \ issues and provides a clear, robust solution that matches lines consisting\
+            \ solely of words starting with the letter 'z' or 'Z', separated by single\
+            \ or multiple whitespace characters, with no trailing or leading spaces."
+          regex: ^(?i)(\bz\w*\b)(?:\s+\bz\w*\b)*$
+        score: 0.0
+      token_usage:
+        input_tokens: 5674
+        output_tokens: 3868
+summary:
+  avg_score: 0.5111111111111112
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.4666666666666666
+    DynamicFewShotSolver: 0.7333333333333334
+    SelfRefineSolver: 0.3333333333333333
+  llms:
+    <nlp_project.solvers.chain_of_thought.ChainOfThoughtSolver object at 0x1074d0c90>: gpt-4.1-mini
+    <nlp_project.solvers.dyfs.DynamicFewShotSolver object at 0x106492ed0>: gpt-4.1-mini
+    <nlp_project.solvers.self_refine.SelfRefineSolver object at 0x1063ef510>: gpt-4.1-mini
+  num_iterations: 5
+  total_problems: 3
+  total_solvers: 3
+  total_tokens_per_model:
+    ChainOfThoughtSolver:
+      input_tokens: 1985
+      output_tokens: 2989
+    DynamicFewShotSolver:
+      input_tokens: 8430
+      output_tokens: 6055
+    SelfRefineSolver:
+      input_tokens: 12703
+      output_tokens: 8652

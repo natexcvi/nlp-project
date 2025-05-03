@@ -1030,7 +1030,7 @@
         "regex": ".*\\bhero\\b.*",
         "string_matches": [
             "The hero saved the day.",
-            "Our hero is brave and strong.",
+            "Hero is someone who is brave and strong.",
             "Is this a journey fitted for a hero?"
         ],
         "string_mismatches": [
