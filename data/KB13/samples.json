@@ -3549,7 +3549,6 @@
         "regex": ".*l(ay|ie).*",
         "string_matches": [
             "I lay down on the couch.",
-            "The book lies on the table.",
             "They lay the groundwork for the project.",
             "He lay there for hours.",
             "The city lies nestled in the valley."

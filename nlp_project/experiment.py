@@ -88,7 +88,7 @@ class ExperimentSummary(BaseModel):
     llms: dict[str, str]
 
 
-NUM_ITERATIONS = 5
+NUM_ITERATIONS = 3
 REPORT_FILE = "experiment_report.yaml"
 CONVERSATIONS_FILE = "conversations_report.yaml"
 
@@ -234,6 +234,9 @@ def run_experiment(sample_size: Optional[int] = None) -> None:
     score_utils = ScoreUtils()
     regex_problem_set = RegexProblems(score_utils)
     regex_examples_problem_set = RegexExampleGenerationProblems(score_utils)
+
+    if sample_size is None:
+        sample_size = len(regex_problem_set.problems)
 
     problem_sample_index = random.sample(
         range(len(regex_problem_set.problems)), sample_size
