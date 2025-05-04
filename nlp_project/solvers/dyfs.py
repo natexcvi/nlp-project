@@ -1,3 +1,4 @@
+import concurrent.futures
 from typing import Any, Dict, List, Tuple
 
 from pydantic import BaseModel, Field
@@ -36,7 +37,9 @@ class DynamicFewShotSolver(Solver):
         super().__init__()
         self.system_message = system_message
 
-    def __generate_edge_cases(self, problem: Problem) -> list[EdgeCase]:
+    def __generate_edge_cases(
+        self, problem: Problem
+    ) -> Tuple[list[EdgeCase], List[Dict[str, Any]]]:
         edge_case_messages = [
             {
                 "role": "system",
@@ -84,6 +87,15 @@ class DynamicFewShotSolver(Solver):
             ]
         )
 
+    def __get_initial_solution(self, problem: Problem, completion_model, messages):
+        response = completion_model(
+            model=self.llm_config.model,
+            messages=messages,
+            response_format=problem.response_format,
+        )
+
+        return response
+
     def solve(self, problem: Problem) -> Tuple[BaseModel, List[Dict[str, Any]]]:
         if not problem.solution_evaluator:
             raise ValueError(
@@ -94,8 +106,6 @@ class DynamicFewShotSolver(Solver):
         else:
             completion_model = self.openai_client.chat.completions.create
 
-        edge_cases, edge_case_conversation = self.__generate_edge_cases(problem)
-
         messages = [
             {"role": "system", "content": self.system_message},
             {"role": "user", "content": problem.statement},
@@ -105,11 +115,15 @@ class DynamicFewShotSolver(Solver):
             },
         ]
 
-        response = completion_model(
-            model=self.llm_config.model,
-            messages=messages,
-            response_format=problem.response_format,
-        )
+        # Run edge case generation and initial solution concurrently
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            edge_case_future = executor.submit(self.__generate_edge_cases, problem)
+            solution_future = executor.submit(
+                self.__get_initial_solution, problem, completion_model, messages
+            )
+
+            edge_cases, edge_case_conversation = edge_case_future.result()
+            response = solution_future.result()
 
         self.token_usage = {
             "input_tokens": response.usage.prompt_tokens,

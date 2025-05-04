@@ -1,0 +1,963 @@
+details:
+  ChainOfThoughtSolver:
+    lines that contain the symbol '-'.:
+      avg_generation_time: 2.354114866256714
+      avg_score: 1.0
+      results:
+      - generation_time: 3.585177183151245
+        output:
+          reasoning: 'Step 1: The requirement is to match lines that contain the symbol
+            ''-''.
+
+            Step 2: We need the regex to match the entire line, so we use ^ for the
+            start of the line and $ for the end of the line.
+
+            Step 3: Between ^ and $, we allow any characters before and after the
+            ''-'' symbol.
+
+            Step 4: ".*" matches any number (including zero) of any characters.
+
+            Step 5: The symbol ''-'' is included literally.
+
+
+            Hence, the regex is ^.*-.*$ which matches any line containing at least
+            one ''-'' anywhere in the line.'
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 2.1481668949127197
+        output:
+          reasoning: 'The user wants to match lines that contain the symbol ''-''.
+            To ensure the match is for the entire line, the regex should start with
+            ^ and end with $ to anchor the match at the start and end of the line
+            respectively.
+
+
+            Between these anchors, we want to ensure that the line contains at least
+            one ''-'' symbol anywhere in the line.
+
+
+            We can use ''.*'' to match any character (except newline) zero or more
+            times before and after the ''-'' symbol.
+
+
+            Therefore, the full regex is:
+
+
+            ^.*-.*$
+
+
+            This matches any line that contains at least one ''-'' symbol.'
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 2.600520133972168
+        output:
+          reasoning: "The user wants to match lines that contain the symbol '-'. To\
+            \ capture the entire line that has '-', we need a pattern that allows\
+            \ any characters before and after the '-'. \n\nStep 1: Match the start\
+            \ of the line with '^'.\nStep 2: Match zero or more characters of any\
+            \ kind (except newline) before '-', so use '.*'.\nStep 3: Match the symbol\
+            \ '-', which is a literal character that doesn't need escaping.\nStep\
+            \ 4: Match zero or more characters after '-', again '.*'.\nStep 5: Match\
+            \ the end of the line with '$'.\n\nSo the regex becomes '^.*-.*$', which\
+            \ matches any line containing at least one '-' character anywhere in the\
+            \ line."
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 1.3914330005645752
+        output:
+          reasoning: The user wants to match lines that contain the symbol '-'. To
+            ensure the entire line is matched, we use ^ to match the start of the
+            line and $ to match the end of the line. Between these anchors, we use
+            .* to match any characters (including zero characters) before and after
+            the '-' symbol. This ensures lines containing at least one '-' will be
+            matched fully.
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 2.0452771186828613
+        output:
+          reasoning: The task is to match lines that contain the symbol '-'. To ensure
+            the entire line is matched, we start with '^' (start of line) and end
+            with '$' (end of line). In between, '.*' matches any number of any characters
+            (including zero). The '-' character is placed in the middle to ensure
+            the line contains at least one '-'. Therefore, '^.*-.*$' matches any line
+            that has at least one '-' anywhere.
+          regex: ^.*-.*$
+        score: 1.0
+      token_usage:
+        avg_generation_time: 2.354114866256714
+        input_tokens: 695
+        output_tokens: 648
+    lines using 'abc' after 'def':
+      avg_generation_time: 2.8389820098876952
+      avg_score: 0.6
+      results:
+      - generation_time: 3.5844409465789795
+        output:
+          reasoning: '1. We need to match lines that contain ''def'' followed by ''abc''
+            somewhere after it.
+
+            2. Using a positive lookahead `(?=.*def)` to ensure ''def'' exists in
+            the line.
+
+            3. Then using `(?=.*abc)` to ensure ''abc'' exists somewhere after.
+
+            4. This alone only ensures both substrings exist but not the order.
+
+            5. To verify ''abc'' occurs after ''def'', we use a single lookahead that
+            checks ''def'' followed later by ''abc'': `(?=.*def.*abc)`.
+
+            6. The regex anchors the start with ^ and allows any characters (.*) until
+            end $ to match the whole line.
+
+            7. So final regex is `^(?=.*def.*abc).*$` which matches any line containing
+            ''def'' followed by ''abc'' somewhere later on the line.'
+          regex: ^(?=.*def)(?=.*abc).*$
+        score: 0.0
+      - generation_time: 2.691614866256714
+        output:
+          reasoning: 'The user wants to match lines that contain the substring ''abc''
+            after the substring ''def''. To capture this, we need to ensure that ''def''
+            appears first somewhere in the line, followed later by ''abc''.
+
+
+            1. ''^'' - start of the line.
+
+            2. ''.*def'' - any characters (including none) followed by ''def'', to
+            find ''def'' anywhere in the line.
+
+            3. ''.*abc'' - then any characters (including none) followed by ''abc'',
+            ensuring ''abc'' occurs after ''def''.
+
+            4. ''.*$'' - then any characters until the end of the line.
+
+
+            Thus, the regex ''^.*def.*abc.*$'' matches any entire line where ''def''
+            comes before ''abc'' in the text.'
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 2.494379997253418
+        output:
+          reasoning: 'Step 1: We need to match full lines that contain the substring
+            ''def'' before the substring ''abc''.
+
+
+            Step 2: To ensure ''def'' comes before ''abc'' anywhere in the line, we
+            use a positive lookahead: (?=.*def.*abc). This means somewhere in the
+            line there is ''def'' followed by ''abc'', allowing any characters (including
+            none) in between.
+
+
+            Step 3: The anchors ^ and $ ensure we match the entire line.
+
+
+            Step 4: .* after the lookahead consumes the whole line to satisfy the
+            pattern.
+
+
+            This regex matches full lines where ''def'' occurs before ''abc'' anywhere
+            in the line.'
+          regex: ^(?=.*def.*abc).*$
+        score: 1.0
+      - generation_time: 2.8652400970458984
+        output:
+          reasoning: 'To match a full line that contains ''abc'' after ''def'', we
+            need to ensure ''def'' appears first in the line and then ''abc'' occurs
+            somewhere after it. Since the exact positions or characters between ''def''
+            and ''abc'' are not specified, we can use ''.*'' to match any characters.
+            The regex breakdown is:
+
+
+            - ''^'' asserts start of line
+
+            - ''.*def'' matches any characters (including none) followed by ''def''
+
+            - ''.*abc'' matches any characters (including none) followed by ''abc''
+
+            - ''.*$'' matches any remaining characters until the end of the line
+
+
+            This ensures ''def'' appears somewhere before ''abc'' in the line. Hence,
+            the full regex is ''^.*def.*abc.*$''.'
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 2.559234142303467
+        output:
+          reasoning: 'The requirement is to match full lines that use ''abc'' after
+            ''def''. First, the line must include ''def'' preceding ''abc''. Using
+            lookahead assertions, we ensure ''def'' occurs before ''abc'' in the line.
+            The regex uses two lookaheads: (?=.*def) ensures ''def'' exists somewhere,
+            and (?=.*abc) ensures ''abc'' exists somewhere. However, we need ''abc''
+            to come after ''def''. To capture the correct order, we modify the pattern
+            to ensure ''def'' appears earlier than ''abc''. The regex ''^(?=.*def.*abc).*$''
+            confirms ''def'' appears before ''abc'' in the line. The anchors ^ and
+            $ ensure the regex matches the entire line.'
+          regex: ^(?=.*def)(?=.*abc).*$
+        score: 0.0
+      token_usage:
+        avg_generation_time: 2.8389820098876952
+        input_tokens: 705
+        output_tokens: 888
+    lines using 'lay' or 'lie':
+      avg_generation_time: 2.878076410293579
+      avg_score: 0.0
+      results:
+      - generation_time: 3.5683581829071045
+        output:
+          reasoning: The goal is to match full lines that contain either the word
+            'lay' or the word 'lie'. To ensure we match the whole line, we use ^ and
+            $ anchors. Using a positive lookahead (?=.*\blay\b|\blie\b) guarantees
+            the line contains at least one of these two words, where \b ensures full
+            word matches so that partial matches like 'layer' or 'alien' won't count.
+            The .* allows any characters before or after the target words. Therefore,
+            this regex will match any entire line that includes either 'lay' or 'lie'
+            as standalone words.
+          regex: ^(?=.*\blay\b|\blie\b).*$
+        score: 0.0
+      - generation_time: 2.3836209774017334
+        output:
+          reasoning: The user wants to match entire lines that use either the word
+            'lay' or 'lie'. To do so, the regex should match lines containing either
+            word as a whole word, not as a part of another word. The pattern uses
+            word boundaries \b around 'lay' or 'lie' to ensure whole words. The positive
+            lookahead (?=.*\blay\b|\blie\b) ensures the line contains at least one
+            of these words anywhere. The ^ and $ anchors ensure the entire line is
+            matched, since the whole line should match.
+          regex: ^(?=.*\blay\b|\blie\b).*$
+        score: 0.0
+      - generation_time: 3.3703019618988037
+        output:
+          reasoning: 'The goal is to match full lines that contain either the word
+            ''lay'' or the word ''lie''.
+
+
+            Step 1: Use word boundaries to match whole words ''lay'' or ''lie'' specifically,
+            rather than matching these sequences within other words. This is done
+            by using \b(lay|lie)\b.
+
+
+            Step 2: The regular expression should match entire lines, so the regex
+            should anchor to the start ^ and end $ of the line.
+
+
+            Step 3: Use a lookahead (?=.*\b(lay|lie)\b) to assert that somewhere in
+            the line the word ''lay'' or ''lie'' appears.
+
+
+            Step 4: Since the lookahead does not consume characters, after the lookahead
+            we use .* to consume the entire line.
+
+
+            Putting it all together: ^(?=.*\b(lay|lie)\b).*$ matches entire lines
+            that contain the word ''lay'' or ''lie'' anywhere in them.'
+          regex: ^(?=.*\b(lay|lie)\b).*$
+        score: 0.0
+      - generation_time: 2.3757989406585693
+        output:
+          reasoning: 'The goal is to match entire lines that contain the word ''lay''
+            or ''lie''. We want to ensure these appear as whole words, so we use word
+            boundaries (\b) around them: \blay\b and \blie\b. We use a positive lookahead
+            (?=.*\blay\b|\blie\b) to assert that at some point in the line there is
+            either ''lay'' or ''lie'' as whole words. The anchors ^ and $ force the
+            match to cover the entire line. The .* inside the positive lookahead and
+            after it allows any characters before and after the words, ensuring the
+            entire line is matched if the condition is met.'
+          regex: ^(?=.*\blay\b|\blie\b).*$
+        score: 0.0
+      - generation_time: 2.6923019886016846
+        output:
+          reasoning: The user wants to match lines that use the words 'lay' or 'lie'.
+            To ensure these are matched as whole words, I use word boundaries (\b)
+            around 'lay' and 'lie'. Since either 'lay' or 'lie' can appear anywhere
+            in the line, I use a positive lookahead (?=.*\blay\b|\blie\b) to assert
+            that the line contains at least one of these words. The anchors ^ and
+            $ ensure that the entire line is matched, and .* matches the rest of the
+            line. This regex matches full lines that contain at least one occurrence
+            of the whole word 'lay' or 'lie'.
+          regex: ^(?=.*\blay\b|\blie\b).*$
+        score: 0.0
+      token_usage:
+        avg_generation_time: 2.878076410293579
+        input_tokens: 705
+        output_tokens: 841
+  DynamicFewShotSolver:
+    lines that contain the symbol '-'.:
+      avg_generation_time: 4.460740756988526
+      avg_score: 1.0
+      results:
+      - generation_time: 5.230163097381592
+        output:
+          reasoning: 'To match lines that contain the symbol ''-'', we need to ensure
+            the line has at least one ''-'' character somewhere. The pattern ''^''
+            anchors at the start of the line and ''$'' anchors at the end, ensuring
+            we match the full line. ''.*'' matches zero or more of any character except
+            newline, so ''^.*-.*$'' means: from the start of the line, match any characters
+            (zero or more), then a ''-'', then any characters (zero or more), and
+            then end of the line. This guarantees the line contains at least one ''-''
+            symbol anywhere.'
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 3.0308609008789062
+        output:
+          reasoning: We want to match lines that contain the symbol '-'. Since the
+            regex should match the entire line, we use '^' to indicate the start of
+            the line and '$' to indicate the end of the line. Between them, '.*' matches
+            any number of any characters (except newline). The '-' symbol should appear
+            somewhere in the line, so we place it between '.*' on either side to allow
+            for characters before and after. Thus, '^.*-.*$' matches any line containing
+            at least one '-' character anywhere in it.
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 4.432164907455444
+        output:
+          reasoning: 'Step 1: Understand the requirement: We need to match full lines
+            that contain the symbol ''-''.
+
+            Step 2: The symbol ''-'' can appear anywhere in the line.
+
+            Step 3: Match from start to end of the line to ensure full line match.
+
+            Step 4: Use ''.*'' to match any characters (including none) before and
+            after the ''-''.
+
+            Step 5: Use ''-'' in the middle to require at least one ''-'' character.
+
+            Step 6: Combine to form the regex ''^.*-.*$'' which matches any line containing
+            at least one ''-'' character.'
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 2.790220022201538
+        output:
+          reasoning: The requirement is to match lines that contain the symbol '-'.
+            To ensure we match the entire line, we use '^' at the start and '$' at
+            the end, which anchor the regex to the start and end of the line respectively.
+            Inside, we use '.*' which matches any number of any characters (except
+            newline), then the '-' character literally, then again '.*' for any trailing
+            characters. This ensures the line contains at least one '-' anywhere in
+            the line.
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 6.8202948570251465
+        output:
+          reasoning: 'The user wants to match full lines that contain at least one
+            hyphen symbol (''-''). Step 1: We need to match an entire line, so the
+            regex should start at the beginning (^) and end at the end ($) of the
+            line. Step 2: The line must contain at least one ''-'' character anywhere
+            in it. Step 3: To ensure we match the entire line with at least one ''-'',
+            we can match any characters except newline around a ''-'', for example:
+            [^\n]*-.* will match any characters before a ''-'', then the ''-'' itself,
+            and then any characters after the ''-''. Step 4: We wrap the entire line
+            from start to end, so the regex is: ^[^\n]*-.*$ This matches lines that
+            have at least one ''-'' anywhere in them. Alternative approach: Since
+            the line must contain ''-'', the simplest full line regex is ^.*-.*$ which
+            says: from start of line, any characters (including none), then a hyphen,
+            then any characters, then end of line. This matches lines containing ''-''
+            anywhere. Therefore, final regex: ^.*-.*$.'
+          regex: ^-?[^\n]*-$|^-?[^\n]*-.*$
+        score: 1.0
+      token_usage:
+        avg_generation_time: 4.460740756988526
+        input_tokens: 695
+        output_tokens: 755
+    lines using 'abc' after 'def':
+      avg_generation_time: 6.975316333770752
+      avg_score: 0.4
+      results:
+      - generation_time: 7.540282726287842
+        output:
+          reasoning: The user desires lines using 'abc' after 'def' but the edge cases
+            clarify that the match should only occur when 'abc' immediately follows
+            'def' with no intervening characters. The first edge case ('def xyz abc')
+            should not match, so intervening characters between 'def' and 'abc' are
+            disallowed. The second case ('abc def') should not match, so the order
+            matters strictly and 'def' must come first. Therefore, the regex must
+            match lines that are exactly 'defabc' with nothing in between or around.
+            The regex ^defabc$ matches lines where 'def' is immediately followed by
+            'abc' and the entire line is just those six letters.
+          regex: ^defabc$
+        score: 0.0
+      - generation_time: 7.686353921890259
+        output:
+          reasoning: To match lines where 'abc' appears after 'def', the regex must
+            ensure that 'def' precedes 'abc' in the line. The pattern '^.*def.*abc.*$'
+            matches lines starting from the beginning (^) followed by any characters
+            (.*), then 'def', then any characters (.*), then 'abc', then any characters
+            until the end ($). This ensures that 'def' occurs before 'abc' somewhere
+            in the line. Lines where 'abc' appears before 'def' will not match since
+            the pattern requires 'def' first. Lines without either 'abc' or 'def'
+            won't match because both substrings are required in order for the pattern
+            to succeed. Therefore, this regex satisfies the requirement, including
+            the edge cases given.
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 6.003803253173828
+        output:
+          reasoning: The user wants to match lines where 'abc' appears after 'def'.
+            The given counterexample 'abc def' should not match, since 'abc' appears
+            before 'def'. The regex '^.*def.*abc.*$' matches lines where 'def' comes
+            before 'abc', anywhere in the line, which correctly excludes 'abc def'.
+            It ensures that at some point 'def' appears, and then after it 'abc' appears
+            later. Therefore, this regex satisfies the requirement and correctly handles
+            the edge case.
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 6.260778903961182
+        output:
+          reasoning: 'Step 1: The user clarified that ''abc'' must appear immediately
+            after ''def'' with no characters in between.
+
+            Step 2: The previous regex allowed ''abc'' to appear anywhere after ''def'',
+            which is too permissive.
+
+            Step 3: The edge cases reveal that cases like ''def xyz abc'' should not
+            match and ''abcdef'' should not match because ''abc'' is not immediately
+            after ''def''.
+
+            Step 4: To ensure ''abc'' directly follows ''def'', the regex must match
+            ''defabc'' as a contiguous substring with no characters in between.
+
+            Step 5: Anchoring the regex with ^ and $ to match the whole line, the
+            only matching line is exactly ''defabc''.
+
+
+            Therefore, the regex ^defabc$ matches lines where ''def'' is immediately
+            followed by ''abc'', with no characters between them and no other characters
+            in the line.'
+          regex: ^defabc$
+        score: 0.0
+      - generation_time: 7.385362863540649
+        output:
+          reasoning: 'Step 1: The user clarified that ''abc'' should appear immediately
+            after ''def'' with no characters in between.
+
+
+            Step 2: The previous regex allowed any characters between ''def'' and
+            ''abc'', which caused incorrect matches.
+
+
+            Step 3: To fix this, we need a pattern where ''def'' is immediately followed
+            by ''abc'' with no intermediate characters, i.e., the substring ''defabc''
+            must appear in the line.
+
+
+            Step 4: So, we use a regex matching any characters (.*), then ''defabc'',
+            then any characters (.*), anchored to the start and end of the line: ^.*defabc.*$
+
+
+            Step 5: This ensures that only lines containing the contiguous substring
+            ''defabc'' will match, fulfilling the requirement that ''abc'' is immediately
+            after ''def''.
+
+
+            Testing against edge cases:
+
+            - ''def xyz abc'' -> no ''defabc'' substring, no match.
+
+            - ''abcdef'' -> ''abc'' before ''def'', no ''defabc'' substring, no match.
+
+            - ''abc def'' -> ''abc'' before ''def'', no match.
+
+            - ''defabc'' -> direct contiguous ''defabc'', matches as expected.'
+          regex: ^.*defabc.*$
+        score: 0.0
+      token_usage:
+        avg_generation_time: 6.975316333770752
+        input_tokens: 4031
+        output_tokens: 2477
+    lines using 'lay' or 'lie':
+      avg_generation_time: 7.368567943572998
+      avg_score: 0.0
+      results:
+      - generation_time: 10.333687782287598
+        output:
+          reasoning: 'To handle the edge cases where ''lay'' or ''lie'' appear in
+            different cases (e.g., ''LAY''), the regex needs to be case-insensitive.
+
+
+            1. Added the inline case-insensitive modifier `(?i)` at the start of the
+            regex.
+
+            2. This modifier ensures that ''lay'' and ''lie'' are matched regardless
+            of letter casing, covering uppercase, lowercase, or mixed case variations.
+
+            3. The rest of the regex remains the same: using lookahead `(?=.*\blay\b|\blie\b)`
+            to assert the presence of ''lay'' or ''lie'' as whole words anywhere in
+            the line.
+
+            4. Anchors `^` and `$` ensure the entire line is matched.
+
+
+            This regex now matches full lines containing the words ''lay'' or ''lie''
+            in a case-insensitive manner, also respecting the word boundaries for
+            whole words only.'
+          regex: ^(?i)(?=.*\blay\b|\blie\b).*$
+        score: 0.0
+      - generation_time: 8.892302751541138
+        output:
+          reasoning: 'The regex uses \b word boundaries around ''lay'' and ''lie''
+            to ensure they are matched as complete words. This handles cases where
+            ''lie'' or ''lay'' are followed or preceded by punctuation (like ''lie?''
+            or ''lay,'') since word boundaries correctly identify word ends next to
+            punctuation.
+
+
+            The positive lookahead (?=.*\blay\b|\blie\b) makes sure the line contains
+            at least one occurrence of ''lay'' or ''lie'' as a whole word anywhere
+            in the line.
+
+
+            Then, ^.*$ matches the entire line.
+
+
+            Therefore, lines like ''I like to lie down in the afternoon.'' and ''Does
+            he lie? Yes, he does.'' are correctly matched because the word boundaries
+            allow matching words adjacent to punctuation.'
+          regex: ^(?=.*\blay\b|\blie\b).*$
+        score: 0.0
+      - generation_time: 7.779933214187622
+        output:
+          reasoning: 'The goal is to match any line that contains either the whole
+            word ''lay'' or the whole word ''lie''. The previous regex used a single
+            positive lookahead that combined both words with an alternation (|), which
+            works in principle. However, based on the user''s concern about edge cases,
+            we want to be confident that either ''lay'' or ''lie'' is found as a whole
+            word anywhere in the line.
+
+
+            This updated regex uses multiple positive lookaheads to cover these cases:
+
+
+            - ''^(?=.*\blay\b)(?=.*\blie\b).*$'' matches lines that contain both ''lay''
+            and ''lie''.
+
+            - ''^(?=.*\blay\b)(?!.*\blie\b).*$'' matches lines that contain ''lay''
+            but not ''lie''.
+
+            - ''^(?!.*\blay\b)(?=.*\blie\b).*$'' matches lines that contain ''lie''
+            but not ''lay''.
+
+
+            This logically covers all lines that contain ''lay'' or ''lie'' at least
+            once as whole words.
+
+
+            The word boundary (\b) ensures ''lie'' or ''lay'' are matched only as
+            full words, not as substrings (e.g., ''alley'' won''t match ''lay'').
+
+
+            This regex fully anchors to the line with ''^'' and ''$'' and matches
+            the entire line as requested.'
+          regex: ^(?=.*\blay\b)(?=.*\blie\b).*$|^(?=.*\blay\b)(?!.*\blie\b).*$|^(?!.*\blay\b)(?=.*\blie\b).*$
+        score: 0.0
+      - generation_time: 6.453721046447754
+        output:
+          reasoning: The regex uses word boundaries ('\b') around 'lie' and 'lay'
+            to ensure that only whole words are matched, not substrings inside other
+            words. For example, 'lay' matches in 'I like to lay low.' because '\blay\b'
+            detects 'lay' as a separate word. The positive lookahead '(?=.*\blie\b|\blay\b)'
+            asserts the line contains at least one whole word 'lie' or 'lay'. Anchors
+            '^' and '$' ensure the entire line matches. Therefore, this regex correctly
+            handles the edge case given by matching 'lay' as a whole word.
+          regex: ^(?=.*\blie\b|\blay\b).*$
+        score: 0.0
+      - generation_time: 3.383194923400879
+        output:
+          reasoning: The user wants to match lines that use either the word 'lay'
+            or 'lie'. To ensure the full line is matched only if it contains these
+            words as whole words (not as substrings), we use word boundaries \b around
+            'lay' and 'lie'. We use a positive lookahead (?=.*\b(lay|lie)\b) to assert
+            that somewhere in the line these words appear. Then we match the entire
+            line from start ^ to end $ using .* to allow any content. This ensures
+            that only lines that contain the words 'lay' or 'lie' will be matched
+            fully.
+          regex: ^(?=.*\b(lay|lie)\b).*$
+        score: 0.0
+      token_usage:
+        avg_generation_time: 7.368567943572998
+        input_tokens: 2399
+        output_tokens: 1809
+  SelfRefineSolver:
+    lines that contain the symbol '-'.:
+      avg_generation_time: 4.341927909851075
+      avg_score: 1.0
+      results:
+      - generation_time: 5.434525966644287
+        output:
+          reasoning: 'The goal is to match entire lines containing at least one occurrence
+            of the symbol ''-''.
+
+
+            Step 1: We want the match to cover the entire line, so we start with ''^''
+            to anchor at the beginning of the line and end with ''$'' to anchor at
+            the end.
+
+
+            Step 2: Inside the line, we want to ensure the ''-'' symbol appears at
+            least once anywhere.
+
+
+            Step 3: We allow any characters before ''-'' with ''.*'', match the ''-''
+            character literally, then allow any characters after it with ''.*''.
+
+
+            Thus, the full regex is ''^.*-.*$'', which matches any line containing
+            one or more ''-'' symbols.'
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 3.4251956939697266
+        output:
+          reasoning: The requirement is to match lines that contain the symbol '-'.
+            To ensure the entire line is matched, from start to end, the regex begins
+            with ^ and ends with $. The .* matches any sequence of characters (including
+            none) before and after the '-' symbol, ensuring that '-' is present somewhere
+            in the line. This matches any line containing at least one '-' anywhere.
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 4.47716212272644
+        output:
+          reasoning: "The task is to match full lines that contain the symbol '-'.\
+            \ To achieve this, the regex should match any line that has at least one\
+            \ '-' character anywhere in the line. \n\nStep-by-step reasoning:\n1.\
+            \ '^' asserts the start of the line.\n2. '.*' matches zero or more of\
+            \ any character except newline, meaning it allows any characters before\
+            \ the '-'.\n3. '-' matches the literal minus symbol.\n4. '.*' again matches\
+            \ zero or more characters after the '-'.\n5. '$' asserts the end of the\
+            \ line.\n\nThis pattern ensures the entire line is matched only if it\
+            \ contains at least one '-' anywhere within it."
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 5.07381010055542
+        output:
+          reasoning: 'We need to match lines that contain the symbol ''-''. Since
+            ''-'' can appear anywhere in the line, we want to match any line that
+            has at least one ''-'' character. The regex ''^.*-.*$'' works as follows:
+
+
+            - ''^'' asserts the start of the line.
+
+            - ''.*'' matches zero or more of any characters.
+
+            - ''-'' matches the literal dash symbol.
+
+            - ''.*'' matches zero or more of any characters after the dash.
+
+            - ''$'' asserts the end of the line.
+
+
+            This ensures the entire line is matched if it contains at least one dash
+            anywhere in the line.'
+          regex: ^.*-.*$
+        score: 1.0
+      - generation_time: 3.298945665359497
+        output:
+          reasoning: 'The task is to create a regex that matches full lines containing
+            the symbol ''-''.
+
+            Step 1: We want to match the entire line, so we use ^ at the start and
+            $ at the end.
+
+            Step 2: Since the line can contain any characters before and after ''-'',
+            we include .* (zero or more of any characters) before and after ''-''.
+
+            Step 3: Include the literal ''-'' symbol in the regex.
+
+            Combining these steps, the regex becomes ^.*-.*$ which matches any line
+            containing at least one ''-''. '
+          regex: ^.*-.*$
+        score: 1.0
+      token_usage:
+        avg_generation_time: 4.341927909851075
+        input_tokens: 2877
+        output_tokens: 1575
+    lines using 'abc' after 'def':
+      avg_generation_time: 9.96430778503418
+      avg_score: 0.8
+      results:
+      - generation_time: 11.422996997833252
+        output:
+          reasoning: "Step 1: Understand the requirement clearly \u2014 match lines\
+            \ in which the substring 'abc' occurs after the substring 'def'.\n\nStep\
+            \ 2: Order matters; 'abc' must come after 'def' in the line.\n\nStep 3:\
+            \ Ensure case-insensitivity by applying the inline modifier `(?i)` at\
+            \ the start.\n\nStep 4: Build a positive lookahead in the regex that asserts\
+            \ 'def' appears before 'abc' anywhere in the line: `(?=.*def.*abc)`.\n\
+            \nStep 5: Wrap with anchors `^` and `$` to match entire lines.\n\nFull\
+            \ regex becomes `^(?i)(?=.*def.*abc).*$`.\n\nExamples:\n- Matches:\n \
+            \ - \"xyz def foo abc ghi\"\n  - \"DEF something abc\"\n  - \"before defabc\
+            \ after\" (because 'abc' occurs within 'defabc' after 'def')\n  - \"multiple\
+            \ def one def two abc\" (because the last 'abc' is after at least one\
+            \ 'def')\n\n- Does not match:\n  - \"abc then def\" (because 'abc' occurs\
+            \ before 'def')\n  - \"just def only\"\n  - \"nothing relevant\"\n\nNotes\
+            \ on edge cases:\n- Overlapping: The substring 'defabc' counts as 'def'\
+            \ followed immediately by 'abc', so it matches.\n- Multiple occurrences:\
+            \ The lookahead ensures that there is at least one 'def' occurring before\
+            \ a subsequent 'abc'.\n- The use of `.*` between ensures any characters\
+            \ can be between 'def' and 'abc'.\n\nThis solution addresses order, case-insensitivity,\
+            \ multiple occurrences, and overlapping substrings appropriately."
+          regex: ^(?i)(?=.*def.*abc).*$
+        score: 0.0
+      - generation_time: 4.198385238647461
+        output:
+          reasoning: 'We need to match entire lines that contain the substring ''def''
+            followed by the substring ''abc'' somewhere later in the line. Step 1:
+            ''.*def'' matches any characters up to and including the first occurrence
+            of ''def''. Step 2: ''.*abc'' then matches any characters after ''def''
+            until it reaches ''abc''. Step 3: ''^'' and ''$'' anchors ensure the entire
+            line matches. This regex ensures ''abc'' appears after ''def'' in the
+            same line.'
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 13.00789189338684
+        output:
+          reasoning: 'To match lines where the substring ''abc'' appears after the
+            substring ''def'', we need a pattern that enforces order: ''def'' must
+            come first somewhere in the line, followed at some point later by ''abc''.
+
+
+            Step-by-step reasoning:
+
+            1. We want full line matching, so we anchor with ''^'' at the start and
+            ''$'' at the end.
+
+            2. The pattern ''def.*abc'' matches ''def'' followed by any characters
+            (including none) and then ''abc''.
+
+            3. Surround with ''.*'' on both sides to allow any characters before ''def''
+            and after ''abc'', so the full regex is ''^.*def.*abc.*$''.
+
+
+            This regex works as follows:
+
+            - It requires at least one occurrence of ''def'', followed later in the
+            line (not necessarily immediately) by ''abc''.
+
+            - It matches the entire line.
+
+
+            Additional notes:
+
+            - It only requires one ''def'' before one ''abc'', regardless of multiple
+            occurrences.
+
+            - Case sensitivity depends on how the regex is used; adding the ''re.IGNORECASE''
+            flag in Python would make it case-insensitive.
+
+
+            Example matches:
+
+            - ''xyz def 123 abc''  (matches)
+
+            - ''defabc'' (matches, since ''def'' then ''abc'' immediately after)
+
+            - ''abc def'' (does not match, because ''abc'' appears before ''def'')
+
+            - ''def xyz'' (does not match, no ''abc'' after)
+
+
+            If order is not important and only presence is required, then lookaheads
+            like ''(?=.*def)(?=.*abc)'' can be used, but they do not enforce order.
+
+
+            In summary, ''^.*def.*abc.*$'' is the simplest and most straightforward
+            regex to enforce ''abc'' after ''def'' on a line.'
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 4.867304086685181
+        output:
+          reasoning: 'The requirement is to match a full line that contains the substring
+            ''def'' first and then ''abc'' afterward somewhere in the same line. Since
+            ''abc'' must appear after ''def'', the regex needs to ensure ''def'' appears
+            before ''abc''.
+
+
+            Step-by-step reasoning:
+
+            1. ^ and $ anchors are used to match the entire line.
+
+            2. ''.*def'' means match any characters (possibly none) followed by ''def''.
+            This ensures ''def'' appears.
+
+            3. ''.*abc.*'' means after ''def'' appears, there can be any characters
+            (zero or more), then ''abc'', and possibly more characters.
+
+
+            Altogether, ''^.*def.*abc.*$'' matches any line where ''def'' precedes
+            ''abc'', regardless of what comes before, in-between, or after them in
+            the line.'
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      - generation_time: 16.324960708618164
+        output:
+          reasoning: "The goal is to match full lines where the substring 'abc' appears\
+            \ somewhere after the substring 'def'. This means the line must contain\
+            \ both 'def' and 'abc', with 'abc' occurring strictly after 'def' (not\
+            \ necessarily immediately).\n\nA straightforward regex for this is '^.*def.*abc.*$'.\
+            \ Here's why:\n\n- '^' and '$' anchor the pattern to the start and end\
+            \ of the line, ensuring the entire line is matched.\n- '.*def.*abc.*'\
+            \ describes any characters ('.*'), then 'def', then any characters again,\
+            \ then 'abc', followed by any characters until the end.\n\nThis pattern\
+            \ guarantees that 'def' appears before 'abc' somewhere in the line.\n\n\
+            **Examples:**\n- Matches:\n  - 'xyz def 123 abc'  (\"abc\" after \"def\"\
+            )\n  - 'defabc'          (\"def\" immediately followed by \"abc\")\n \
+            \ - 'def something abc else'  (\"def\" then later \"abc\")\n  - 'abc def\
+            \ abc'     (matches because of the latter \"abc\" after \"def\")\n\n-\
+            \ Does not match:\n  - 'abc def'         (\"abc\" before \"def\"; no \"\
+            abc\" after \"def\")\n  - 'abcdef'          (only \"abc\" before \"def\"\
+            ; order incorrect)\n  - 'xyz abc def'     (\"abc\" before \"def\")\n\n\
+            This regex is simple and efficient enough for most cases. While '.*' is\
+            \ greedy, it is necessary here to account for any characters between 'def'\
+            \ and 'abc'. The regex engine finds the earliest 'def' and subsequently\
+            \ looks for an 'abc' after it.\n\n**Multiple occurrences:** If there are\
+            \ multiple 'def's and 'abc's, the regex matches as long as there exists\
+            \ at least one 'def' followed later by at least one 'abc'. For example,\
+            \ in 'abc def foo abc def', the regex matches because the second 'abc'\
+            \ after the first 'def' satisfies the condition.\n\nIf more granular extraction\
+            \ or capturing groups are needed, the regex can be adapted, but for matching\
+            \ lines where 'abc' occurs after 'def', '^.*def.*abc.*$' is concise and\
+            \ effective."
+          regex: ^.*def.*abc.*$
+        score: 1.0
+      token_usage:
+        avg_generation_time: 9.96430778503418
+        input_tokens: 3825
+        output_tokens: 2301
+    lines using 'lay' or 'lie':
+      avg_generation_time: 10.416454839706422
+      avg_score: 0.0
+      results:
+      - generation_time: 9.88083004951477
+        output:
+          reasoning: The goal is to match lines that contain the words 'lay' or 'lie'
+            as whole words, regardless of case (so that 'Lay', 'lie', 'LIE', etc.
+            are matched). A simple regex with word boundaries around the alternation
+            '\b(lay|lie)\b' suffices. Including the inline case-insensitive modifier
+            '(?i)' at the start ensures case-insensitive matching. Since many tools
+            apply regex per line by default, anchors '^' and '$' are unnecessary.
+            This approach is simpler, more efficient, and compatible with regex engines
+            that support inline modifiers without needing lookaheads.
+          regex: (?i)\b(lay|lie)\b
+        score: 0.0
+      - generation_time: 14.15672516822815
+        output:
+          reasoning: 'The user wants to match entire lines containing the words ''lay''
+            or ''lie'' as whole words. Using the regex ''\b(lay|lie)\b'' directly
+            matches these whole words anywhere in the line. To match the entire line
+            containing these words, the pattern anchors at start (^) and end ($),
+            and includes ''.*'' to allow any characters before or after the target
+            word. The ''(?i)'' inline modifier at the start makes the match case-insensitive,
+            so variations like ''Lay'' or ''LIE'' are also matched.
+
+
+            This approach is simpler and clearer than using a positive lookahead.
+            It preserves word boundaries to prevent partial matches (e.g., it won''t
+            match ''player'' or ''belie'').
+
+
+            Example matches:
+
+            - ''I will lay the book on the table.'' (matches ''lay'')
+
+            - ''He decided to lie down.'' (matches ''lie'')
+
+            - ''LAY your cards on the table.'' (case-insensitive match)
+
+            - ''Playing the game is fun.'' (no match, ''Playing'' is not ''lay'' or
+            ''lie'').
+
+
+            If the user wants to match word forms like ''lying'', ''lied'', or ''lays'',
+            the regex can be adjusted accordingly upon clarification.'
+          regex: (?i)^.*\b(lay|lie)\b.*$
+        score: 0.0
+      - generation_time: 8.882699966430664
+        output:
+          reasoning: 'The user''s requirement is to match lines containing the words
+            ''lay'' or ''lie''. The previous solution used anchors and lookahead,
+            which is more complex than needed.
+
+
+            Improvements made:
+
+            - Simplified regex to ''\b(lay|lie)\b'' which directly matches the target
+            words as whole words.
+
+            - Added the inline case-insensitive modifier ''(?i)'' at the start to
+            match ''Lay'', ''LIE'', or any case variation.
+
+
+            Regarding line matching:
+
+            - Since the user wants to find lines that use these words, the regex should
+            match anywhere in the line; thus, no anchors or lookaheads are needed.
+
+
+            Example tests:
+
+            - Matches: ''I will lie here.'', ''They will lay eggs.'', ''LAY down your
+            arms.''
+
+            - Does not match: ''lays'', ''lies'', ''relay'', as word boundaries prevent
+            partial matches.
+
+
+            This approach is simple, clear, and effective for matching full lines
+            containing the exact words ''lay'' or ''lie'' in any case.'
+          regex: (?i)\b(lay|lie)\b
+        score: 0.0
+      - generation_time: 5.324314117431641
+        output:
+          reasoning: The user wants to match full lines that contain either the word
+            'lay' or the word 'lie'. To ensure that we match these as whole words,
+            we use word boundaries \b around 'lay' and 'lie'. We use a positive lookahead
+            `(?=.*\b(lay|lie)\b)` to assert that somewhere in the line these words
+            appear. Then we match the entire line by `.*`. The ^ and $ anchors ensure
+            we match the full line as required. This regex thus matches lines containing
+            either the word 'lay' or 'lie' anywhere in the line.
+          regex: ^(?=.*\b(lay|lie)\b).*$
+        score: 0.0
+      - generation_time: 13.83770489692688
+        output:
+          reasoning: To match lines containing the words 'lay' or 'lie' as whole words,
+            the regex uses word boundaries (\b) around the alternatives 'lay' and
+            'lie' to prevent matching substrings (e.g., 'relay'). The pattern '.*\b(lay|lie)\b.*'
+            matches any line that includes either word anywhere. Anchors ^ and $ ensure
+            the entire line is matched. The inline modifier '(?i)' at the beginning
+            makes the matching case-insensitive, so words like 'Lay' or 'LIE' will
+            also match. A lookahead is not necessary here because the entire line
+            is matched directly. This regex handles lines with multiple occurrences
+            and excludes lines where 'lay' or 'lie' appear as parts of other words.
+          regex: ^(?i).*\b(lay|lie)\b.*$
+        score: 0.0
+      token_usage:
+        avg_generation_time: 10.416454839706422
+        input_tokens: 4234
+        output_tokens: 2138
+summary:
+  avg_generation_time_per_model:
+    ChainOfThoughtSolver: 2.6903910954793293
+    DynamicFewShotSolver: 6.268208344777425
+    SelfRefineSolver: 8.240896844863892
+  avg_score: 0.5333333333333333
+  avg_score_per_model:
+    ChainOfThoughtSolver: 0.5333333333333333
+    DynamicFewShotSolver: 0.4666666666666666
+    SelfRefineSolver: 0.6
+  llms:
+    <nlp_project.solvers.chain_of_thought.ChainOfThoughtSolver object at 0x1063694d0>: gpt-4.1-mini
+    <nlp_project.solvers.dyfs.DynamicFewShotSolver object at 0x1064da9d0>: gpt-4.1-mini
+    <nlp_project.solvers.self_refine.SelfRefineSolver object at 0x1063cc610>: gpt-4.1-mini
+  num_iterations: 5
+  total_problems: 3
+  total_solvers: 3
+  total_tokens_per_model:
+    ChainOfThoughtSolver:
+      avg_generation_time: 2.6903910954793293
+      input_tokens: 2105
+      output_tokens: 2377
+    DynamicFewShotSolver:
+      avg_generation_time: 6.268208344777425
+      input_tokens: 7125
+      output_tokens: 5041
+    SelfRefineSolver:
+      avg_generation_time: 8.240896844863892
+      input_tokens: 10936
+      output_tokens: 6014
