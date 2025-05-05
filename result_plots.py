@@ -30,6 +30,8 @@ avg_scores = [0.814, 0.717, 0.608]
 avg_times = [3.045, 6.553, 9.632]
 input_tokens = [126657, 454217, 762838]
 output_tokens = [164028, 327248, 440144]
+num_solved_alone = [3, 8, 5]
+num_solved_better = [59, 20, 8]
 
 x = np.arange(len(models))
 width = 0.35
@@ -79,3 +81,29 @@ plt.legend()
 plt.tight_layout()
 plt.grid(axis="y", linestyle="--", alpha=0.7)
 plt.savefig(f"{output_dir}/token_usage.svg", format="svg")
+
+# Chart 4: Solver Performance
+plt.figure(figsize=(8, 6))
+plt.bar(
+    x,
+    num_solved_better,
+    capsize=5,
+    label="Top Solver",
+    color="plum"
+)
+plt.bar(
+    x,
+    num_solved_alone,
+    bottom=num_solved_better,
+    capsize=5,
+    label="Only Solver",
+    color="darkturquoise",
+)
+plt.xticks(x, models, rotation=20)
+plt.ylabel("Number of Problems")
+plt.title("Top vs. Only Solves per Model")
+plt.legend()
+plt.tight_layout()
+plt.grid(axis="y", linestyle="--", alpha=0.7)
+plt.savefig(f"{output_dir}/solver_performance.svg", format="svg")
+
