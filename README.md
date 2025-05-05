@@ -10,23 +10,19 @@ Regular expressions are notoriously difficult to write correctly, even for exper
    - Instead of using static examples, it uses an LLM to identify problem-specific edge cases
    - Then it incorporates these examples and feedback on failing cases into the prompt
    - The implementation parallels edge case generation and initial solution creation using concurrent processing
-   - This adaptive few-shot approach outperforms static examples by tailoring the demonstration set to each problem
 
 2. **Chain of Thought (CoT)**: This cognitive enhancement prompting technique:
    - Explicitly instructs the model to "solve the problem step-by-step, reasoning about each step"
    - Encourages the LLM to break down the regex problem into logical components before synthesis
    - Helps the model avoid common errors by making its reasoning process explicit
-   - Works without examples but can be combined with few-shot learning for further improvements
 
 3. **Self Refine**: This iterative improvement approach allows models to critique and improve their own solutions:
    - Generates an initial solution to the regex problem
    - Uses a separate LLM call to identify specific issues and provide improvement suggestions
    - Presents this feedback to the original model along with the request to generate an improved solution
    - Can perform multiple refinement iterations until no further issues are identified or a maximum iteration count is reached
-   - Functions as a form of implicit few-shot learning where the model learns from its own previous attempts
 
 The project framework allows for comparing these approaches individually and in combination to determine optimal strategies for regex generation tasks.
-
 
 ## Project Structure
 
