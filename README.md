@@ -27,24 +27,6 @@ Regular expressions are notoriously difficult to write correctly, even for exper
 
 The project framework allows for comparing these approaches individually and in combination to determine optimal strategies for regex generation tasks.
 
-## Setup and Installation
-
-### Prerequisites
-- Python 3.10+
-- Poetry (for dependency management)
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
-   ```
-   poetry install
-   ```
-3. Set up environment variables in a `.env` file:
-   ```
-   OPENAI_API_KEY=your_openai_api_key
-   GEMINI_API_KEY=your_gemini_api_key
-   ```
 
 ## Project Structure
 
@@ -88,22 +70,6 @@ Reports are saved to the `reports/` directory with a timestamp and include:
 - **Generation times**: Time taken to generate solutions by each approach
 - **Complete conversation logs**: Full prompts and responses for qualitative analysis
 
-## Development
-
-### Adding New Problems
-
-Add new regex problems in `nlp_project/dataset/regex_problem.py` following the existing format. Each problem requires:
-- A natural language description
-- Test cases (strings that should match and not match)
-- A scoring function to evaluate solutions
-
-### Implementing New Solvers
-
-Create a new solver in the `nlp_project/solvers/` directory:
-1. Inherit from `base_solver.py`
-2. Implement the `solve()` method with your custom few-shot learning or prompting strategy
-3. Add the solver to the experiment in `experiment.py`
-
 ## Project Details
 
 ### Evaluation Methodology
@@ -113,17 +79,6 @@ The project employs a rigorous evaluation methodology:
 - Multiple iterations per problem to account for variation in LLM outputs
 - Test cases include both matching and non-matching strings to ensure comprehensive evaluation
 - Metrics include accuracy, token efficiency, and generation time
-
-### Technologies Used
-
-- **Python**: Core programming language
-- **OpenAI API**: For accessing GPT models with structured response formats
-- **Google Gemini API**: For accessing Gemini models
-- **Pandas**: For data manipulation and analysis
-- **PyYAML**: For structured report generation
-- **Pydantic**: For data validation and typed response parsing
-- **Concurrent Processing**: For parallel execution of solver components
-- **Regex Library**: For executing and validating generated expressions
 
 ## Authors
 
