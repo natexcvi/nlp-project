@@ -99,10 +99,6 @@ Solutions are evaluated based on:
 - **PyYAML**: For report generation
 - **Pydantic**: For data validation and serialization
 
-## License
-
-[Project License Information]
-
 ## Authors
 
 AA, RR & NL 
