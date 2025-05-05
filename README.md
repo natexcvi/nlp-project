@@ -70,9 +70,7 @@ Reports are saved to the `reports/` directory with a timestamp and include:
 - **Generation times**: Time taken to generate solutions by each approach
 - **Complete conversation logs**: Full prompts and responses for qualitative analysis
 
-## Project Details
-
-### Evaluation Methodology
+## Evaluation Methodology
 
 The project employs a rigorous evaluation methodology:
 - Each solver is tested on the same set of regex problems
